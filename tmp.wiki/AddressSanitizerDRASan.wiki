@@ -1,0 +1,10 @@
+#summary Hybrid instrumentation-based version of ASan
+
+DRASan is based on the combination of compiler and dynamic instrumentation [http://swsys.ru/index.php?page=article&id=3593&lang=en [1]].<br>The dynamic instrumentation is based on DynamoRIO (DR), hence the prefix.
+
+DRASan source code can be found [https://code.google.com/p/address-sanitizer/source/browse/#svn%2Ftrunk%2Fdynamorio here].
+
+
+By applying the ASan instrumentation dynamically to system libraries, JIT and self-modifying code, DRASan provides extra code coverage during analysis.  Extra dynamic instrumentation doesn't add much steady-state execution slowdown.  However, the startup performance degrades on large projects - this issue is being worked on.
+
+DRASan is currently used for testing Chromium on [http://blog.chromium.org/2012/04/fuzzing-for-security.html ClusterFuzz].

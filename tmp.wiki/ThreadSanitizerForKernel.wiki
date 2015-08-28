@@ -1,0 +1,3 @@
+#summary ThreadSanitizer for Linux kernel.
+
+The wiki was moved to [https://github.com/google/ktsan/wiki GitHub].

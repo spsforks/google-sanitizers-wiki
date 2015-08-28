@@ -1,0 +1,13 @@
+#summary Using AddressSanitizer with Android platform components
+
+= Introduction =
+
+AddressSanitizer is supported in AOSP starting with JellyBean? release.
+
+= Details =
+
+To run applications built with ASan you'll need an -eng build of Android.
+
+To build any part of Android system with ASan, add LOCAL_ADDRESS_SANITIZER:=true to the appropriate Android.mk.
+
+To run a standalone native binary, prefix it with asanwrapper: /system/bin/asanwrapper _path_to_your_binary_ _options_
