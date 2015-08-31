@@ -34,4 +34,4 @@ The baseline is `clang -O2`.
 The average slowdown introduced by full instrumentation (red) is *1.73*.
 When only writes are instrumented (blue), the average slowdown is *1.26*.
 
-http://address-sanitizer.googlecode.com/svn/trunk/img/spec_r496.png 
+https://raw.githubusercontent.com/wiki/google/sanitizers/spec_r496.png
