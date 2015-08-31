@@ -2,9 +2,9 @@
 
 <wiki:toc max_depth="2" />
 
-*New*: AddressSanitizer [http://llvm.org/releases/3.1/docs/ReleaseNotes.html#whatsnew is released] as part of [http://llvm.org LLVM] 3.1. <BR>
-*New*: Watch the presentation from the [http://llvm.org/devmtg/2011-11/ LLVM Developer's meeting] (Nov 18, 2011): [http://www.youtube.com/watch?v=CPnRS1nv3_s Video], [http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf slides].<BR>
-*New*: Read the [http://research.google.com/pubs/pub37752.html USENIX ATC '2012 paper]. <BR>
+*New*: AddressSanitizer [http://llvm.org/releases/3.1/docs/ReleaseNotes.html#whatsnew is released] as part of [http://llvm.org LLVM] 3.1. 
+*New*: Watch the presentation from the [http://llvm.org/devmtg/2011-11/ LLVM Developer's meeting] (Nov 18, 2011): [http://www.youtube.com/watch?v=CPnRS1nv3_s Video], [http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf slides].
+*New*: Read the [http://research.google.com/pubs/pub37752.html USENIX ATC '2012 paper]. 
 
 
 =Introduction=
@@ -31,7 +31,7 @@ See also:
 
 =Getting !AddressSanitizer=
 
-AddressSanitizer is a part of [http://llvm.org LLVM] starting with version 3.1 and a part of [http://gcc.gnu.org GCC] starting with version 4.8 <BR>
+AddressSanitizer is a part of [http://llvm.org LLVM] starting with version 3.1 and a part of [http://gcc.gnu.org GCC] starting with version 4.8 
 If you prefer to build from source, see AddressSanitizerHowToBuild.
 
 
@@ -40,9 +40,9 @@ So far, AddressSanitizer has been tested only on Linux Ubuntu 12.04, 64-bit
 
 
 = Using !AddressSanitizer =
-In order to use AddressSanitizer you will need to compile and link your program using `clang` with the `-fsanitize=address` switch. <BR>
-To get a reasonable performance add `-O1` or higher. <BR>
-To get nicer stack traces in error messages add `-fno-omit-frame-pointer`. <BR>
+In order to use AddressSanitizer you will need to compile and link your program using `clang` with the `-fsanitize=address` switch. 
+To get a reasonable performance add `-O1` or higher. 
+To get nicer stack traces in error messages add `-fno-omit-frame-pointer`. 
 Note: [http://llvm.org/releases/3.1/tools/clang/docs/AddressSanitizer.html Clang 3.1 release uses another flag syntax].
 
 {{{

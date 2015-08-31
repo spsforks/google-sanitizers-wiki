@@ -93,7 +93,7 @@ long Foo(long *a) { return *a; }
 }}}
 
 ==Performance==
-The data below reflects the performance gain from zero-based shadow on SPEC CPU 2006. <BR>
+The data below reflects the performance gain from zero-based shadow on SPEC CPU 2006. 
 Measured LLVM r174590 on Intel Xeon W3690 @3.47GHz
 
 {{{

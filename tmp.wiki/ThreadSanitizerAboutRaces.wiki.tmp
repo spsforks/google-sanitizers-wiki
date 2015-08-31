@@ -212,7 +212,7 @@ So, how do I make my code correct?
 
 If you are not a black belt in synchronization primitives, please use something crafted by those who are (e.g. `pthread_mutex_lock`, `pthread_once`, etc). 
 
-If you are indeed a black belt (are you?), you probably know about CAS and other atomics, memory barriers, compiler barriers and other magic. <BR>
+If you are indeed a black belt (are you?), you probably know about CAS and other atomics, memory barriers, compiler barriers and other magic. 
 
 
 
