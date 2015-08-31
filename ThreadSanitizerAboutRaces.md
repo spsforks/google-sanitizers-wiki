@@ -201,11 +201,7 @@ So, how do I make my code correct?<br>
 <br>
 If you are not a black belt in synchronization primitives, please use something crafted by those who are (e.g. <code>pthread_mutex_lock</code>, <code>pthread_once</code>, etc).<br>
 <br>
-If you are indeed a black belt (are you?), you probably know about CAS and other atomics, memory barriers, compiler barriers and other magic. <br>
-<br>
-<BR><br>
-<br>
-<br>
+If you are indeed a black belt (are you?), you probably know about CAS and other atomics, memory barriers, compiler barriers and other magic.<br>
 <br>
 <br>
 <br>

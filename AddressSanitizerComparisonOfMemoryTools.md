@@ -16,41 +16,13 @@
 | Leaks                                   | **yes** (see LeakSanitizer)                    | yes                                      | yes                                              | ?                                                            | no          | yes                                                 |
 
 
-**DBI**: dynamic binary instrumentation 
-
-&lt;BR&gt;
-
-
-**CTI**: compile-time instrumentation 
-
-&lt;BR&gt;
-
-
-**UMR**: uninitialized memory reads 
-
-&lt;BR&gt;
-
-
-**UAF**: use-after-free (aka dangling pointer)  
-
-&lt;BR&gt;
-
-
-**UAR**: use-after-return 
-
-&lt;BR&gt;
-
-
-**OOB**: out-of-bounds  
-
-&lt;BR&gt;
-
-
-**x86**: includes 32- and 64-bit. 
-
-&lt;BR&gt;
-
-
+**DBI**: dynamic binary instrumentation
+**CTI**: compile-time instrumentation
+**UMR**: uninitialized memory reads
+**UAF**: use-after-free (aka dangling pointer)
+**UAR**: use-after-return
+**OOB**: out-of-bounds
+**x86**: includes 32- and 64-bit.
 **Guard Page**: a family of memory error detectors ([Electric fence](http://perens.com/FreeSoftware/) or [DUMA](http://duma.sourceforge.net/) on Linux, Page Heap on Windows, Guard Malloc in Mac)
 **gperftools**: various performance tools/error detectors bundled with TCMalloc. [Heap checker](http://gperftools.googlecode.com/svn/trunk/doc/heap_checker.html) (leak detector) is only available on Linux. [Debug allocator](https://code.google.com/p/gperftools/source/browse/src/debugallocation.cc) provides both guard pages and canary values for more precise detection of OOB writes, so it's better than guard page-only detectors.
 

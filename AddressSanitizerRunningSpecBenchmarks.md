@@ -14,11 +14,7 @@ cd your-spec-dir
 # Patching SPEC 2006
 
 There are several bugs in SPEC 2006 detectable by [AddressSanitizer](AddressSanitizer):
-[AddressSanitizerFoundBugs#Spec\_CPU\_2006](AddressSanitizerFoundBugs#Spec_CPU_2006) 
-
-&lt;BR&gt;
-
-
+[AddressSanitizerFoundBugs#Spec\_CPU\_2006](AddressSanitizerFoundBugs#Spec_CPU_2006)
 You will need to patch the spec code in order to run the benchmarks w/o errors: https://address-sanitizer.googlecode.com/svn/trunk/spec/spec2006-asan.patch
 
 # Running SPEC 2006

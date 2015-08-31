@@ -1,15 +1,7 @@
 # Spec CPU 2006 (C/C++)
 
-These numbers are measured on [SPEC 2006](AddressSanitizerRunningSpecBenchmarks) (C/C++ only) using Clang3.3 (trunk) r179094 (on Google Code) (April 09 2013) on Intel Xeon W3690 @3.47GHz. 
-
-&lt;BR&gt;
-
-
-2-nd column: `clang -O2` 
-
-&lt;BR&gt;
-
-
+These numbers are measured on [SPEC 2006](AddressSanitizerRunningSpecBenchmarks) (C/C++ only) using Clang3.3 (trunk) r179094 (on Google Code) (April 09 2013) on Intel Xeon W3690 @3.47GHz.
+2-nd column: `clang -O2`
 3-rd column: `clang -O2 -fsanitize=address -fno-omit-frame-pointer`
 | BENCHMARK            |  O2       | O2+asan | slowdown|
 |:---------------------|:----------|:--------|:--------|
@@ -36,20 +28,8 @@ These numbers are measured on [SPEC 2006](AddressSanitizerRunningSpecBenchmarks)
 The average slowdown is **1.93**, the median slowdown is **1.86**.
 
 Older measurements: asan r496 (on Google Code) (`clang -O2 -fsanitize=address`) with `malloc_context_size=1` (i.e. no unwinding).
-
-&lt;BR&gt;
-
-
-The baseline is `clang -O2`. 
-
-&lt;BR&gt;
-
-
+The baseline is `clang -O2`.
 The average slowdown introduced by full instrumentation (red) is **1.73**.
-
-&lt;BR&gt;
-
-
 When only writes are instrumented (blue), the average slowdown is **1.26**.
 
 ![http://address-sanitizer.googlecode.com/svn/trunk/img/spec_r496.png](http://address-sanitizer.googlecode.com/svn/trunk/img/spec_r496.png)

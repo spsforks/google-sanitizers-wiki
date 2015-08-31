@@ -91,11 +91,7 @@ long Foo(long *a) { return *a; }
 ```
 
 ## Performance
-The data below reflects the performance gain from zero-based shadow on SPEC CPU 2006. 
-
-&lt;BR&gt;
-
-
+The data below reflects the performance gain from zero-based shadow on SPEC CPU 2006.
 Measured LLVM r174590 (on Google Code) on Intel Xeon W3690 @3.47GHz
 
 ```
