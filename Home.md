@@ -25,3 +25,14 @@ Learn more:
 
 Your comments are welcome at address-sanitizer@googlegroups.com or [in Google+](https://plus.google.com/117014197169958493500)
 
+### ThreadSanitizer
+ThreadSanitizer is a fast data race detector for C/C++ and Go.
+
+Check out:
+
+ * [C/C++ User Manual](ThreadSanitizerCppManual)
+ * [Go User Manual](ThreadSanitizerGoManual)
+ * [High-level algorithm overview](ThreadSanitizerAlgorithm)
+ * [Instructions for developers](ThreadSanitizerDevelopment)
+
+Send comments/questions to thread-sanitizer@googlegroups.com
