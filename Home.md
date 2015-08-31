@@ -14,13 +14,14 @@ AddressSanitizer (ASan) is a fast memory error detector.
 It finds use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs. 
 Learn more:
 
-AddressSanitizer -- how to use the tool.
-AddressSanitizer page at clang.llvm.org
-AddressSanitizerAlgorithm -- how it works.
-HowToContribute -- if you want to help.
-Read if you are working on Chromium
-Watch the presentation from the LLVM Developer's meeting (Nov 18, 2011): Video, slides.
-Our paper accepted to USENIX ATC 2012
-See also: our slides for USENIX ATC 2012
+* AddressSanitizer -- how to use the tool.
+* AddressSanitizer page at clang.llvm.org
+* AddressSanitizerAlgorithm -- how it works.
+* AddressSanitizerHowToContribute -- if you want to help.
+* Read if you are working on Chromium
+* Watch the presentation from the LLVM Developer's meeting (Nov 18, 2011): Video, slides.
+* Our paper accepted to USENIX ATC 2012
+* See also: our slides for USENIX ATC 2012
+
 Your comments are welcome at address-sanitizer@googlegroups.com or in Google+
 
