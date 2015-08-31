@@ -1,16 +1,16 @@
 
 
 # Introduction
-[AddressSanitizer](AddressSanitizer.md) introduces [~2x slowdown on average](AddressSanitizerPerformanceNumbers.md).
+[AddressSanitizer](AddressSanitizer) introduces [~2x slowdown on average](AddressSanitizerPerformanceNumbers).
 This is very good for most kinds of testing, but still often prohibitively slow
-for production use. We believe that [AddressSanitizer](AddressSanitizer.md) can be
+for production use. We believe that [AddressSanitizer](AddressSanitizer) can be
 efficiently implemented in hardware which will reduce the CPU overhead to ~20%
-and thus allow wider use of [AddressSanitizer](AddressSanitizer.md) in production.
-On this page we try to explain why a hardware-assisted [AddressSanitizer](AddressSanitizer.md) (**HWASAN**)
+and thus allow wider use of [AddressSanitizer](AddressSanitizer) in production.
+On this page we try to explain why a hardware-assisted [AddressSanitizer](AddressSanitizer) (**HWASAN**)
 could be faster and more flexible than a pure-software implementation (**SWASAN**).
 
 # Instrumentation
-As explained in detail in [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm.md),
+As explained in detail in [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm),
 every memory access in the program is instrumented like this:
 ```
 CheckAddressAndCrashIfBad(Addr, kSize);
@@ -36,7 +36,7 @@ if (Shadow)
 ```
 kOffset is a compile-time constant that depends on the particular platform.
 E.g. on Linux i386 kOffset=0x20000000, and on Linux x86\_64 kOffset=0x7fff8000.
-The offset is different when using [AddressSanitizerForKernel](AddressSanitizerForKernel.md).
+The offset is different when using [AddressSanitizerForKernel](AddressSanitizerForKernel).
 
 This is how the x86\_64 assembly look:
 ```
@@ -80,7 +80,7 @@ We believe that all these computations could be done by a single new machine ins
 **ASANCHK**, that takes `Addr` as a single parameter and has 7 modifications for 7 different
 accesses sizes.
 This may sound too complex for one instruction, but Intel has recently introduced
-two even more complex instructions: [BNDLDX/BNDSTX](AddressSanitizerIntelMemoryProtectionExtensions.md).
+two even more complex instructions: [BNDLDX/BNDSTX](AddressSanitizerIntelMemoryProtectionExtensions).
 
 The instrumented code would look like this:
 ```
@@ -196,7 +196,7 @@ Pattern mode is less suitable for detecting stack-buffer-overflow bugs because i
 to poison 8 times more memory on every function entry and exit.
 
 ## Byte-to-bit shadow
-Alternative to the [AddressSanitizer](AddressSanitizer.md) shadow encoding is a simple byte-to-bit shadow mapping where
+Alternative to the [AddressSanitizer](AddressSanitizer) shadow encoding is a simple byte-to-bit shadow mapping where
 one bit of shadow represent addressability of the corresponding byte in memory.
 Disadvantage of this mapping is that it requires 1/8 of address space to be used for shadow memory,
 while ShadowScale>=4 allows to use less address space.
@@ -209,8 +209,8 @@ But byte-to-bit mapping _may_ be simpler to implement in hardware.
 An alternative to ASANCHK instruction is to perform the checks for all load/store instructions
 if HWASAN is anabled (ASANCFGU).
 The benefit is that no instrumentation will be required and all legacy code will be automatically checked
-if linked with the [AddressSanitizer](AddressSanitizer.md) run-time library.
+if linked with the [AddressSanitizer](AddressSanitizer) run-time library.
 The downside is that no compiler optimizations (eliminations of ASANCHK) will be possible.
 
 ## Links
-  * The paper [WatchdogLite: Hardware-Accelerated Compiler-Based Pointer Checking](http://www.cs.rutgers.edu/~santosh.nagarakatte/papers/cgo2014-final.pdf) proposes a similar set of extra instructions, although they are much closer in spirit to [MPX](AddressSanitizerIntelMemoryProtectionExtensions.md) than to [AddressSanitizer](AddressSanitizer.md)
+  * The paper [WatchdogLite: Hardware-Accelerated Compiler-Based Pointer Checking](http://www.cs.rutgers.edu/~santosh.nagarakatte/papers/cgo2014-final.pdf) proposes a similar set of extra instructions, although they are much closer in spirit to [MPX](AddressSanitizerIntelMemoryProtectionExtensions) than to [AddressSanitizer](AddressSanitizer)

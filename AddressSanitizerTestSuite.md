@@ -1,14 +1,14 @@
 # Introduction
 
-You may run [AddressSanitizer](AddressSanitizer.md) test suite with any toolchain at hand (Clang or GCC). Basically, tests verify that the compiler understands `-fsanitize=address` flag and produces working executables, which crash with expected error messages.
+You may run [AddressSanitizer](AddressSanitizer) test suite with any toolchain at hand (Clang or GCC). Basically, tests verify that the compiler understands `-fsanitize=address` flag and produces working executables, which crash with expected error messages.
 
 Test suite is stored in [compiler-rt](http://compiler-rt.llvm.org) repository
-and is kept in sync with upstream LLVM version of [AddressSanitizer](AddressSanitizer.md), so
+and is kept in sync with upstream LLVM version of [AddressSanitizer](AddressSanitizer), so
 some new tests may not work with older toolchains. GCC support in test-suite is still experimental, so be prepared to be prepared to encounter some problems.
 
 # How to run test suite
   * Download and install [CMake](http://cmake.org) (you'll need at least CMake 2.8.8).
-  * Checkout LLVM sources and build LLVM tools. You may omit this step if you already have LLVM build tree somewhere in your system. Note, that you will need fresh enough host compiler (see [AddressSanitizerHowToBuild](AddressSanitizerHowToBuild.md) section):
+  * Checkout LLVM sources and build LLVM tools. You may omit this step if you already have LLVM build tree somewhere in your system. Note, that you will need fresh enough host compiler (see [AddressSanitizerHowToBuild](AddressSanitizerHowToBuild) section):
 ```
 svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm_tmp_src
 mkdir llvm_tmp_obj && cd llvm_tmp_obj
@@ -28,7 +28,7 @@ svn co http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler-rt_src
         -DLLVM_CONFIG_PATH=../llvm_tmp_obj/bin/llvm-config \
         ../compiler-rt_src
 ```
-  * Run [AddressSanitizer](AddressSanitizer.md) test suite!
+  * Run [AddressSanitizer](AddressSanitizer) test suite!
 ```
   make check-asan
 ```

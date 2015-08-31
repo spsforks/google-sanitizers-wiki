@@ -1,4 +1,4 @@
-# Running [AddressSanitizerForKernel](AddressSanitizerForKernel.md) on Vagrant
+# Running [AddressSanitizerForKernel](AddressSanitizerForKernel) on Vagrant
 
 Install [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/).
 

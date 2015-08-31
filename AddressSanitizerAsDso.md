@@ -13,7 +13,7 @@ Cons:
   * Issue 147 (on Google Code) (can't use -static-libstdc++)
   * Harder deployment (need to carry the DSO around)
   * `__asan_init` is not called from `preinit_array` and so there is a risk that an instrumented code will get called before `__asan_init` (may cause SEGV at startup; still unlikely)
-  * Spurious warnings from libsanitizer when debug output is enabled (e.g. "[AddressSanitizer](AddressSanitizer.md): failed to intercept 'memcpy'")
+  * Spurious warnings from libsanitizer when debug output is enabled (e.g. "[AddressSanitizer](AddressSanitizer): failed to intercept 'memcpy'")
 
 Pros:
   * Smaller disk usage and memory footprint when multiple processes are running with asan.

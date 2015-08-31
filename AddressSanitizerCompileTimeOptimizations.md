@@ -1,7 +1,7 @@
 
 
 # Introduction
-[AddressSanitizer](AddressSanitizer.md) does not need to instrument all memory accesses to find all bugs.
+[AddressSanitizer](AddressSanitizer) does not need to instrument all memory accesses to find all bugs.
 
 The simplest example:
 ```

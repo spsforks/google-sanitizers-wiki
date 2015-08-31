@@ -42,4 +42,4 @@ leaving poisoned redzones between them.
 The allocated chunks should start with 8-aligned addresses.
 
 
-If a [run-time flag](AddressSanitizerFlags.md) `allow_user_poisoning` is set to `0`, the manual poisoning callbacks are no-ops.
+If a [run-time flag](AddressSanitizerFlags) `allow_user_poisoning` is set to `0`, the manual poisoning callbacks are no-ops.

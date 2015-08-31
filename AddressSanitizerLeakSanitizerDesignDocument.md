@@ -1,6 +1,6 @@
 # Introduction
 
-LeakSanitizer is a heap leak detector which is designed to run on top of [AddressSanitizer](AddressSanitizer.md) / [MemorySanitizer](MemorySanitizer.md), or as a standalone tool.
+LeakSanitizer is a heap leak detector which is designed to run on top of [AddressSanitizer](AddressSanitizer) / [MemorySanitizer](MemorySanitizer), or as a standalone tool.
 
 # Operation
 

@@ -1,6 +1,6 @@
-[AddressSanitizer](AddressSanitizer.md) is fully integrated with the LLVM source tree.
+[AddressSanitizer](AddressSanitizer) is fully integrated with the LLVM source tree.
 
-## Checkout [AddressSanitizer](AddressSanitizer.md) sources
+## Checkout [AddressSanitizer](AddressSanitizer) sources
 ```
 # cd somewhere
 # Get llvm, clang and compiler-rt
@@ -25,7 +25,7 @@ In order to build fresh Clang you need some other compiler (e.g. GCC or an older
 Since January 2014 Clang will not build with old compilers (at least GCC 4.7 is required),
 so on older systems you may need to install a newer compiler separately. Follow [these instructions](http://llvm.org/docs/GettingStarted.html#getting-a-modern-host-c-toolchain) to use new GCC as your host compiler.
 
-## Building [AddressSanitizer](AddressSanitizer.md) with CMake (LLVM 3.2 or later)
+## Building [AddressSanitizer](AddressSanitizer) with CMake (LLVM 3.2 or later)
   * Download and install [CMake](http://www.cmake.org/cmake/resources/software.html) (you'll need at least CMake 2.8.8).
   * Get llvm, clang and compiler-rt sources (see above).
   * Make sure you have a modern C++ toolchain (see above).
@@ -95,7 +95,7 @@ projects/compiler-rt/lib/sanitizer_common/scripts/check_lint.sh
 If you want to get even faster incremental builds, use ninja: http://clang.llvm.org/docs/HowToSetupToolingForLLVM.html
 
 ## Chrome
-The Chromium team periodically bakes fresh LLVM/Clang binaries, which include [AddressSanitizer](AddressSanitizer.md) support.
+The Chromium team periodically bakes fresh LLVM/Clang binaries, which include [AddressSanitizer](AddressSanitizer) support.
 Simply execute the following:
 ```
 mkdir -p tools/clang

@@ -21,7 +21,7 @@ Examples of redundant accesses:
 
 Atomic memory accesses are instrumented using specialized `__tsan_atomic_` callbacks.
 Reads from vtable pointer are instrumented using `__tsan_vptr_update` to
-deal with [benign vptr races](ThreadSanitizerPopularDataRaces#Data_race_on_vptr.md).
+deal with [benign vptr races](ThreadSanitizerPopularDataRaces#Data_race_on_vptr).
 Function entry and exit are instrumented with `__tsan_func_entry(caller_pc)`
 and `__tsan_func_exit`.
 A call to `__tsan_init` is inserted before all initializers.

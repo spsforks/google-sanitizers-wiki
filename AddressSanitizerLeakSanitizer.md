@@ -1,6 +1,6 @@
 # Introduction
 
-LeakSanitizer is a memory leak detector which is integrated into [AddressSanitizer](AddressSanitizer.md). The tool is supported on x86\_64 Linux.
+LeakSanitizer is a memory leak detector which is integrated into [AddressSanitizer](AddressSanitizer). The tool is supported on x86\_64 Linux.
 
 LeakSanitizer is enabled by default in all ASan builds. LSan lies dormant until the very end of the process, at which point there is an extra leak detection phase. In performance-critical scenarios, LSan can also be used without ASan instrumentation.
 
@@ -8,7 +8,7 @@ See also: LeakSanitizerDesignDocument, LeakSanitizerVsHeapChecker
 
 # Using LeakSanitizer
 
-To use LSan, simply build your program with [AddressSanitizer](AddressSanitizer.md):
+To use LSan, simply build your program with [AddressSanitizer](AddressSanitizer):
 
 ```
 $ cat memory-leak.c 
@@ -60,7 +60,7 @@ You can fine-tune LeakSanitizer's behavior through the `LSAN_OPTIONS` environmen
 | report\_objects  | 0       | If 1, LSan will report the addresses of individual leaked objects. |
 | use\_unaligned | 0       | If 0, LSan will only consider properly aligned 8-byte patterns when looking for pointers. Set to 1 to include unaligned patterns. This refers to the pointer itself, not the memory being pointed at. |
 
-Leak detection is also affected by certain [ASan flags](AddressSanitizerFlags.md). If you're not happy with the stack traces you see, check out `fast_unwind_on_malloc`, `malloc_context_size` and `strip_path_prefix`. Those flags go in `ASAN_OPTIONS` as usual. However, if you built with `-fsanitize=leak`, put them in `LSAN_OPTIONS` instead (and use `LSAN_SYMBOLIZER_PATH` to pass the symbolizer path).
+Leak detection is also affected by certain [ASan flags](AddressSanitizerFlags). If you're not happy with the stack traces you see, check out `fast_unwind_on_malloc`, `malloc_context_size` and `strip_path_prefix`. Those flags go in `ASAN_OPTIONS` as usual. However, if you built with `-fsanitize=leak`, put them in `LSAN_OPTIONS` instead (and use `LSAN_SYMBOLIZER_PATH` to pass the symbolizer path).
 
 ## Suppressions
 

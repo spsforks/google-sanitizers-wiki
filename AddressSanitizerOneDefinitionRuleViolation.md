@@ -19,7 +19,7 @@ Simple cases can be detected by linker:
 /tmp/odr1-f97b07.o:(.bss+0x0): multiple definition of `XXX'
 ```
 
-In various other cases (e.g. when shared libraries are involved) the linker remains silent. [AddressSanitizer](AddressSanitizer.md), however, is able to detect most of the ODR violations at process startup.
+In various other cases (e.g. when shared libraries are involved) the linker remains silent. [AddressSanitizer](AddressSanitizer), however, is able to detect most of the ODR violations at process startup.
 
 Currently it requires a special run-time switch `ASAN_OPTIONS=detect_odr_violation=1`
 ```

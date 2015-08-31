@@ -1,19 +1,19 @@
-# [AddressSanitizer](AddressSanitizer.md) for Mac: don’t be afraid.
+# [AddressSanitizer](AddressSanitizer) for Mac: don’t be afraid.
 
 **ATTENTION**: most of the implementation details of ASan on Mac have changed in the past years and aren't reflected in this document. Please refer to the source. In particular, we are no longer using mach\_override (which used to be a maintenance hell and didn't work on iOS) in favor of dyld interposition (see http://llvm.org/viewvc/llvm-project/compiler-rt/trunk/lib/interception/interception.h?view=markup) and re-exec()ution. This allows us to hook the allocation/deallocation routines early and eliminates the need to replace CFAllocator and wrap various CF... functions.
 Overall, we've stopped relying on most of the undocumented functions and assumptions.
 
-This document should cover the implementation details of [AddressSanitizer](AddressSanitizer.md) for Mac OS, because there are notable differences from Linux. We are almost sure that not all the possible issues are covered here (and in the code), so any comments and suggestions are welcome.
+This document should cover the implementation details of [AddressSanitizer](AddressSanitizer) for Mac OS, because there are notable differences from Linux. We are almost sure that not all the possible issues are covered here (and in the code), so any comments and suggestions are welcome.
 
 
 
 ## Overview
 
-[AddressSanitizer](AddressSanitizer.md) is a dynamic detector of addressability bugs like buffer overflows (on the heap, stack and global variables) use-after-free errors for heap allocations and use-after-return errors for stack allocations.
-The [AddressSanitizer](AddressSanitizer.md) algorithm is described in [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm.md), but we’ll repeat it here for the sake of completeness.
+[AddressSanitizer](AddressSanitizer) is a dynamic detector of addressability bugs like buffer overflows (on the heap, stack and global variables) use-after-free errors for heap allocations and use-after-return errors for stack allocations.
+The [AddressSanitizer](AddressSanitizer) algorithm is described in [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm), but we’ll repeat it here for the sake of completeness.
 
 Every 8 bytes of application memory are backed up with a byte of shadow memory which tells how many of those 8 bytes are addressable. Each memory access in a program is instrumented with code that checks the addressability of the memory region being accessed before the actual memory access. If the memory is unaddressable, an error is reported.
-[AddressSanitizer](AddressSanitizer.md) consists of an LLVM instrumentation pass and a runtime library.
+[AddressSanitizer](AddressSanitizer) consists of an LLVM instrumentation pass and a runtime library.
 The instrumentation pass adds the code that checks the shadow memory before each memory access. It also rearranges the variables on the stack and in the data segment by adding “poisoned” (unaddressable) redzones to them. For each module in the client program the instrumentation pass emits a static constructor that calls `__asan_init()` (the routine that initializes the runtime library if it wasn’t initialized yet) and `__asan_register_globals()` (tells the runtime about the globals in the module and initializes their redzones). Similarly, a static destructor that tears the globals down by calling `__asan_unregister_globals()` is emitted.
 
 The runtime library manages the shadow memory for the application. It replaces the client memory allocation routines so that poisoned redzones are added to each allocated chunk of memory. It also poisons the redzones around global variables (on program startup) and around stack variables (on function entry).
@@ -25,20 +25,20 @@ We’ve added the `-faddress-sanitizer` flag to Clang, the LLVM front-end for C 
 the modules keep their binary compatibility with each other (and the system libraries), otherwise something may crash at startup;
 code from non-instrumented modules that is executed before `__asan_init()` cannot call code from the instrumented modules, otherwise a segmentation violation will occur while trying to access the shadow memory. In fact it is almost impossible to ensure this at compile time, so the best option is to instrument the whole program.
 
-An important design decision taken in the early days of [AddressSanitizer](AddressSanitizer.md) is that it should be as transparent to the user as possible. Therefore it’s usually enough to pass `-faddress-sanitizer` to `clang`/`clang++` in order to compile and link the instrumented program, and the resulting binary should just work as it would normally do, and report memory errors in the case they occur. We try to minimize the use of any additional options needed to run the instrumented program, because it usually complicates the deployment process and thwart the users.
+An important design decision taken in the early days of [AddressSanitizer](AddressSanitizer) is that it should be as transparent to the user as possible. Therefore it’s usually enough to pass `-faddress-sanitizer` to `clang`/`clang++` in order to compile and link the instrumented program, and the resulting binary should just work as it would normally do, and report memory errors in the case they occur. We try to minimize the use of any additional options needed to run the instrumented program, because it usually complicates the deployment process and thwart the users.
 
-## [AddressSanitizer](AddressSanitizer.md) and other memory tools
+## [AddressSanitizer](AddressSanitizer) and other memory tools
 
-Some comparison of existing memory tools is done at [AddressSanitizerComparisonOfMemoryTools](AddressSanitizerComparisonOfMemoryTools.md).
+Some comparison of existing memory tools is done at [AddressSanitizerComparisonOfMemoryTools](AddressSanitizerComparisonOfMemoryTools).
 
 ### Valgrind Memcheck
 
 [Memcheck](http://valgrind.org/docs/manual/mc-manual.html) is based on [Valgrind](http://valgrind.org/), a binary instrumentation framework, so all the advantages and disadvantages of DBI apply to it. It does not require code recompilation and is able to find the memory errors in the shared libraries and JITted code as well as in the main executable. On the other hand, it is unable to find bugs on global and stack variables. Memcheck is also quite slow, mainly because of the translation/instrumentation overhead and the program threads being serialized.
-Memcheck also allows the user to detect problems related to uninitialized values, which requires a more complex shadow state and is not the goal of [AddressSanitizer](AddressSanitizer.md).
+Memcheck also allows the user to detect problems related to uninitialized values, which requires a more complex shadow state and is not the goal of [AddressSanitizer](AddressSanitizer).
 
 ### libgmalloc
 
-Some people compare [AddressSanitizer](AddressSanitizer.md) to [`libgmalloc`](https://developer.apple.com/library/mac/#documentation/darwin/reference/manpages/man3/libgmalloc.3.html). These two tools are a bit similar, but they may find different bugs. libgmalloc places each heap allocation on its own virtual memory page, which is unmapped when the allocated memory chunk is freed. This allows libgmalloc to easily detect use-after-free bugs without instrumenting the program or the system libraries, but at the same time page-level granularity does not allow to catch the accesses right behind the array bounds.
+Some people compare [AddressSanitizer](AddressSanitizer) to [`libgmalloc`](https://developer.apple.com/library/mac/#documentation/darwin/reference/manpages/man3/libgmalloc.3.html). These two tools are a bit similar, but they may find different bugs. libgmalloc places each heap allocation on its own virtual memory page, which is unmapped when the allocated memory chunk is freed. This allows libgmalloc to easily detect use-after-free bugs without instrumenting the program or the system libraries, but at the same time page-level granularity does not allow to catch the accesses right behind the array bounds.
 libgmalloc does not manage stack memory and the globals, thus it can’t detect stack and global buffer overflows.
 
 ## Clang and compile-time stuff
@@ -75,7 +75,7 @@ Another approach worth to consider is to patch the resulting executable after it
 
 Because of the two-level namespaces used by many applications, it is generally impossible to reliably intercept the functions by providing replacements for them and obtaining the original function pointers via `dlsym()`. This is why we’re using function patching based on the mach\_star framework (https://github.com/rentzsch/mach_star/tree/master/mach_override).
 We had to make some changes to the `mach_override.{c,h}` in order to make it fit to our needs:
-externalize the functions that allocate and deallocate the branch islands, because [AddressSanitizer](AddressSanitizer.md) adds some limitations on their placement (e.g. they should not overlap with the shadow regions or be more than 2 Gb far from the functions being intercepted). This has sped up the program execution significantly, because previously the library used to probe the virtual memory space looking for a free page, which resulted in 3M calls to `vm_allocate()` per program run (http://code.google.com/p/address-sanitizer/issues/detail?id=24);
+externalize the functions that allocate and deallocate the branch islands, because [AddressSanitizer](AddressSanitizer) adds some limitations on their placement (e.g. they should not overlap with the shadow regions or be more than 2 Gb far from the functions being intercepted). This has sped up the program execution significantly, because previously the library used to probe the virtual memory space looking for a free page, which resulted in 3M calls to `vm_allocate()` per program run (http://code.google.com/p/address-sanitizer/issues/detail?id=24);
 add a number of instructions unsupported by the trunk mach\_override, including support for short jump instructions, ja and je (http://code.google.com/p/address-sanitizer/issues/detail?id=53);
 because the client library may include its own copy of mach\_override library, we need to make sure it is named differently (otherwise mutual calling of instrumented and non-instrumented functions may result in problems, see http://code.google.com/p/address-sanitizer/issues/detail?id=22)
 
@@ -119,7 +119,7 @@ We do not do anything with the garbage collected allocators.
 
 ### Threading, TLS and Grand Central Dispatch
 
-[AddressSanitizer](AddressSanitizer.md) needs to keep track of the threads that exist during the program execution.
+[AddressSanitizer](AddressSanitizer) needs to keep track of the threads that exist during the program execution.
 For every thread an `AsanThreadSummary` object is created.
 
 For historical reasons (because Clang did not support the `__thread` keyword on Mac OS prior to 10.7), we are using thread-specific data (TSD) provided by libpthread. In order to minimize the differences between ASan on Linux and Mac we’re using TSD on Linux as well. This approach has a drawback: data in the TSD is destroyed when the thread is exited, and the order of destruction of the different TSD pieces is undefined. Previously we’ve used to ensure our destructor was the very last one, but now we’re deliberately leaking the corresponding AsanThreadSummary object on all the platforms to guarantee that it outlives its thread.
@@ -128,13 +128,13 @@ Starting at OS X 10.6 Apple introduced Grand Central Dispatch, a mechanism for r
 
 ### File mappings and symbolization
 
-[AddressSanitizer](AddressSanitizer.md) sometimes needs to know the list of memory mappings in the process address space. There are two cases when it is necessary: to detect which image does a stack frame belong to, and to check whether any of the mapped libraries overlap with the shadow memory range at startup (this is possible if ASLR is on, see below).
+[AddressSanitizer](AddressSanitizer) sometimes needs to know the list of memory mappings in the process address space. There are two cases when it is necessary: to detect which image does a stack frame belong to, and to check whether any of the mapped libraries overlap with the shadow memory range at startup (this is possible if ASLR is on, see below).
 
 Initially we had been using an interface class from gperftools (http://code.google.com/p/gperftools/) that queried /proc/self/maps on Linux and emulated the same behaviour on Mac using the dyld API (_dyld\_get\_image_{name,header,vmaddr\_slide}()). This means we can only get the list of images mapped by the process, not all the existing mappings. However this hadn’t been an issue, because the mappings that do not correspond to binary images typically do not contain program code (ASan can’t symbolize JITted code), and there are no such mappings at program startup.
 
 We've rewritten the gperftools code heavily now (http://llvm.org/viewvc/llvm-project/compiler-rt/trunk/lib/asan/asan_procmaps.h?view=markup), but it is still using the same API.
 
-Currently [AddressSanitizer](AddressSanitizer.md) uses out-of-process symbolization performed by a Python script, asan\_symbolize.py, which looks for object+offset pairs in the crash logs and replaces them with symbol:file:line triples obtained from addr2line on Linux or atos on Mac OS. Because the report may contain stacks of memory allocation/deallocation that had happened in the past, it sometimes may be impossible to find the binary that contains a particular address (e.g. if it was in a library that had already been unloaded). We are aware of this problem and know how to fix it, but it hadn’t been noticed in the wild yet.
+Currently [AddressSanitizer](AddressSanitizer) uses out-of-process symbolization performed by a Python script, asan\_symbolize.py, which looks for object+offset pairs in the crash logs and replaces them with symbol:file:line triples obtained from addr2line on Linux or atos on Mac OS. Because the report may contain stacks of memory allocation/deallocation that had happened in the past, it sometimes may be impossible to find the binary that contains a particular address (e.g. if it was in a library that had already been unloaded). We are aware of this problem and know how to fix it, but it hadn’t been noticed in the wild yet.
 
 ### Runtime flags
 
@@ -146,24 +146,24 @@ Runtime flags that affect ASan behavior can be passed via the `ASAN_OPTIONS` env
 
 #### `memcpy()` and `memmove()`
 
-[AddressSanitizer](AddressSanitizer.md) wraps `memcpy()` and `memmove()` in order to check that the memory regions being accessed are addressable, and that the parameters of `memcpy()` do not overlap.
+[AddressSanitizer](AddressSanitizer) wraps `memcpy()` and `memmove()` in order to check that the memory regions being accessed are addressable, and that the parameters of `memcpy()` do not overlap.
 It turns out that on Mac OS 10.7 `memcpy()` and `memmove()` are the same function (see http://code.google.com/p/address-sanitizer/issues/detail?id=34), so wrapping both of them makes us do the checks twice and report overlapping parameters for `memmove()` as well.
 To avoid this, we wrap only `memmove()` on non-Snow Leopard systems (http://llvm.org/viewvc/llvm-project/compiler-rt/trunk/lib/asan/asan_mac.cc?view=markup).
 
 #### Address space layout randomization (ASLR)
 
-Address space layout randomization is a security method that prevents attacks relying on a particular addresses of the application and library segments. Because the application is loaded before `__asan_init()` is called, any of its segments may intersect with the shadow memory ranges, which is likely to result in incorrect behavior (the `mmap()` and `mprotect()` calls setting up the memory will corrupt the data or the code of the app). Because [AddressSanitizer](AddressSanitizer.md) is intended to be used by software developers, it should be safe to disable ASLR for the program built with [AddressSanitizer](AddressSanitizer.md).
+Address space layout randomization is a security method that prevents attacks relying on a particular addresses of the application and library segments. Because the application is loaded before `__asan_init()` is called, any of its segments may intersect with the shadow memory ranges, which is likely to result in incorrect behavior (the `mmap()` and `mprotect()` calls setting up the memory will corrupt the data or the code of the app). Because [AddressSanitizer](AddressSanitizer) is intended to be used by software developers, it should be safe to disable ASLR for the program built with [AddressSanitizer](AddressSanitizer).
 
 On OS X 10.6 ASLR is really aggressive, so even the smallest 32-bit application is very likely to intersect with the shadow. The randomization can be disabled with the DYLD\_NO\_PIE env var, which is being set manually by the users (http://code.google.com/p/address-sanitizer/issues/detail?id=29 is the corresponding bug). We haven’t faced any problems with ASLR on 10.7, thus we didn’t need to disable it, although there is a known method to do so: http://reverse.put.as/2011/08/11/how-gdb-disables-aslr-in-mac-os-x-lion/
 
 #### Slow shutdown on 64-bit apps
 
-[AddressSanitizer](AddressSanitizer.md) needs to mmap one eighth of the address space available to the client program, which is 16 Tb on the 64-bit systems. Mapping such a big amount of memory bloats the virtual page table and causes the page lookup operations to take more time. As a result, the process shutdown may take up to half a second (and probably more on slower machines). This should not be a big problem for real world applications, but our test suite that forks hundreds of child processes becomes rather slow.
+[AddressSanitizer](AddressSanitizer) needs to mmap one eighth of the address space available to the client program, which is 16 Tb on the 64-bit systems. Mapping such a big amount of memory bloats the virtual page table and causes the page lookup operations to take more time. As a result, the process shutdown may take up to half a second (and probably more on slower machines). This should not be a big problem for real world applications, but our test suite that forks hundreds of child processes becomes rather slow.
 We’ve reported the bug to Apple, see http://openradar.appspot.com/10699643.
 
 #### `CFStringCreateCopy()`
 
-`CFStringCreateCopy()` is a function for copying CFString instances. Normally it does not copy constant strings (http://opensource.apple.com/source/CF/CF-476.19/CFString.c), but if the default CoreFoundation allocator is replaced using `CFAllocatorSetDefault()`, it starts to. We believe this is incorrect (Apple Radar bug 11164715 (on Google Code) filed, see also http://openradar.appspot.com/11164715), but since [AddressSanitizer](AddressSanitizer.md) replaces the default allocator, we still have to deal with it (http://code.google.com/p/address-sanitizer/issues/detail?id=10)
+`CFStringCreateCopy()` is a function for copying CFString instances. Normally it does not copy constant strings (http://opensource.apple.com/source/CF/CF-476.19/CFString.c), but if the default CoreFoundation allocator is replaced using `CFAllocatorSetDefault()`, it starts to. We believe this is incorrect (Apple Radar bug 11164715 (on Google Code) filed, see also http://openradar.appspot.com/11164715), but since [AddressSanitizer](AddressSanitizer) replaces the default allocator, we still have to deal with it (http://code.google.com/p/address-sanitizer/issues/detail?id=10)
 We wrap `CFStringCreateCopy()` in the ASan runtime library and check if its second argument is a constant string. If it is, we return it as is, otherwise the original `CFStringCreateCopy()` is called.
 
 #### Wrapping `__CFInitialize()`

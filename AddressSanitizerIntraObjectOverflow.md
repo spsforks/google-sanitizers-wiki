@@ -1,4 +1,4 @@
-One class of bugs currently not properly detected by [AddressSanitizer](AddressSanitizer.md) is **intra-object-overflow**:
+One class of bugs currently not properly detected by [AddressSanitizer](AddressSanitizer) is **intra-object-overflow**:
 
 ```
 struct S {
@@ -13,9 +13,9 @@ void Foo(S *s, int idx) {
 ```
 
 
-This class of bugs will be detectable with the [Intel MPX](AddressSanitizerIntelMemoryProtectionExtensions.md).
+This class of bugs will be detectable with the [Intel MPX](AddressSanitizerIntelMemoryProtectionExtensions).
 
-In the meantime, we are trying the following approach in [AddressSanitizer](AddressSanitizer.md):
+In the meantime, we are trying the following approach in [AddressSanitizer](AddressSanitizer):
 if the type is a C++ non-standard-layout class with a destructor, we add poisoned gaps (redzones) between fields in the class.
 
 An early prototype of this functionality is available in clang trunk. Don't expect it to work outside of small tests (yet).

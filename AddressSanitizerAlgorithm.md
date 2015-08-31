@@ -19,7 +19,7 @@ if (IsPoisoned(address)) {
 ```
 
 The tricky part is how to implement `IsPoisoned` very fast and `ReportError` very compact.
-Also, instrumenting some of the accesses may be [proven redundant](AddressSanitizerCompileTimeOptimizations.md).
+Also, instrumenting some of the accesses may be [proven redundant](AddressSanitizerCompileTimeOptimizations).
 
 
 # Memory mapping and Instrumentation
@@ -41,7 +41,7 @@ if (ShadowIsPoisoned(shadow_address)) {
 ```
 
 ## Mapping
-[AddressSanitizer](AddressSanitizer.md) maps 8 bytes of the application
+[AddressSanitizer](AddressSanitizer) maps 8 bytes of the application
 memory into 1 byte of the shadow memory.
 
 There are only 9 different values for any aligned 8 bytes of the application memory:
@@ -121,7 +121,7 @@ It is possible to use just a single instruction (e.g. `ud2`), but this will requ
 to have a full disassembler in the run-time library (or some other hacks).
 
 ## Stack
-In order to catch stack buffer overflow, [AddressSanitizer](AddressSanitizer.md) instruments the code like this:
+In order to catch stack buffer overflow, [AddressSanitizer](AddressSanitizer) instruments the code like this:
 
 Original code:
 ```

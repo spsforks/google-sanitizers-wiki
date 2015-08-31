@@ -1,10 +1,10 @@
-The [AddressSanitizer](AddressSanitizer.md) run-time library and the LLVM compiler module are being developed in the LLVM source tree. Please see the [LLVM Developer Policy](http://llvm.org/docs/DeveloperPolicy.html)
+The [AddressSanitizer](AddressSanitizer) run-time library and the LLVM compiler module are being developed in the LLVM source tree. Please see the [LLVM Developer Policy](http://llvm.org/docs/DeveloperPolicy.html)
 
 The run-time library resides in the [Compiler-RT](http://compiler-rt.llvm.org/) tree, under `lib/asan` as well as some shared files under `lib/sanitizer_common`, etc.
 
 To request a merge into the sanitizer's code-base, please send patches based on the LLVM tree to `llvm-commits@cs.uiuc.edu`. For non-trivial patches please use [Phabricator](http://llvm.org/docs/Phabricator.html) -- this will help us reply faster.
 
-The GCC version of [AddressSanitizer](AddressSanitizer.md) run-time is a copy of the LLVM version, please do not commit changes to GCC trunk w/o committing them to LLVM trunk first. See also `libsanitizer/README.gcc` in the GCC trunk.
+The GCC version of [AddressSanitizer](AddressSanitizer) run-time is a copy of the LLVM version, please do not commit changes to GCC trunk w/o committing them to LLVM trunk first. See also `libsanitizer/README.gcc` in the GCC trunk.
 
 Some files only exist in the GCC tree, to make it interoperate with the rest of the GCC code. If you need to change them, you'll have to split your patch, apply the LLVM part first, merge it back to the GCC tree and then apply your patch there. We should aim to keep both trees in sync, so that GCC wouldn't need to go through this, but that's for another topic.
 

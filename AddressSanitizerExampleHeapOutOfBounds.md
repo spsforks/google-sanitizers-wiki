@@ -50,4 +50,4 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   ASan internal:         fe
 ==6226== ABORTING
 ```
-Read [AddressSanitizerCallStack](AddressSanitizerCallStack.md) about symbolizing callstack
+Read [AddressSanitizerCallStack](AddressSanitizerCallStack) about symbolizing callstack

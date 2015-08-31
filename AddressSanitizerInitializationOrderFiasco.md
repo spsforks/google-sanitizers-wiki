@@ -29,9 +29,9 @@ $ clang++ tmp/init-order/example/b.cc tmp/init-order/example/a.cc && ./a.out
 
 Such bugs are hard to spot and may stay unnoticed until some irrelevant changes in the code (or compiler, or link strategy) change the code behavior, often breaking it in an unexpected way.
 
-# Initialization-order checker in [AddressSanitizer](AddressSanitizer.md)
-[AddressSanitizer](AddressSanitizer.md) inserts checks into the compiled program aimed at detecting initialization-order problems. They are turned off by default,
-and you have to pass [run-time flags](AddressSanitizerFlags.md) to enable them. See [example usage](AddressSanitizerExampleInitOrderFiasco.md).
+# Initialization-order checker in [AddressSanitizer](AddressSanitizer)
+[AddressSanitizer](AddressSanitizer) inserts checks into the compiled program aimed at detecting initialization-order problems. They are turned off by default,
+and you have to pass [run-time flags](AddressSanitizerFlags) to enable them. See [example usage](AddressSanitizerExampleInitOrderFiasco).
 
 ## Loose init-order checking
 This mode reports an error if initializer for a global variable accesses dynamically initialized global from another translation unit, **which is not yet initialized**.

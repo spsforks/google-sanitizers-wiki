@@ -82,4 +82,4 @@ Just works, this is the primary compiler for the developers.<br>
 The first version is in trunk, will appear in 4.8 release.<br>
 The implementation is (almost?) complete, but we don't have enough experience with it yet.<br>
 <br>
-In <a href='AddressSanitizer.md'>AddressSanitizer</a> mode GCC defines <code>__SANITIZE_ADDRESS__</code> macro, but does not support <code>__has_feature(address_sanitizer)</code>
+In <a href='AddressSanitizer'>AddressSanitizer</a> mode GCC defines <code>__SANITIZE_ADDRESS__</code> macro, but does not support <code>__has_feature(address_sanitizer)</code>

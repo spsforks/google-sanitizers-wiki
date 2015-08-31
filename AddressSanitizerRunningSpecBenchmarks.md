@@ -13,8 +13,8 @@ cd your-spec-dir
 
 # Patching SPEC 2006
 
-There are several bugs in SPEC 2006 detectable by [AddressSanitizer](AddressSanitizer.md):
-[AddressSanitizerFoundBugs#Spec\_CPU\_2006](AddressSanitizerFoundBugs#Spec_CPU_2006.md) 
+There are several bugs in SPEC 2006 detectable by [AddressSanitizer](AddressSanitizer):
+[AddressSanitizerFoundBugs#Spec\_CPU\_2006](AddressSanitizerFoundBugs#Spec_CPU_2006) 
 
 &lt;BR&gt;
 

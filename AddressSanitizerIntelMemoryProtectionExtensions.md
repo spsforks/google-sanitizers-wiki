@@ -85,7 +85,7 @@ For similar applications we can expect that MPX-based bug detection tools will b
 
 For many other benchmarks (e.g. 400.perlbench, 429.mcf, 483.xalancbmk, 471.omnetpp)
 the number of expensive BNDMOV and very expensive BNDLDX/BNDSTX instruction is comparable to the number of checks.
-For these applications we expect MPX to be slower than alternative software-only solutions, such as [AddressSanitizer](AddressSanitizer.md).
+For these applications we expect MPX to be slower than alternative software-only solutions, such as [AddressSanitizer](AddressSanitizer).
 
 Note that the data is preliminary because we've built the benchmarks
 and without the MPX-enabled glibc.
@@ -250,7 +250,7 @@ MPX is expected to be very fast if the ratio of BNDCU/BNDLDX is large (i.e. for 
 
 # Biased conclusion
 A **very biased** conclusion: Intel MPX might be useful for in-struct buffer overflow detection, and for general buffer overflow detection in programs with lots of arrays and few pointers.
-However [AddressSanitizer](AddressSanitizer.md) (and, if implemented, [AddressSanitizerInHardware](AddressSanitizerInHardware.md)) is more useful: faster, finds more bugs, easier to deploy.
+However [AddressSanitizer](AddressSanitizer) (and, if implemented, [AddressSanitizerInHardware](AddressSanitizerInHardware)) is more useful: faster, finds more bugs, easier to deploy.
 
 # Random Thoughts
 BNDLDX/BNDSTX are (I guess) very slow since they access two cache lines.

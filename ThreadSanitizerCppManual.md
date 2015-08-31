@@ -28,11 +28,11 @@ int main() {
 }
 ```
 
-There are a lot of various ways to trigger a data race in C++, see [ThreadSanitizerPopularDataRaces](ThreadSanitizerPopularDataRaces.md), TSan detects all of them and more -- [ThreadSanitizerDetectableBugs](ThreadSanitizerDetectableBugs.md).
+There are a lot of various ways to trigger a data race in C++, see [ThreadSanitizerPopularDataRaces](ThreadSanitizerPopularDataRaces), TSan detects all of them and more -- [ThreadSanitizerDetectableBugs](ThreadSanitizerDetectableBugs).
 
 # Obtaining `ThreadSanitizer`
 
-`ThreadSanitizer` is part of clang 3.2 and gcc 4.8. To build the freshest version see [ThreadSanitizerDevelopment](ThreadSanitizerDevelopment.md) page.
+`ThreadSanitizer` is part of clang 3.2 and gcc 4.8. To build the freshest version see [ThreadSanitizerDevelopment](ThreadSanitizerDevelopment) page.
 
 # Supported Platforms
 
@@ -92,16 +92,16 @@ WARNING: ThreadSanitizer: data race (pid=26327)
 ThreadSanitizer: reported 1 warnings
 ```
 
-Refer to [ThreadSanitizerReportFormat](ThreadSanitizerReportFormat.md) for explanation of reports format.
+Refer to [ThreadSanitizerReportFormat](ThreadSanitizerReportFormat) for explanation of reports format.
 
-There is a bunch of runtime and compiler flags to tune behavior of TSan -- see [ThreadSanitizerFlags](ThreadSanitizerFlags.md).
+There is a bunch of runtime and compiler flags to tune behavior of TSan -- see [ThreadSanitizerFlags](ThreadSanitizerFlags).
 
 # Suppressing Reports
 
 Sometimes you can't fix the race (e.g. in third-party code) or don't want to do it straight away. There are several options how you can suppress known reports:
 
-  * [Suppressions](ThreadSanitizerSuppressions.md) files (runtime mechanism).
-  * [Blacklist](ThreadSanitizerFlags.md) files (compile-time mechanism).
+  * [Suppressions](ThreadSanitizerSuppressions) files (runtime mechanism).
+  * [Blacklist](ThreadSanitizerFlags) files (compile-time mechanism).
   * Exclude problematic code/test under TSan with `#if defined(__has_feature) && __has_feature(thread_sanitizer)`.
 
 # How To Test

@@ -1,13 +1,13 @@
-[AddressSanitizer](AddressSanitizer.md) collects call stacks on the following events:
+[AddressSanitizer](AddressSanitizer) collects call stacks on the following events:
   * `malloc` and `free`
   * thread creation
   * failure
 
 `malloc` and `free` happen relatively frequently and it is important to unwind the call stack fast.
-[AddressSanitizer](AddressSanitizer.md) uses a simple unwinder that relies on frame pointers.
+[AddressSanitizer](AddressSanitizer) uses a simple unwinder that relies on frame pointers.
 
 If you don't care about `malloc`/`free` call stacks, simply disable the unwinder completely
-(use `malloc_context_size=0` [runtime flag](AddressSanitizerFlags.md)).
+(use `malloc_context_size=0` [runtime flag](AddressSanitizerFlags)).
 
 Each stack frame needs to be symbolized (of course, if the binary is compiled with debug info).
 Given a PC, we need to print
@@ -18,7 +18,7 @@ Given a PC, we need to print
 [http://llvm.org/bugs/show_bug.cgi?id=7554 LLVM issue].
 '></a>
 
-[AddressSanitizer](AddressSanitizer.md) uses [llvm-symbolizer](http://llvm.org/docs/CommandGuide/llvm-symbolizer.html) binary from Clang 3.3+ distribution to symbolize the stack traces. Just make sure llvm-symbolizer is in `PATH` before running the binary or provide it in separate `ASAN_SYMBOLIZER_PATH` environment variable:
+[AddressSanitizer](AddressSanitizer) uses [llvm-symbolizer](http://llvm.org/docs/CommandGuide/llvm-symbolizer.html) binary from Clang 3.3+ distribution to symbolize the stack traces. Just make sure llvm-symbolizer is in `PATH` before running the binary or provide it in separate `ASAN_SYMBOLIZER_PATH` environment variable:
 ```
 export ASAN_SYMBOLIZER_PATH=/path/to/llvm_build/bin/llvm-symbolizer
 ./a.out
@@ -46,7 +46,7 @@ You may also filter the log file through `scripts/asan_symbolize.py` to get the 
 ```
 To demangle functions names either add `-d` to `asan_symbolize.py` or use `c++filt`.
 
-You may want to introduce your own format of the stack traces using `stack_trace_format` [runtime flag](AddressSanitizerFlags.md). For example:
+You may want to introduce your own format of the stack traces using `stack_trace_format` [runtime flag](AddressSanitizerFlags). For example:
 ```
 % ./a.out
     ...

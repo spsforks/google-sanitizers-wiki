@@ -3,7 +3,7 @@
 
 **Stack-use-after-return** bug appears when a stack object is used after
 the function where this object is defined has returned.
-Example (see also [AddressSanitizerExampleUseAfterReturn](AddressSanitizerExampleUseAfterReturn.md)):
+Example (see also [AddressSanitizerExampleUseAfterReturn](AddressSanitizerExampleUseAfterReturn)):
 ```
 int *ptr;
 void FunctionThatEscapesLocalObject() {
@@ -13,7 +13,7 @@ void FunctionThatEscapesLocalObject() {
 // *ptr is used later
 ```
 
-[AddressSanitizer](AddressSanitizer.md) currently does not attempt to detect these bugs by default,
+[AddressSanitizer](AddressSanitizer) currently does not attempt to detect these bugs by default,
 only with an additional flag run-time: ASAN\_OPTIONS=detect\_stack\_use\_after\_return=1 (Clang only, starting from r191186 (on Google Code))
 
 # Algorithm
@@ -61,9 +61,9 @@ If the given size class is fully used, the allocator will return 0 and thus regu
 (i.e. stack-use-after-return detection will not work for the given function call).
 The amount of memory given to every size class is proportional to the size of thread's real stack,
 but not more than `2**max_uar_stack_size_log` (by default, `2**20`)
-and not less than `2**min_uar_stack_size_log` (by default, `2**16`). See also: [AddressSanitizerFlags](AddressSanitizerFlags.md).
+and not less than `2**min_uar_stack_size_log` (by default, `2**16`). See also: [AddressSanitizerFlags](AddressSanitizerFlags).
 
-So, with the default 8Mb stack size and default [AddressSanitizerFlags](AddressSanitizerFlags.md) each size class will get `2**20` bytes and thus every thread will mmap ~11Mb for Fake Stack.
+So, with the default 8Mb stack size and default [AddressSanitizerFlags](AddressSanitizerFlags) each size class will get `2**20` bytes and thus every thread will mmap ~11Mb for Fake Stack.
 
 The bigger the Fake Stack the better your chances to catch a stack-use-after-return and get a correct report, but the greater is the memory consumption.
 
@@ -97,7 +97,7 @@ These are the performance numbers on SPEC 2006. We've compared pure asan against
 
 
 # Garbage collection
-We have an experimental API to support interoperability of [AddressSanitizer](AddressSanitizer.md)'s fake stack with garbage collection.
+We have an experimental API to support interoperability of [AddressSanitizer](AddressSanitizer)'s fake stack with garbage collection.
 See http://llvm.org/viewvc/llvm-project?view=revision&revision=200908 and stay tuned for more news.
 
 # Compatibility

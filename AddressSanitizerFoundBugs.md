@@ -166,7 +166,7 @@ https://lists.gnu.org/archive/html/bug-bash/2015-06/msg00089.html
   * https://github.com/parrot/parrot/commit/1e5f20eefce263
 
 # libreoffice
-  * http://whatofhow.wordpress.com/2014/05/22/stacked-bugs/ (nice [AddressSanitizerUseAfterReturn](AddressSanitizerUseAfterReturn.md) bug)
+  * http://whatofhow.wordpress.com/2014/05/22/stacked-bugs/ (nice [AddressSanitizerUseAfterReturn](AddressSanitizerUseAfterReturn) bug)
 # MySQL
   * http://bugs.mysql.com/bug.php?id=67242
   * http://bugs.mysql.com/bug.php?id=67243

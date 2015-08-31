@@ -1,4 +1,4 @@
-Follow instructions in [MemorySanitizerUsingGit](MemorySanitizerUsingGit.md) under "Building". They will get you an MSan-enabled Clang compiler in llvm/build/bin/clang.
+Follow instructions in [MemorySanitizerUsingGit](MemorySanitizerUsingGit) under "Building". They will get you an MSan-enabled Clang compiler in llvm/build/bin/clang.
 
 Compile and link your code with -fmemory-sanitizer. Run the resulting binary.
 

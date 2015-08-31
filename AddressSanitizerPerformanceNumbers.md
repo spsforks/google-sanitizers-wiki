@@ -1,6 +1,6 @@
 # Spec CPU 2006 (C/C++)
 
-These numbers are measured on [SPEC 2006](AddressSanitizerRunningSpecBenchmarks.md) (C/C++ only) using Clang3.3 (trunk) r179094 (on Google Code) (April 09 2013) on Intel Xeon W3690 @3.47GHz. 
+These numbers are measured on [SPEC 2006](AddressSanitizerRunningSpecBenchmarks) (C/C++ only) using Clang3.3 (trunk) r179094 (on Google Code) (April 09 2013) on Intel Xeon W3690 @3.47GHz. 
 
 &lt;BR&gt;
 

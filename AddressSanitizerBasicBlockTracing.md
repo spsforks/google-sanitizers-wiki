@@ -3,7 +3,7 @@
 We want to get a complete trace of program execution as a sequence of basic block IDs.
 In general this task is quite challenging due to performance, IO, threads, memory consumption and what not.
 Here we describe a very simple and limited prototype of basic-block
-tracer built into [AddressSanitizerCoverage](AddressSanitizerCoverage.md) (you will need fresh clang).
+tracer built into [AddressSanitizerCoverage](AddressSanitizerCoverage) (you will need fresh clang).
 
 Usage:
 

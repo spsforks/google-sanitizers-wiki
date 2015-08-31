@@ -1,6 +1,6 @@
 # Introduction
 
-[MemorySanitizer](MemorySanitizer.md) code itself can not be tested with [MemorySanitizer](MemorySanitizer.md) for obvious reasons, but the rest of Clang/LLVM can. Instructions on this page show how to do it.
+[MemorySanitizer](MemorySanitizer) code itself can not be tested with [MemorySanitizer](MemorySanitizer) for obvious reasons, but the rest of Clang/LLVM can. Instructions on this page show how to do it.
 
 # Details
 
@@ -26,7 +26,7 @@ mkdir build && cd build && cmake -GNinja -DCMAKE_BUILD_TYPE=Release .. && ninja
 ```
 
 Run bootstrap.sh script that would first build libc++ and libc++abi with MSan instrumentation, then run the entire clang build with MSan and newly built libc++/libc++abi.
-Build libcxx (and libcxxabi) with [MemorySanitizer](MemorySanitizer.md) instrumentation:
+Build libcxx (and libcxxabi) with [MemorySanitizer](MemorySanitizer) instrumentation:
 ```
 CLANG=/path/to/clang ./bootstrap.sh
 ```

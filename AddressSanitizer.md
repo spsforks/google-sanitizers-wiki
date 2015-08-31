@@ -1,6 +1,6 @@
 
 
-**New**: [AddressSanitizer](AddressSanitizer.md) [is released](http://llvm.org/releases/3.1/docs/ReleaseNotes.html#whatsnew) as part of [LLVM](http://llvm.org) 3.1. 
+**New**: [AddressSanitizer](AddressSanitizer) [is released](http://llvm.org/releases/3.1/docs/ReleaseNotes.html#whatsnew) as part of [LLVM](http://llvm.org) 3.1. 
 
 &lt;BR&gt;
 
@@ -19,16 +19,16 @@
 
 # Introduction
 
-[AddressSanitizer](AddressSanitizer.md) (aka ASan) is a memory error detector for C/C++.
+[AddressSanitizer](AddressSanitizer) (aka ASan) is a memory error detector for C/C++.
 It finds:
-  * [Use after free](AddressSanitizerExampleUseAfterFree.md) (dangling pointer dereference)
-  * [Heap buffer overflow](AddressSanitizerExampleHeapOutOfBounds.md)
-  * [Stack buffer overflow](AddressSanitizerExampleStackOutOfBounds.md)
-  * [Global buffer overflow](AddressSanitizerExampleGlobalOutOfBounds.md)
-  * [Use after return](AddressSanitizerExampleUseAfterReturn.md)
-  * [Initialization order bugs](AddressSanitizerInitializationOrderFiasco.md)
+  * [Use after free](AddressSanitizerExampleUseAfterFree) (dangling pointer dereference)
+  * [Heap buffer overflow](AddressSanitizerExampleHeapOutOfBounds)
+  * [Stack buffer overflow](AddressSanitizerExampleStackOutOfBounds)
+  * [Global buffer overflow](AddressSanitizerExampleGlobalOutOfBounds)
+  * [Use after return](AddressSanitizerExampleUseAfterReturn)
+  * [Initialization order bugs](AddressSanitizerInitializationOrderFiasco)
 
-This tool is very fast. The average slowdown of the instrumented program is ~2x (see [AddressSanitizerPerformanceNumbers](AddressSanitizerPerformanceNumbers.md)).
+This tool is very fast. The average slowdown of the instrumented program is ~2x (see [AddressSanitizerPerformanceNumbers](AddressSanitizerPerformanceNumbers)).
 
 The tool consists of a compiler instrumentation module (currently, an LLVM pass)
 and a run-time library which replaces the `malloc` function.
@@ -36,25 +36,25 @@ and a run-time library which replaces the `malloc` function.
 The tool works on x86 Linux and Mac, and ARM Android.
 
 See also:
-  * [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm.md) -- if you are curious how it works.
-  * [AddressSanitizerComparisonOfMemoryTools](AddressSanitizerComparisonOfMemoryTools.md)
+  * [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm) -- if you are curious how it works.
+  * [AddressSanitizerComparisonOfMemoryTools](AddressSanitizerComparisonOfMemoryTools)
 
 # Getting AddressSanitizer
 
-[AddressSanitizer](AddressSanitizer.md) is a part of [LLVM](http://llvm.org) starting with version 3.1 and a part of [GCC](http://gcc.gnu.org) starting with version 4.8 
+[AddressSanitizer](AddressSanitizer) is a part of [LLVM](http://llvm.org) starting with version 3.1 and a part of [GCC](http://gcc.gnu.org) starting with version 4.8 
 
 &lt;BR&gt;
 
 
-If you prefer to build from source, see [AddressSanitizerHowToBuild](AddressSanitizerHowToBuild.md).
+If you prefer to build from source, see [AddressSanitizerHowToBuild](AddressSanitizerHowToBuild).
 
 
-So far, [AddressSanitizer](AddressSanitizer.md) has been tested only on Linux Ubuntu 12.04, 64-bit
-(it can run both 64- and 32-bit programs), Mac 10.6, 10.7 and 10.8, and [AddressSanitizerOnAndroid](AddressSanitizerOnAndroid.md) 4.2+.
+So far, [AddressSanitizer](AddressSanitizer) has been tested only on Linux Ubuntu 12.04, 64-bit
+(it can run both 64- and 32-bit programs), Mac 10.6, 10.7 and 10.8, and [AddressSanitizerOnAndroid](AddressSanitizerOnAndroid) 4.2+.
 
 
 # Using AddressSanitizer
-In order to use [AddressSanitizer](AddressSanitizer.md) you will need to compile and link your program using `clang` with the `-fsanitize=address` switch. 
+In order to use [AddressSanitizer](AddressSanitizer) you will need to compile and link your program using `clang` with the `-fsanitize=address` switch. 
 
 &lt;BR&gt;
 
@@ -82,7 +82,7 @@ int main() {
 % ../clang_build_Linux/Release+Asserts/bin/clang -fsanitize=address -O1 -fno-omit-frame-pointer -g   tests/use-after-free.c
 ```
 
-Now, run the executable. [AddressSanitizerCallStack](AddressSanitizerCallStack.md) page describes how to obtain symbolized stack traces.
+Now, run the executable. [AddressSanitizerCallStack](AddressSanitizerCallStack) page describes how to obtain symbolized stack traces.
 
 ```
 % ./a.out
@@ -105,7 +105,7 @@ SUMMARY: AddressSanitizer: heap-use-after-free use-after-free.c:5 main
 
 # Interaction with other tools
 ## gdb
-See [AddressSanitizerAndDebugger](AddressSanitizerAndDebugger.md)
+See [AddressSanitizerAndDebugger](AddressSanitizerAndDebugger)
 
 
 ## ulimit -v
@@ -116,18 +116,18 @@ You may try more sophisticated tools to limit your memory consumption,
 e.g. http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/cgroups/memory.txt
 
 # Flags
-See the separate [AddressSanitizerFlags](AddressSanitizerFlags.md) page.
+See the separate [AddressSanitizerFlags](AddressSanitizerFlags) page.
 
 # Call stack
 
-See the separate [AddressSanitizerCallStack](AddressSanitizerCallStack.md) page.
+See the separate [AddressSanitizerCallStack](AddressSanitizerCallStack) page.
 
 # Incompatibility
 
-Sometimes an [AddressSanitizer](AddressSanitizer.md) build may behave differently than the regular one. See [AddressSanitizerIncompatiblity](AddressSanitizerIncompatiblity.md) for details.
+Sometimes an [AddressSanitizer](AddressSanitizer) build may behave differently than the regular one. See [AddressSanitizerIncompatiblity](AddressSanitizerIncompatiblity) for details.
 
 # Turning off instrumentation
-In some cases a particular function should be ignored (not instrumented) by [AddressSanitizer](AddressSanitizer.md):
+In some cases a particular function should be ignored (not instrumented) by [AddressSanitizer](AddressSanitizer):
   * Ignore a very hot function known to be correct to speedup the app.
   * Ignore a function that does some low-level magic (e.g. walking through the thread's stack bypassing the frame boundaries).
   * Don't report a known problem.
@@ -148,7 +148,7 @@ void ThisFunctionWillNotBeInstrumented() {...}
 
 Clang 3.1 and 3.2 supported `__attribute__((no_address_safety_analysis))` instead.
 
-You may also ignore certain functions using a blacklist: create a file `my_ignores.txt` and pass it to [AddressSanitizer](AddressSanitizer.md)
+You may also ignore certain functions using a blacklist: create a file `my_ignores.txt` and pass it to [AddressSanitizer](AddressSanitizer)
 at compile time using `-fsanitize-blacklist=my_ignores.txt` (This flag is new and is only supported by Clang now):
 ```
 # Ignore exactly this function (the names are mangled)
@@ -161,8 +161,8 @@ fun:*MyFooBar*
 
 
 # FAQ
-  * Q: Can [AddressSanitizer](AddressSanitizer.md) continue running after reporting first error?
-  * A: No, sorry. [AddressSanitizer](AddressSanitizer.md) errors are fatal. This design choice allows the tool to be faster and simpler.
+  * Q: Can [AddressSanitizer](AddressSanitizer) continue running after reporting first error?
+  * A: No, sorry. [AddressSanitizer](AddressSanitizer) errors are fatal. This design choice allows the tool to be faster and simpler.
 
   * Q: Why didn't ASan report an obviously invalid memory access in my code?
   * A1: If your errors is too obvious, compiler might have already optimized it out by the time Asan runs.

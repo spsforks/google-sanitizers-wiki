@@ -1,4 +1,4 @@
-When `ThreadSanitizer` detects a bug it prints a report. Format of the reports differ depending on bug type (see [ThreadSanitizerDetectableBugs](ThreadSanitizerDetectableBugs.md)). We've tried to make the reports as self-explanatory as possible, but still there are some tips and tricks.
+When `ThreadSanitizer` detects a bug it prints a report. Format of the reports differ depending on bug type (see [ThreadSanitizerDetectableBugs](ThreadSanitizerDetectableBugs)). We've tried to make the reports as self-explanatory as possible, but still there are some tips and tricks.
 
 First, let's consider the simplest report:
 

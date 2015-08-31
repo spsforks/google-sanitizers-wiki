@@ -1,6 +1,6 @@
 # Introduction
 
-[AddressSanitizer](AddressSanitizer.md) is supported in AOSP starting with JellyBean? release.
+[AddressSanitizer](AddressSanitizer) is supported in AOSP starting with JellyBean? release.
 
 # Details
 

@@ -3,8 +3,8 @@
 
 To enable this mode, build **all** the sources with `-fsanitize-address-zero-base-shadow`, clang-only.
 
-Instead of computing `Shadow = (Mem >> 3) + kOffset` we compute `Shadow = (Mem >> 3)`, i.e. `kOffset = 0` (see [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm.md)).
-This mode is possible only if 1/8 of address space starting from the zero page is not occupied at startup and [AddressSanitizer](AddressSanitizer.md) can map it for the shadow.
+Instead of computing `Shadow = (Mem >> 3) + kOffset` we compute `Shadow = (Mem >> 3)`, i.e. `kOffset = 0` (see [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm)).
+This mode is possible only if 1/8 of address space starting from the zero page is not occupied at startup and [AddressSanitizer](AddressSanitizer) can map it for the shadow.
 We are aware of only one situation where this works: Linux executables compiled with `-fPIC` or `-fPIE` and linked with `-pie`.
 
 ```

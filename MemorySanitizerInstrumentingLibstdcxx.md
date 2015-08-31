@@ -1,8 +1,8 @@
 # Introduction
 
-[MemorySanitizer](MemorySanitizer.md) (without a dynamic component) requires that the entire program code including libraries, (except libc/libm/libpthread, to some extent), is instrumented.
+[MemorySanitizer](MemorySanitizer) (without a dynamic component) requires that the entire program code including libraries, (except libc/libm/libpthread, to some extent), is instrumented.
 
-Any non-trivial C++ program depends on the C++ runtime library. The choice here is between libstdc++ and libc++. The latter can be built with [MemorySanitizer](MemorySanitizer.md) quite easily, but, due to minor incompatibilities between them, code that works with libstdc++ sometimes must be changed to work with libc++.
+Any non-trivial C++ program depends on the C++ runtime library. The choice here is between libstdc++ and libc++. The latter can be built with [MemorySanitizer](MemorySanitizer) quite easily, but, due to minor incompatibilities between them, code that works with libstdc++ sometimes must be changed to work with libc++.
 
 Instructions below let one build MSan-instrumented libstdc++. The resulting library, if using dynamic linking, can be substituted in run-time with an LD\_LIBRARY\_PATH setting. Compilation of the user code is unaffected.
 

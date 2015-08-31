@@ -1,4 +1,4 @@
-One kind of bugs that [AddressSanitizer](AddressSanitizer.md) can find with the help of code annotations is, as we call it, "container-overflow".
+One kind of bugs that [AddressSanitizer](AddressSanitizer) can find with the help of code annotations is, as we call it, "container-overflow".
 Simplest example:
 ```
 #include <vector>

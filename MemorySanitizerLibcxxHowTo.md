@@ -1,6 +1,6 @@
 ## Introduction
 
-If you want [MemorySanitizer](MemorySanitizer.md) to work properly and not produce any false positives, you must ensure that all the code in your program and in libraries it uses is instrumented (i.e. built with `-fsanitize=memory`). In particular, you would need to link against MSan-instrumented C++ standard library. We recommend to use [libc++](http://libcxx.llvm.org/)
+If you want [MemorySanitizer](MemorySanitizer) to work properly and not produce any false positives, you must ensure that all the code in your program and in libraries it uses is instrumented (i.e. built with `-fsanitize=memory`). In particular, you would need to link against MSan-instrumented C++ standard library. We recommend to use [libc++](http://libcxx.llvm.org/)
 for that purpose.
 
 In this manual, we will try to build and run simple program that uses [googletest](https://code.google.com/p/googletest/) framework.
@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 }
 ```
 
-[MemorySanitizer](MemorySanitizer.md) will not work out-of-the-box, and will instead report
+[MemorySanitizer](MemorySanitizer) will not work out-of-the-box, and will instead report
 false positives coming from uninstrumented code:
 
 ```
@@ -36,7 +36,7 @@ Uninitialized bytes in __interceptor_strlen at offset 7 inside [0x60400000eff8, 
 ...
 ```
 
-We need to re-build both C++ standard library and googletest with [MemorySanitizer](MemorySanitizer.md).
+We need to re-build both C++ standard library and googletest with [MemorySanitizer](MemorySanitizer).
 
 ## Instrumented libc++
 

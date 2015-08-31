@@ -50,11 +50,11 @@ See the corresponding [issue tracker label](http://code.google.com/p/address-san
 
 ## SPEC CPU2006 results
 We’ve run ASan/Win on SPEC tests.
-It has shown the very same slowdown as the Linux version (see [here](AddressSanitizerPerformanceNumbers.md)) on the C tests.
+It has shown the very same slowdown as the Linux version (see [here](AddressSanitizerPerformanceNumbers)) on the C tests.
 
 The C++ tests were not run.
 
-ASan has found the same UAF in perlbench and stack OOB on h264ref [seen on Linux](AddressSanitizerFoundBugs.md).
+ASan has found the same UAF in perlbench and stack OOB on h264ref [seen on Linux](AddressSanitizerFoundBugs).
 
 The global OOB on h264ref was not detected - since this feature is not implemented yet on Windows. (or are they? issue 49 (on Google Code))<br>However, it has found one similar heap-OOB access on h264ref which needs to be investigated. See issue 50 (on Google Code) for the details.<br>
 <br>

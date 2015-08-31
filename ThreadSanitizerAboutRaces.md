@@ -4,7 +4,7 @@
 
 Most programmers know that races are harmful. <br>
 For some races it could be quite easy to predict what may go wrong.<br>
-For example, the variable <code>var</code> in the following code may not be equal to <code>2</code> at the end of the program execution (for more examples refer to <a href='ThreadSanitizerPopularDataRaces.md'>ThreadSanitizerPopularDataRaces</a>)<br>
+For example, the variable <code>var</code> in the following code may not be equal to <code>2</code> at the end of the program execution (for more examples refer to <a href='ThreadSanitizerPopularDataRaces'>ThreadSanitizerPopularDataRaces</a>)<br>
 <pre><code>int var;<br>
 void Thread1() {  // Runs in one thread.<br>
   var++;<br>
@@ -113,7 +113,7 @@ Again, you are underestimating the cleverness of modern compilers. How about thi
 </code></pre>
 
 <h1>Double-Checked Locking</h1>
-<a href='http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html'>Double-Checked Locking</a> is broken in C++ because of all the reasons discussed <a href='#Racy_publication.md'>above</a>.<br>
+<a href='http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html'>Double-Checked Locking</a> is broken in C++ because of all the reasons discussed <a href='#Racy_publication'>above</a>.<br>
 <br>
 <h1>Racy lazy initialization</h1>
 One more frequent bug:<br>
