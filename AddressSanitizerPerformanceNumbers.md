@@ -3,6 +3,7 @@
 These numbers are measured on [SPEC 2006](AddressSanitizerRunningSpecBenchmarks) (C/C++ only) using Clang3.3 (trunk) r179094 (on Google Code) (April 09 2013) on Intel Xeon W3690 @3.47GHz.
 2-nd column: `clang -O2`
 3-rd column: `clang -O2 -fsanitize=address -fno-omit-frame-pointer`
+
 | BENCHMARK            |  O2       | O2+asan | slowdown|
 |:---------------------|:----------|:--------|:--------|
 |       400.perlbench  |      344.00|     1304.00|        3.79|

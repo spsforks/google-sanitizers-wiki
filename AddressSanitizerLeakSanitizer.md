@@ -51,11 +51,7 @@ You can fine-tune LeakSanitizer's behavior through the `LSAN_OPTIONS` environmen
 |:----|:--------|:------------|
 | exitcode | 23      | If non-zero, LSan will call `_exit(exitcode)` upon detecting leaks. This can be different from the exit code used to signal ASan errors. |
 | max\_leaks | 0       | If non-zero, report only this many top leaks. |
-| suppressions  | 
-
-&lt;none&gt;
-
- | Path to file containing suppression rules (see below) |
+| suppressions  | (none)  | Path to file containing suppression rules (see below) |
 | print\_suppressions  | 1       | If 1, print statistics for matched suppressions. |
 | report\_objects  | 0       | If 1, LSan will report the addresses of individual leaked objects. |
 | use\_unaligned | 0       | If 0, LSan will only consider properly aligned 8-byte patterns when looking for pointers. Set to 1 to include unaligned patterns. This refers to the pointer itself, not the memory being pointed at. |

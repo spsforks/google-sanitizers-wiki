@@ -74,6 +74,7 @@ Detecting stack-use-after-return is expensive in both CPU and RAM:
 
 These are the performance numbers on SPEC 2006. We've compared pure asan against ASAN\_OPTIONS=detect\_stack\_use\_after\_return=1 both with `-fsanitize=address -O2`.
 4 benchmarks get 30% extra slowdown and one gets almost 2x extra slowdown. Other 14 benchmarks are not affected at all.
+
 |       400.perlbench|      1269.00|      1653.00|         **1.30**|
 |:-------------------|:------------|:------------|:----------------|
 |           401.bzip2|       845.00|       847.00|         1.00    |

@@ -36,6 +36,7 @@ Every aligned 8-byte word of application memory is mapped into *N* Shadow Words
 using direct address mapping (no memory accesses required to compute the shadow address).
 
 *Shadow Word* is a 64-bit object that contains the following fields:
+
 ||TID (Thread Id)             || 16 bits (configurable) ||
 ||Scalar Clock                || 42 bits (configurable) ||
 ||!IsWrite                    || 1 bit  ||

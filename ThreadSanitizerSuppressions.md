@@ -8,6 +8,7 @@ Each non-empty line of the suppressions file represents one suppression, each su
 suppression_type:suppression_string
 ```
 The suppression types are:
+
 | race | suppresses data races and use-after-free reports |
 |:-----|:-------------------------------------------------|
 | thread | suppresses reports related to threads (leaks)    |

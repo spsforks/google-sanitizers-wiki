@@ -7,6 +7,7 @@
 | -fno-common |         | Do not treat global variable in C as common variables (allows ASan to instrument them) |
 
 ASan-specific compile-time flags are passed via clang flag `-mllvm <flag>`. In most cases you don't need them.
+
 | flag| default | description |
 |:----|:--------|:------------|
 | -asan-stack   | 1       | Detect overflow/underflow for stack objects |
