@@ -1,6 +1,6 @@
-NOTE: _this document is about running Android applications built with the NDK under [AddressSanitizer](AddressSanitizer). For information about using [AddressSanitizer](AddressSanitizer) on Android platform components, see [AddressSanitizerAndroidPlatform](AddressSanitizerAndroidPlatform)._
+NOTE: _this document is about running Android applications built with the NDK under [AddressSanitizer](AddressSanitizer). For information about using [AddressSanitizer](AddressSanitizer) on Android platform components, see the [android documentation](http://source.android.com/devices/tech/debug/asan.html)._
 
-NOTE: _ASan is broken on Android L. Use a K`*` build. This will be fixed in one of the future L updates (or the current AOSP master branch)._
+NOTE: _ASan is broken in the initial release of Android L. It works in L MR1, or any K`*` build._
 
 NOTE: _[AddressSanitizer](AddressSanitizer) on Android requires a rooted device (either -eng or -userdebug build, or any other setup that allows editing the contents of the /system partition)._
 
