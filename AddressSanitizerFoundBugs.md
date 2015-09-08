@@ -160,6 +160,7 @@ https://lists.gnu.org/archive/html/bug-bash/2015-06/msg00089.html
   * https://bugs.php.net/bug.php?id=65564
   * https://bugs.php.net/bug.php?id=68095
   * https://bugs.php.net/bug.php?id=68027 (CVE-2014-3668)
+  * https://bugs.php.net/bug.php?id=70430
 
 # parrot (http://www.parrot.org/)
   * https://github.com/parrot/parrot/commit/df12f34e946553
