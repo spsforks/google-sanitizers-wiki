@@ -1,6 +1,6 @@
 NOTE: _this document is about running Android applications built with the NDK under [AddressSanitizer](AddressSanitizer). For information about using [AddressSanitizer](AddressSanitizer) on Android platform components, see the [android documentation](http://source.android.com/devices/tech/debug/asan.html)._
 
-NOTE: _ASan is broken in the initial release of Android L. It works in L MR1, or any K`*` build._
+NOTE: _ASan is supported in all versions of Android starting with KitKat, with the exception of the initial release of Lollipop (Lollipop MR1 update is fine)._
 
 NOTE: _[AddressSanitizer](AddressSanitizer) on Android requires a rooted device (either -eng or -userdebug build, or any other setup that allows editing the contents of the /system partition)._
 
@@ -16,7 +16,7 @@ LOCAL_LDFLAGS   := -fsanitize=address
 LOCAL_ARM_MODE := arm
 ```
 
-[AddressSanitizer](AddressSanitizer) is only supported in clang-3.5 toolchain, so you Application.mk should include
+[AddressSanitizer](AddressSanitizer) is only supported in clang-3.5 (or newer) toolchain, so you Application.mk should include
 
 ```
 NDK_TOOLCHAIN_VERSION=clang3.5
