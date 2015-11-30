@@ -189,7 +189,7 @@ int *u = (int*)((char*)x + 6);
 *u = 1;  // Access to range [6-9]
 ```
 
-A viable solution is described in http://code.google.com/p/address-sanitizer/issues/detail?id=100 but it comes at a performance cost.
+A viable solution is described in https://github.com/google/sanitizers/issues/100 but it comes at a performance cost.
 
 
 # Run-time library
