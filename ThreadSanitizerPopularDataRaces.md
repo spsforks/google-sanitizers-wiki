@@ -1,6 +1,4 @@
-﻿#summary Description of some most popular data races
-
-
+Description of some most popular data races
 
 # Simple race
 
