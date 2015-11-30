@@ -141,7 +141,7 @@ TSan supports pthread synchronization primitives, built-in compiler atomic opera
 
   * Q: I see what looks like a false report inside the libstdc++ (libc++) code.
 This may happen in c++11 mode. One such case is discussed [here](http://lists.cs.uiuc.edu/pipermail/cfe-dev/2014-February/035408.html).
-Note that `ThreadSanitizer` is not [yet](https://code.google.com/p/thread-sanitizer/issues/detail?id=48) heavily tested on code that uses c++11 threading.
+Note that `ThreadSanitizer` is not [yet](https://github.com/google/sanitizers/issues/455) heavily tested on code that uses c++11 threading.
 The solution is be to rebuild libstdc++ (libc++) with `ThreadSanitizer` (this might be tricky, and the process changes periodically; contact us for details).
 It is also possible that libstdc++ (libc++) has a bug, we've seen at least [one such](http://gcc.gnu.org/bugzilla/show_bug.cgi?id=59215) before.
 
