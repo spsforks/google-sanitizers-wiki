@@ -24,8 +24,8 @@
 **OOB**: out-of-bounds  
 **x86**: includes 32- and 64-bit.  
 **mudflap** was removed in GCC 4.9, as it has been superseded by AddressSanitizer.  
-**Guard Page**: a family of memory error detectors ([Electric fence](http://perens.com/FreeSoftware/) or [DUMA](http://duma.sourceforge.net/) on Linux, Page Heap on Windows, Guard Malloc in Mac)  
-**gperftools**: various performance tools/error detectors bundled with TCMalloc. [Heap checker](http://gperftools.googlecode.com/svn/trunk/doc/heap_checker.html) (leak detector) is only available on Linux. [Debug allocator](https://code.google.com/p/gperftools/source/browse/src/debugallocation.cc) provides both guard pages and canary values for more precise detection of OOB writes, so it's better than guard page-only detectors.
+**Guard Page**: a family of memory error detectors ([Electric fence](https://en.wikipedia.org/wiki/Electric_Fence) or [DUMA](http://duma.sourceforge.net/) on Linux, Page Heap on Windows, Guard Malloc in Mac)  
+**gperftools**: various performance tools/error detectors bundled with TCMalloc. [Heap checker](http://htmlpreview.github.io/?https://github.com/gperftools/gperftools/blob/master/doc/heap_checker.html) (leak detector) is only available on Linux. [Debug allocator](https://github.com/gperftools/gperftools/blob/master/src/debugallocation.cc) provides both guard pages and canary values for more precise detection of OOB writes, so it's better than guard page-only detectors.
 
 
 # Performance numbers on SPEC cpu2006
