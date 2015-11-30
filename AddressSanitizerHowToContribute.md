@@ -8,7 +8,7 @@ The GCC version of [AddressSanitizer](AddressSanitizer) run-time is a copy of th
 
 Some files only exist in the GCC tree, to make it interoperate with the rest of the GCC code. If you need to change them, you'll have to split your patch, apply the LLVM part first, merge it back to the GCC tree and then apply your patch there. We should aim to keep both trees in sync, so that GCC wouldn't need to go through this, but that's for another topic.
 
-We're creating a set of guidelines for GCC developers to contribute back with ease, and below are some guidelines. Please, let us know if they don't work, of if there's a better way:
+We're creating a set of guidelines for GCC developers to contribute back with ease, and below are some guidelines. Please let us know if they don't work, of if there's a better way:
 
   1. Develop and test in GCC's sanitizer tree
   1. Take a diff one directory up (to avoid "libsanitizer")
@@ -18,6 +18,6 @@ We're creating a set of guidelines for GCC developers to contribute back with ea
   1. Commit to compiler-rt (or ask someone to do that for you).
   1. Merge back into GCC's libsanitizer, and apply the missing patches.
 
-Please, remember: The GCC compiler module is developed according to the [general GCC rules](http://gcc.gnu.org/contribute.html).
+Please remember: The GCC compiler module is developed according to the [general GCC rules](http://gcc.gnu.org/contribute.html).
 
 If you are adding support for a new architecture/platform, we encourage you to [set up a public build bot](http://llvm.org/docs/HowToAddABuilder.html), otherwise we can not guarantee that we will keep your code in working conditions.
