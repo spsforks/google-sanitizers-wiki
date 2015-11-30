@@ -1,1 +1,1 @@
-The wiki was moved to [GitHub](https://github.com/google/ktsan/wiki).
+There's a separate [GitHub project dedicated to KTSAN](https://github.com/google/ktsan/wiki).
