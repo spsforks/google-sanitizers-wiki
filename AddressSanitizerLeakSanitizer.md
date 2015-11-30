@@ -4,7 +4,7 @@ LeakSanitizer is a memory leak detector which is integrated into [AddressSanitiz
 
 LeakSanitizer is enabled by default in all ASan builds. LSan lies dormant until the very end of the process, at which point there is an extra leak detection phase. In performance-critical scenarios, LSan can also be used without ASan instrumentation.
 
-See also: AddressSanitizerLeakSanitizerDesignDocument, AddressSanitizerLeakSanitizerVsHeapChecker
+See also: [design document](AddressSanitizerLeakSanitizerDesignDocument), [comparison with tcmalloc's heap leak checker](AddressSanitizerLeakSanitizerVsHeapChecker)
 
 # Using LeakSanitizer
 
@@ -95,7 +95,7 @@ Direct leak of 5 byte(s) in 1 object(s) allocated from:
     #3 0x7f7e760b476c in __libc_start_main /build/buildd/eglibc-2.15/csu/libc-start.c:226
 
 -----------------------------------------------------
-Suppressions used:
+Suppressions used:[design document](AddressSanitizerLeakSanitizerDesignDocument)
   count      bytes template
       1          7 FooBar
 -----------------------------------------------------
