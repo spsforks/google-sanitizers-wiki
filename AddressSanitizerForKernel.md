@@ -1,1 +1,1 @@
-The wiki was moved to [GitHub](https://github.com/google/kasan/wiki).
+There's a separate [GitHub project dedicated to KASAN](https://github.com/google/kasan/wiki).
