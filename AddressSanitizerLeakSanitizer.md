@@ -4,7 +4,7 @@ LeakSanitizer is a memory leak detector which is integrated into [AddressSanitiz
 
 LeakSanitizer is enabled by default in all ASan builds. LSan lies dormant until the very end of the process, at which point there is an extra leak detection phase. In performance-critical scenarios, LSan can also be used without ASan instrumentation.
 
-See also: LeakSanitizerDesignDocument, LeakSanitizerVsHeapChecker
+See also: AddressSanitizerLeakSanitizerDesignDocument, AddressSanitizerLeakSanitizerVsHeapChecker
 
 # Using LeakSanitizer
 
