@@ -1,6 +1,6 @@
 # Introduction
 
-[MemorySanitizer](MemorySanitizer) (without a dynamic component) requires that the entire program code including libraries, (except libc/libm/libpthread, to some extent), is instrumented.
+Without a dynamic component, [MemorySanitizer](MemorySanitizer) requires that the entire program code including libraries, (except libc/libm/libpthread, to some extent), is instrumented.
 
 Any non-trivial C++ program depends on the C++ runtime library. The choice here is between libstdc++ and libc++. The latter can be built with [MemorySanitizer](MemorySanitizer) quite easily, but, due to minor incompatibilities between them, code that works with libstdc++ sometimes must be changed to work with libc++.
 
