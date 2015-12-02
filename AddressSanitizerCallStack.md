@@ -18,7 +18,7 @@ Given a PC, we need to print
 [http://llvm.org/bugs/show_bug.cgi?id=7554 LLVM issue].
 '></a>
 
-[AddressSanitizer](AddressSanitizer) uses [llvm-symbolizer](http://llvm.org/docs/CommandGuide/llvm-symbolizer.html) binary from Clang 3.3+ distribution to symbolize the stack traces. Just make sure llvm-symbolizer is in `PATH` before running the binary or provide it in separate `ASAN_SYMBOLIZER_PATH` environment variable:
+[AddressSanitizer](AddressSanitizer) uses [llvm-symbolizer](http://llvm.org/docs/CommandGuide/llvm-symbolizer.html) binary from the Clang distribution to symbolize the stack traces (note that ideally the llvm-symbolizer version must match the version of ASan runtime library). Just make sure llvm-symbolizer is in `PATH` before running the binary or provide it in separate `ASAN_SYMBOLIZER_PATH` environment variable:
 ```
 export ASAN_SYMBOLIZER_PATH=/path/to/llvm_build/bin/llvm-symbolizer
 ./a.out
