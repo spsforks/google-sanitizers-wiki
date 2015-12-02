@@ -1,10 +1,5 @@
 
 
-**New**: [AddressSanitizer](AddressSanitizer) [is released](http://llvm.org/releases/3.1/docs/ReleaseNotes.html#whatsnew) as part of [LLVM](http://llvm.org) 3.1.
-**New**: Watch the presentation from the [LLVM Developer's meeting](http://llvm.org/devmtg/2011-11/) (Nov 18, 2011): [Video](http://www.youtube.com/watch?v=CPnRS1nv3_s), [slides](http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf).
-**New**: Read the [USENIX ATC '2012 paper](http://research.google.com/pubs/pub37752.html).
-
-
 # Introduction
 
 [AddressSanitizer](AddressSanitizer) (aka ASan) is a memory error detector for C/C++.
@@ -21,7 +16,18 @@ This tool is very fast. The average slowdown of the instrumented program is ~2x 
 The tool consists of a compiler instrumentation module (currently, an LLVM pass)
 and a run-time library which replaces the `malloc` function.
 
-The tool works on x86 Linux and Mac, and ARM Android.
+The tool works on x86, ARM, MIPS (both 32- and 64-bit versions of all architectures), PowerPC64.
+The supported operation systems are Linux, Darwin (OS X and iOS Simulator), FreeBSD, Android:
+
+| OS            | x86 | x86_64 | ARM | ARM64 | MIPS | MIPS64 | PowerPC64 |
+|:--------------|:---:|:------:|:---:|:-----:|:----:|:------:|:---------:|
+| Linux         | yes | yes    |     |       | yes  | yes    | yes       |
+| OS X          | yes | yes    |     |       |      |        |           |
+| iOS Simulator | yes |        |     |       |      |        |           |
+| FreeBSD       | yes | yes    |     |       |      |        |           |
+| Android       |     |        | yes | yes   |      |        |           |
+
+Other OS/arch combinations may work as well, but aren't actively developed/tested.
 
 See also:
   * [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm) -- if you are curious how it works.
@@ -163,7 +169,11 @@ fun:*MyFooBar*
   * Q: I've built my main executable with ASan. Do I also need to build shared libraries?
   * A: ASan will work even if you rebuild just part of your program. But you'll have to rebuild all components to detect all errors.
 
+# Talks and papers
+ * Watch the presentation from the [LLVM Developer's meeting](http://llvm.org/devmtg/2011-11/) (Nov 18, 2011): [Video](http://www.youtube.com/watch?v=CPnRS1nv3_s), [slides](http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf).
+ * Read the [USENIX ATC '2012 paper](http://research.google.com/pubs/pub37752.html).
+
+
 # Comments?
 Send comments to address-sanitizer@googlegroups.com
 or [in Google+](https://plus.google.com/117014197169958493500).
-
