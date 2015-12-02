@@ -15,6 +15,7 @@ It finds use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ pr
 Learn more:
 
 * [AddressSanitizer](AddressSanitizer) -- how to use the tool.
+* [LeakSanitizer](AddressSanitizerLeakSanitizer) -- leak detector
 * [AddressSanitizer page at clang.llvm.org](http://clang.llvm.org/docs/AddressSanitizer.html)
 * [AddressSanitizerAlgorithm](AddressSanitizerAlgorithm) -- how it works.
 * [AddressSanitizerHowToContribute](AddressSanitizerHowToContribute) -- if you want to help.
