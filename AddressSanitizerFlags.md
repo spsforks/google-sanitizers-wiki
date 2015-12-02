@@ -59,11 +59,11 @@ ASAN_OPTIONS=help=1 ./a.out
 | detect\_leaks | 1                 | If 1, enables memory leak detection. See LeakSanitizer (Linux/x86\_64-only). |
 | use\_sigaltstack | 1                 | If 1, `sigaltstack` is called at start up time. This will provide verbose reports in case of stack overflow.  |
 | color    | auto              | Print reports in color. Possible values: auto|always|never. By default, color is enabled if printing to terminal. |
-| coverage | 0                 | Enables coverage collection. See [AddressSanitizerCoverage](AddressSanitizerCoverage). |
+| coverage | 0                 | Enables coverage collection. See [SanitizerCoverage](clang.llvm.org/docs/SanitizerCoverage.html). |
 | coverage\_dir | ./                | Controls the path at which coverage is saved. |
-| coverage\_direct | 0                 | Enables writing coverage directly to a memory-mapped file (compared to once at the end of the program). See [AddressSanitizerCoverage](AddressSanitizerCoverage). |
-| coverage\_pcs | 1                 | If 1, will dump the coverage as PCs. See [AddressSanitizerCoverage](AddressSanitizerCoverage). |
-| coverage\_bitset | 0                 | If 1, will dump the coverage as bitset. See [AddressSanitizerCoverage](AddressSanitizerCoverage). |
+| coverage\_direct | 0                 | Enables writing coverage directly to a memory-mapped file (compared to once at the end of the program). See [SanitizerCoverage](clang.llvm.org/docs/SanitizerCoverage.html). |
+| coverage\_pcs | 1                 | If 1, will dump the coverage as PCs. See [SanitizerCoverage](clang.llvm.org/docs/SanitizerCoverage.html). |
+| coverage\_bitset | 0                 | If 1, will dump the coverage as bitset. See [SanitizerCoverage](clang.llvm.org/docs/SanitizerCoverage.html). |
 | detect\_odr\_violation | 2                 | If > 0, detect [ODR Violations](AddressSanitizerOneDefinitionRuleViolation) |
 | stack\_frame\_format | "DEFAULT"         | Format of the stackframe. Placeholders in user-provided string are replaced with actual data. See  [sanitizer\_stacktrace\_printer.h](http://llvm.org/viewvc/llvm-project/compiler-rt/trunk/lib/sanitizer_common/sanitizer_stacktrace_printer.h?view=markup) for format description. |
 | mmap\_limit\_mb | 0                 | If > 0, abort if more than this number of megabytes were mmap-ed by user. Experimental, may change in future! |
