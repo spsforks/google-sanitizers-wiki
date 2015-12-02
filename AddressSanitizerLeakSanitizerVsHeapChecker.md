@@ -4,7 +4,7 @@ LeakSanitizer was designed to replace the gperftools [Heap Leak Checker](http://
 
 # Features and output
 
-LeakSanitizer uses a very similar algorithm to the one used by Heap Checker. We do some things differently though, in particular handling of thread-local data. Heap Checker has an issue which causes it to miss some leaks in the presence of threads (see gperftools [issue 537](https://code.google.com/p/gperftools/issues/detail?id=537)). LSan reports those leaks correctly. Also, when used on top of ASan, LSan will rely on ASan to tell it which memory ranges are valid. This helps to avoid picking up "junk" pointers from memory locations which are not legally accessible. Such pointers can mask real leaks.
+LeakSanitizer uses a very similar algorithm to the one used by Heap Checker. We do some things differently though, in particular handling of thread-local data. Heap Checker has an issue which causes it to miss some leaks in the presence of threads (see gperftools [issue 540](https://github.com/gperftools/gperftools/issues/540)). LSan reports those leaks correctly. Also, when used on top of ASan, LSan will rely on ASan to tell it which memory ranges are valid. This helps to avoid picking up "junk" pointers from memory locations which are not legally accessible. Such pointers can mask real leaks.
 
 LeakSanitizer reports more information about leaks. The stack traces look better (the symbolizer that we use reports source file name, line number, and the function’s type signature where Heap Checker reports only the function’s name). LSan also differentiates between direct and indirect leaks in its output. This gives useful information about which leaks should be prioritized, because fixing the direct leaks is likely to fix the indirect ones as well.
 
