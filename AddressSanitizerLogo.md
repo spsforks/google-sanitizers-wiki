@@ -1,5 +1,5 @@
 We need a logo for [AddressSanitizer](AddressSanitizer).
 
 Here are the prototypes (a Pheasant eating a Bug).
-![http://address-sanitizer.googlecode.com/svn/trunk/img/fasan_logo_2.jpg](http://address-sanitizer.googlecode.com/svn/trunk/img/fasan_logo_2.jpg)
-![http://address-sanitizer.googlecode.com/svn/trunk/img/fasan_logo.jpg](http://address-sanitizer.googlecode.com/svn/trunk/img/fasan_logo.jpg)
+![https://raw.githubusercontent.com/google/sanitizers/master/address-sanitizer/img/fasan_logo.jpg](https://raw.githubusercontent.com/google/sanitizers/master/address-sanitizer/img/fasan_logo.jpg)
+![https://raw.githubusercontent.com/google/sanitizers/master/address-sanitizer/img/fasan_logo_2.jpg](https://raw.githubusercontent.com/google/sanitizers/master/address-sanitizer/img/fasan_logo_2.jpg)
