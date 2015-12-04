@@ -75,9 +75,6 @@ asan_device_setup --extra-options=<options text>
 ```
 > this flag can be used to set default ASAN\_OPTIONS for the Zygote process. Note that this will affect all applications on the device!
 
-```
-adb shell setprop asan.option <options text>
-```
-> these are additional `ASAN_OPTIONS` that are evaluated at the moment the first instrumented DSO is loaded into the Zygote process. Beware of the system property length limit (90-something characters?). Also, not all possible `ASAN_OPTIONS` can be set here. Setting options through `asan_device_setup` is preferable.
+Additional per-application options can be specified in `/data/local/tmp/asan.options.%b`, where `%b` stands for the "nice name" of the application as seen in `ps` output. These additional options that are evaluated at the moment the first instrumented DSO is loaded into the Zygote process. Not all possible `ASAN_OPTIONS` can be set here. Setting options through `asan_device_setup` is preferable.
 
 See [AddressSanitizerFlags](AddressSanitizerFlags) for the list of supported flags.
