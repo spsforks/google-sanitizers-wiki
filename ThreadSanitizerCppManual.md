@@ -5,7 +5,7 @@
 
 Here is an example of a data race that can lead to crashes and memory corruptions:
 
-```
+```c++
 #include <pthread.h>
 #include <stdio.h>
 #include <string>
@@ -44,7 +44,7 @@ Simply compile your program with -fsanitize=thread and link it with -fsanitize=t
 
 When you run the program, TSan will print a report if it finds a data race. Here is an example:
 
-```
+```c++
 $ cat simple_race.cc
 #include <pthread.h>
 #include <stdio.h>
