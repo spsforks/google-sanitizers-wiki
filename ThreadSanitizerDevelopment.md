@@ -34,7 +34,7 @@ Additional build types:
 
 To run an arbitrary program with `ThreadSanitizer`:
 ```
-your/fresh/clang test.c -fsanitize=thread -g -O1
+your/fresh/clang test.c -fsanitize=thread -fPIE -pie -g -O1
 ```
 
 # GCC Development
