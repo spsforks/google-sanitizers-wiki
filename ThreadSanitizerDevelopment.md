@@ -1,7 +1,7 @@
 # LLVM Development
 
 To download the latest sources:
-```
+```shell
 # cd somewhere
 svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm
 cd llvm
@@ -11,7 +11,7 @@ R=$(svn info | grep Revision: | awk '{print $2}')
 ```
 
 To build (requires cmake>=2.8.8):
-```
+```shell
 # in llvm dir
 mkdir build && cd build
 CC=gcc CXX=g++ cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON /path/to/llvm/checkout
@@ -25,34 +25,16 @@ make check-all -j10 # build and run all tests
 make check-tsan -j10 # build and run ThreadSanitizer tests
 ```
 
-Before commit you need to run the presubmit tests (requires gcc>=4.6):
-```
-cd projects/compiler-rt/lib/tsan
-make presubmit
-../sanitizer_common/scripts/check_lint.sh
-```
-
 Additional build types:
-```
-cd projects/compiler-rt/lib/tsan
 
-# Debug build of the runtime library:
-make DEBUG=1
-
-# Debug build of the runtime library with debug output:
-make DEBUG=1 CFLAGS=-DTSAN_DEBUG_OUTPUT=1
-
-# Debug build of the runtime library with extended debug output
-# (including memory accesses and function entry/exit events, be careful it can be enormous):
-make DEBUG=1 CFLAGS=-DTSAN_DEBUG_OUTPUT=2
-
-# Runtime with stats collection (prints internal stats at exit):
-make CFLAGS=-DTSAN_COLLECT_STATS=1
-```
+* Pass `-DCOMPILER_RT_DEBUG=ON` to CMake to build debug version of TSan runtime library.
+* Additionally pass `-DCOMPILER_RT_TSAN_DEBUG_OUTPUT=ON` to enable stats collection
+  and extended debug output (including memory accesses and function entry/exit events, be
+  careful it can be enormous).
 
 To run an arbitrary program with `ThreadSanitizer`:
 ```
-your/fresh/clang test.c -fsanitize=thread -g -O1 -fPIE -pie
+your/fresh/clang test.c -fsanitize=thread -g -O1
 ```
 
 # GCC Development
