@@ -140,7 +140,8 @@ fun:*MyFooBar*
 
 # FAQ
   * Q: Can [AddressSanitizer](AddressSanitizer) continue running after reporting first error?
-  * A: No, sorry. [AddressSanitizer](AddressSanitizer) errors are fatal. This design choice allows the tool to be faster and simpler.
+  * A1: No, sorry. [AddressSanitizer](AddressSanitizer) errors are fatal. This design choice allows the tool to be faster and simpler.
+  * A2: [AddressSanitizer](AddressSanitizer) has recently got -fsanitize-recover=address which enables continue-after-error mode. But this is somewhat experimental so may not yet be as reliable as default mode (and not as timely supported). Also keep in mind that errors after the first one may actually be spurious.
 
   * Q: Why didn't ASan report an obviously invalid memory access in my code?
   * A1: If your errors is too obvious, compiler might have already optimized it out by the time Asan runs.
