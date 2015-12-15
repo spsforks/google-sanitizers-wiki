@@ -4,10 +4,7 @@
 
 # Details
 
-MSan requires that all code in the process is instrumented (see [handling-external-code](http://clang.llvm.org/docs/MemorySanitizer.html#handling-external-code)). Luckily, the only external dependency of Clang is the C++ standard library (and, of course, libc, but MSan _almost_ takes care of it already).
-
-The script referenced below is available from
-[bootstrap.sh](https://code.google.com/p/memory-sanitizer/source/browse/bootstrap/bootstrap.sh).
+MSan requires that all code in the process is instrumented (see [handling-external-code](http://clang.llvm.org/docs/MemorySanitizer.html#handling-external-code)). Luckily, the only external dependency of Clang is the C++ standard library (and, of course, libc, but MSan _almost_ takes care of it).
 
 Checkout the source:
 ```
@@ -20,15 +17,52 @@ R=$(svn info | grep Revision: | awk '{print $2}')
 (cd projects && svn co -r $R http://llvm.org/svn/llvm-project/libcxxabi/trunk libcxxabi)
 ```
 
-Build Clang
+## Build Clang
+
 ```
-mkdir build && cd build && cmake -GNinja -DCMAKE_BUILD_TYPE=Release .. && ninja
+mkdir /code/build && cd /code/build && cmake -GNinja -DCMAKE_BUILD_TYPE=Release /code/llvm && ninja
 ```
 
-Run bootstrap.sh script that would first build libc++ and libc++abi with MSan instrumentation, then run the entire clang build with MSan and newly built libc++/libc++abi.
-Build libcxx (and libcxxabi) with [MemorySanitizer](MemorySanitizer) instrumentation:
+## Build libc++ and libc++abi with MemorySanitizer
+
 ```
-CLANG=/path/to/clang ./bootstrap.sh
+mkdir /code/build-libcxx-msan && cd /code/build-libcxx-msan
+CC=/code/build/bin/clang \
+CXX=/code/build-llvm/bin/clang++ \
+cmake -GNinja \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DLLVM_USE_SANITIZER=MemoryWithOrigins
+      /code/llvm
+ninja cxx cxxabi
+```
+
+## Build clang with MemorySanitizer, using the new libc++
+
+```
+MSAN_FLAGS=" \
+  -nostdinc++ \
+  -isystem /code/build-libcxx-msan/include \
+  -isystem /code/build-libcxx-msan/include/c++/v1  \
+  -lc++abi \
+  -Wl,--rpath=/code/build-libcxx-msan/lib \
+  -L/code/build-libcxx-msan/lib \
+  -fsanitize=memory \
+  -fsanitize-memory-track-origins \
+  -w"
+
+CC=/code/build/bin/clang \
+CXX=/code/build/bin/clang++ \
+CFLAGS=$MSAN_FLAGS \
+CXXFLAGS=$MSAN_FLAGS \
+cmake -GNinja \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DLLVM_USE_SANITIZER=MemoryWithOrigins \
+      -DLLVM_ENABLE_LIBCXX=ON \
+      -DCMAKE_EXE_LINKER_FLAGS="-lc++abi -Wl,--rpath=/code/build-libcxx-msan/lib -L/code/build-libcxx-msan/lib" \
+      /code/llvm
+
+ninja clang
+ninja check-clang check-llvm
 ```
 
 Note that building all targets in the instrumented tree will attempt to link newly built MSan runtime with MSan runtime from the previous stage, which is not a good idea.
