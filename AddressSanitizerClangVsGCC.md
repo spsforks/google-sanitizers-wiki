@@ -44,7 +44,7 @@ Support new kinds of bugs detection.
 
 <br>
 #### Feature:
-stack allocation via dynamic alloca
+on-demand stack allocation in UAR mode
 * LLVM: yes
 * GCC: no
 * Bugs/ML: 
@@ -160,6 +160,17 @@ Dynamic linkage proc:
 
 <br>
 #### Feature:
+use explicit list of exported symbols
+* LLVM: yes
+* GCC: no
+* Bugs/ML: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=64234 
+
+##### Cons and Pros:
+
+In GCC, statically sanitized executables don't export ASan symbols. In particular, if executable is linked with -static-libasan, it won't export libasan public API (__asan_reportXYZ, etc.), causing dlopens of sanitized shared libraries to fail. Clang uses --dynamic-list link option to export public symbols and avoid such errors.
+
+<br>
+#### Feature:
 asan_symbolize script
 * LLVM: yes
 * GCC: no
@@ -198,7 +209,7 @@ support sanitizer coverage
 * LLVM: yes
 * GCC: very limited, for Linux kernel only
 * Bugs/ML: http://clang.llvm.org/docs/SanitizerCoverage.html <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 https://gcc.gnu.org/ml/gcc-patches/2015-12/msg00299.html
 
 ##### Cons and Pros:
