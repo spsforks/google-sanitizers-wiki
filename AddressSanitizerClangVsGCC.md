@@ -185,8 +185,8 @@ GCC needs a special patch to handle the issue.
 support ASan blacklist file
 * LLVM: yes
 * GCC: no
-* Bugs/ML: http://clang.llvm.org/docs/AddressSanitizer.html#suppressing-errors-in-recompiled-code-blacklist <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://gcc.gnu.org/ml/gcc-patches/2013-12/msg00649.html
+* Bugs/ML: <http://clang.llvm.org/docs/AddressSanitizer.html#suppressing-errors-in-recompiled-code-blacklist><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<https://gcc.gnu.org/ml/gcc-patches/2013-12/msg00649.html>
 
 ##### Cons and Pros:
 
