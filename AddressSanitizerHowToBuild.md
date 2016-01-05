@@ -82,7 +82,6 @@ mkdir llvm_cmake_build_asan
 cd llvm_cmake_build_asan
 export CC=clang
 export CXX=clang++
-
 cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_SANITIZER=Address /path/to/llvm/checkout
 ```
 
@@ -98,10 +97,7 @@ If you want to get even faster incremental builds, use ninja: http://clang.llvm.
 The Chromium team periodically bakes fresh LLVM/Clang binaries, which include [AddressSanitizer](AddressSanitizer) support.
 Simply execute the following:
 ```
-mkdir -p tools/clang
-cd tools/clang
-svn co http://src.chromium.org/svn/trunk/src/tools/clang/scripts
-cd ../../
-tools/clang/scripts/update.sh
-# Now use third_party/llvm-build/Release+Asserts/bin/{clang,clang++}
+svn co https://src.chromium.org/svn/trunk/src/tools/clang/scripts tools/clang/scripts
+tools/clang/scripts/update.py
+# Now use third_party/llvm-build/Release+Asserts/bin/clang++
 ```
