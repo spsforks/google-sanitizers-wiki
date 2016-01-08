@@ -89,7 +89,7 @@ Comparing the profiles, it looks like MPX disables inlining in the compiler, or 
 Also, `perf` attributes lots of CPU cycles to the `bnd` instructions (not sure if we can trust perf here): 
 ```
   8.44 │       bndcl  (%rax),%bnd1
-  6.42 │       bndmov 0x10(%rsp),%bnd2  ...                                                          
+  6.42 │       bndmov 0x10(%rsp),%bnd2  ... 
  12.49 │       bndcu  (%rax),%bnd2
 ```
  
