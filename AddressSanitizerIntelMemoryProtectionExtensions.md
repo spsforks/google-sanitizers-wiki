@@ -20,7 +20,8 @@ Follow the [GCC instructions](https://gcc.gnu.org/wiki/Intel%20MPX%20support%20i
 e.g. [i7-6700](http://ark.intel.com/products/88196/Intel-Core-i7-6700-Processor-8M-Cache-up-to-4_00-GHz).
 Also Make sure your Linux kernel is built with `CONFIG_X86_INTEL_MPX=y`
 
-# Run
+# Experiments
+## Simple functionality
 ```
 % cat heap-buffer-overflow.c
 #include <stdlib.h>
@@ -47,6 +48,8 @@ Saw a #BR! status 1 at 0x401d27
 
 As you can see, `fcheck-pointer-bounds` found the buffer overflows using the `bndcu` instructions.
 The error message could have been more verbose, but that's not the hardware task.
+
+## Performance on bzip2
 
 Let's now try something more interesting, but sill simple enough: bzip2.
 ```
@@ -124,6 +127,40 @@ compiler implementation is naive. After all, the GCC wiki page frankly
 "Current support could be considered as enabling of the technology, there will
 be more changes for performance tuning."
 
+## Memory consumption
+Let us now measure memory consumption on something extremely MPX-unfriendly:
+the C++ `unordered_set` (aka hash set). This data structure has many different pointers
+internally and thus will stress the MPS's metadata usage.
+
+```
+% cat hset.cc
+#include <unordered_set>
+int main() {
+  std::unordered_set<int> s;
+  for (int i = 0; i < 10000000; i++) s.insert(i);
+    return s.size() == 10000000 ? 0 : 1;
+}
+% $GCC_ROOT/bin/g++ -std=c++11 -O2 hset.cc -static -o hset-plain
+% $GCC_ROOT/bin/g++ -std=c++11 -O2 hset.cc -static -o hset-mpx \
+  -fcheck-pointer-bounds -mmpx
+```
+
+Running on a non-MPX machine shows ~50% difference in CPU time but no difference
+in RAM consumption, which is expected as the MPX instructions are NOPs. Now
+let's run a real MPX box:
+
+```
+% /usr/bin/time ./hset-plain; /usr/bin/time ./hset-mpx ;
+1.78user 0.28system 0:02.07elapsed 99%CPU (0avgtext+0avgdata 486624maxresident)k
+0inputs+0outputs (0major+82336minor)pagefaults 0swaps
+5.50user 1.27system 0:06.80elapsed 99%CPU (0avgtext+0avgdata 2166196maxresident)k
+0inputs+0outputs (0major+376900minor)pagefaults 0swaps
+```
+
+The time difference is 3x, which may be caused by the naive compiler
+implementation, but there is also a **4x RAM usage increase**.
+It's hard to prove that the MPX itself (and not the compiler or the library) is
+guilty here, but this sounds very likely.
 
 
 # Performance
