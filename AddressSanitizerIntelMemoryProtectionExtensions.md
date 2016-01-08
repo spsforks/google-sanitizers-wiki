@@ -53,10 +53,11 @@ tar xf bzip2-1.0.6.tar.gz
 cd bzip2-1.0.6
 make clean
 make  all LDFLAGS=-static  -j CC="$GCC_ROOT/bin/gcc  \
- -fcheck-pointer-bounds -mmpx -Wl,-rpath=$GCC_ROOT/lib64"  \
-  && mv bzip2 ../bzip2-mpx
+ -fcheck-pointer-bounds -mmpx -Wl,-rpath=$GCC_ROOT/lib64"
+mv bzip2 ../bzip2-mpx
 make clean
-make  all LDFLAGS=-static  -j CC="$GCC_ROOT/bin/gcc                                                         " && mv bzip2 ../bzip2-plain
+make  all LDFLAGS=-static  -j CC="$GCC_ROOT/bin/gcc"
+mv bzip2 ../bzip2-plain
 )
 ```
 
