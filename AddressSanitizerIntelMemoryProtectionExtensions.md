@@ -17,36 +17,30 @@ Some external feedback: [1](https://groups.google.com/d/msg/comp.arch/iKAACmTrTQ
 e.g. [i7-6700](http://ark.intel.com/products/88196/Intel-Core-i7-6700-Processor-8M-Cache-up-to-4_00-GHz).
 Also Make sure your Linux kernel is built with `CONFIG_X86_INTEL_MPX=y`
 
-## Run
+# Run
 ```
-% cat global_buffer_overflow.c 
-#include <stdio.h>
-int g[10];
+% cat heap-buffer-overflow.c 
+#include <stdlib.h>
 int main(int argc, char **argv) {
-  printf("g: %p %p\n", g, g+10);
-  int x = g[argc * 10];
-  printf("finishing\n");
-  return x;
+  char *x = (char*)malloc(argc * 10);
+  x[argc + 10] = 0;
+  int res = x[10];
+  free(x);
+  return res;
 }
-% $MPX_GCC/bin/gcc -fcheck-pointers -mmpx -L$MPX_RUNTIME_LIB -B$MPX_BINUTILS/bin -lmpx-runtime64 \
- -Wl,-rpath,$MPX_RUNTIME_LIB  global_buffer_overflow.c
-# Use CHKP_RT_MODE=count to continue running after bug reports
-% CHKP_RT_MODE=count $SDE_KIT/sde -mpx-mode -- ./a.out
-g: 0x600bb0 0x600bd8
-Bound violation detected,status 0x1 at 0x4006ce
-finishing
+% $GCC_ROOT/bin/gcc -fcheck-pointer-bounds -mmpx heap-buffer-overflow.c -static 
 ```
 
-
-I was able to build 401.bzip2 benchmark using this command line:
-
+Now, if you run this on non-MPX-enabled machine, the application will exit silently. 
+However, if you run it on a proper MPX machine, you will get this: 
 ```
-$MPX_GCC/bin/gcc -fcheck-pointers -mmpx -L$MPX_RUNTIME_LIB -B$MPX_BINUTILS/bin -lmpx-runtime64\ 
- -Wl,-rpath,$MPX_RUNTIME_LIB *.c -w -DSPEC_CPU -DNDEBUG -DSPEC_CPU_LP64  \
- -fno-mpx-use-fast-string-functions -fno-mpx-use-nochk-string-functions  -O1
+% ./a.out 
+Saw a #BR! status 1 at 0x401d0a
+Saw a #BR! status 1 at 0x401d27
 ```
 
-The emulator ($SDE\_KIT/sde) is a PIN-based tool and has ~30x slowdown.
+As you can see, `fcheck-pointer-bounds` found the buffer overflows. 
+
 
 # Performance
 MPX has several different instructions that have very different performance properties:
