@@ -119,7 +119,10 @@ Now, if we run the same binaries on a proper MPX-enabled machine
 **the performance difference will be around 4x**.
 This is very sad, but it actually does not give us any hint about the
 potential of the MPX hardware feature, because as we describe above the
-compiler implementation is naive.
+compiler implementation is naive. After all, the GCC wiki page frankly
+[says](https://gcc.gnu.org/wiki/Intel%20MPX%20support%20in%20the%20GCC%20compiler):
+"Current support could be considered as enabling of the technology, there will
+be more changes for performance tuning."
 
 
 
