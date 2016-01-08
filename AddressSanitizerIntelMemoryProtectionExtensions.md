@@ -138,7 +138,7 @@ internally and thus will stress the MPS's metadata usage.
 int main() {
   std::unordered_set<int> s;
   for (int i = 0; i < 10000000; i++) s.insert(i);
-    return s.size() == 10000000 ? 0 : 1;
+  return s.size() == 10000000 ? 0 : 1;
 }
 % $GCC_ROOT/bin/g++ -std=c++11 -O2 hset.cc -static -o hset-plain
 % $GCC_ROOT/bin/g++ -std=c++11 -O2 hset.cc -static -o hset-mpx \
