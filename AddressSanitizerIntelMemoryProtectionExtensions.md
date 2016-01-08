@@ -19,7 +19,7 @@ Also Make sure your Linux kernel is built with `CONFIG_X86_INTEL_MPX=y`
 
 # Run
 ```
-% cat heap-buffer-overflow.c 
+% cat heap-buffer-overflow.c
 #include <stdlib.h>
 int main(int argc, char **argv) {
   char *x = (char*)malloc(argc * 10);
@@ -28,13 +28,13 @@ int main(int argc, char **argv) {
   free(x);
   return res;
 }
-% $GCC_ROOT/bin/gcc -fcheck-pointer-bounds -mmpx heap-buffer-overflow.c -static 
+% $GCC_ROOT/bin/gcc -fcheck-pointer-bounds -mmpx heap-buffer-overflow.c -static
 ```
 
-Now, if you run this on non-MPX-enabled machine, the application will exit silently. 
-However, if you run it on a proper MPX machine, you will get this: 
+Now, if you run this on non-MPX-enabled machine, the application will exit silently.
+However, if you run it on a proper MPX machine, you will get this:
 ```
-% ./a.out 
+% ./a.out
 Saw a #BR! status 1 at 0x401d0a
 Saw a #BR! status 1 at 0x401d27
 % objdump -d a.out | grep "401d0a\|401d27"
@@ -43,9 +43,9 @@ Saw a #BR! status 1 at 0x401d27
 ```
 
 As you can see, `fcheck-pointer-bounds` found the buffer overflows using the `bndcu` instructions.
-The error message could have been more verbose, but that's not the hardware task.   
+The error message could have been more verbose, but that's not the hardware task.
 
-Let's now try something more interesting, but sill simple enough: bzip2. 
+Let's now try something more interesting, but sill simple enough: bzip2.
 ```
 wget http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz
 tar xf bzip2-1.0.6.tar.gz
@@ -63,7 +63,7 @@ mv bzip2 ../bzip2-plain
 
 Now, find some large file (50Mb+), copy it to `inp` and run this:
 ```
-for f in plain mpx; do time ./bzip2-$f -c inp > /dev/null ; done 
+for f in plain mpx; do time ./bzip2-$f -c inp > /dev/null ; done
 ```
 
 One a non-MPX machine, the MPX binary will execute NOPs.
@@ -87,15 +87,16 @@ Profile with MPX:
   2.98%  bzip2-mpx  bzip2-mpx          [.] copy_output_until_stop
 ```
 
-Comparing the profiles, it looks like MPX disables inlining in the compiler, or at least forces the inliner to make different decisions. This may partially explain the performance difference. 
+Comparing the profiles, it looks like MPX disables inlining in the compiler, or at least forces the inliner to make different decisions.
+This may partially explain the performance difference.
 
-Also, `perf` attributes lots of CPU cycles to the `bnd` instructions (not sure if we can trust perf here): 
+Also, `perf` attributes lots of CPU cycles to the `bnd` instructions (not sure if we can trust perf here):
 ```
   8.44 │       bndcl  (%rax),%bnd1
-  6.42 │       bndmov 0x10(%rsp),%bnd2  ... 
+  6.42 │       bndmov 0x10(%rsp),%bnd2  ...
  12.49 │       bndcu  (%rax),%bnd2
 ```
- 
+
 Now, we may run the same binaries on a proper MPX-enabled machine. (Stay tuned)
 
 
@@ -118,14 +119,13 @@ For many other benchmarks (e.g. 400.perlbench, 429.mcf, 483.xalancbmk, 471.omnet
 the number of expensive BNDMOV and very expensive BNDLDX/BNDSTX instruction is comparable to the number of checks.
 For these applications we expect MPX to be slower than alternative software-only solutions, such as [AddressSanitizer](AddressSanitizer).
 
-Note that the data is preliminary because we've built the benchmarks
-and without the MPX-enabled glibc.
+Note that the data is preliminary because we've built the benchmarks without the MPX-enabled glibc.
 
 # False positives
 ## False positive with atomic pointers
 http://software.intel.com/en-us/forums/topic/413959
 ```
-% cat cxx11_ptr_check.cc 
+% cat cxx11_ptr_check.cc
 // Example of a false positive with Pointer Checker or MPX.
 // The false report happens because the pointer update
 // and the metadata update together do not happen atomically.
@@ -251,10 +251,12 @@ Example (third\_party/icu/source/common/ucmndata.h)
 
 
 # Comparison with AddressSanitizer
-MPX is not yet available in hardware, so this section is speculation based
-on our evaluation of
+MPX has just recently become available in hardware.
+
+Most of this section is speculation based on our earlier evaluation of
 [Intel Pointer Checker](http://software.intel.com/en-us/articles/pointer-checker-feature-in-intel-parallel-studio-xe-2013-how-is-it-different-from-static)
 (software-only implementation of MPX-like checker) and the MPX-enabled gcc (which can be run under emulator).
+
 ## MPX strengths
 MPX-based tool can find in-struct buffer overflows:
 ```
@@ -265,7 +267,7 @@ MPX-based tool can find in-struct buffer overflows:
 
 MPX-based tool can find buffer overflows of any size since it does not rely on redzones:
 ```
-int a[10]; ... 
+int a[10]; ...
 a[1000000] = 0;  // Will be detected by MPX
 ```
 
