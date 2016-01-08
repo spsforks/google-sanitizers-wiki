@@ -12,7 +12,10 @@ Some external feedback: [1](https://groups.google.com/d/msg/comp.arch/iKAACmTrTQ
 **NEW** As of January 2016, Intel MPX is available in hardware and one can actually try how it works!
 
 # Setup
-* To build with MPX all you need is a fresh GCC, e.g. 5.3. Now you can build your code with MPX and execute the binary on any x86_64 machine. The MPX instructions will be treated as NOPs, but you will be able to measure e.g. code size increase and MPX-NOP overhead. Follow the [GCC instructions](https://gcc.gnu.org/wiki/Intel%20MPX%20support%20in%20the%20GCC%20compiler********) to build your code. 
+* To build with MPX all you need is a fresh GCC, e.g. 5.3.
+Now you can build your code with MPX and execute the binary on any x86_64 machine.
+The MPX instructions will be treated as NOPs, but you will be able to measure e.g. code size increase and MPX-NOP overhead. 
+Follow the [GCC instructions](https://gcc.gnu.org/wiki/Intel%20MPX%20support%20in%20the%20GCC%20compiler) to build your code.
 * To run with the actual checks acquire a new machine with an MPX-enabled CPU,
 e.g. [i7-6700](http://ark.intel.com/products/88196/Intel-Core-i7-6700-Processor-8M-Cache-up-to-4_00-GHz).
 Also Make sure your Linux kernel is built with `CONFIG_X86_INTEL_MPX=y`
