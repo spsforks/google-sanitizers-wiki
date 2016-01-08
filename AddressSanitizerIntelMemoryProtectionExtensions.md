@@ -58,6 +58,44 @@ make  all LDFLAGS=-static  -j CC="$GCC_ROOT/bin/gcc                             
 )
 ```
 
+Now, find some large file (50Mb+), copy it to `inp` and run this:
+```
+for f in plain mpx; do time ./bzip2-$f -c inp > /dev/null ; done 
+```
+
+One a non-MPX machine, the MPX binary will execute NOPs.
+On my Xeon E5-2680 I observe 80% (!!!!) slowdown from MPX-NOPs.
+
+Profile w/o mpx:
+```
+ 44.29%  bzip2-plain  bzip2-plain        [.] mainSort                                                                                                                          
+ 43.07%  bzip2-plain  bzip2-plain        [.] BZ2_compressBlock                                                                                                                 
+  5.32%  bzip2-plain  bzip2-plain        [.] handle_compress.isra.2                                                                                                            
+  4.82%  bzip2-plain  bzip2-plain        [.] mainGtU.part.0          
+```
+Profile with MPX:
+```
+ 35.27%  bzip2-mpx  bzip2-mpx          [.] generateMTFValues                                                                                                                   
+ 21.24%  bzip2-mpx  bzip2-mpx          [.] mainSort                                                                                                                            
+ 11.89%  bzip2-mpx  bzip2-mpx          [.] sendMTFValues                                                                                                                       
+ 11.27%  bzip2-mpx  bzip2-mpx          [.] mainSimpleSort                                                                                                                      
+  9.39%  bzip2-mpx  bzip2-mpx          [.] copy_input_until_stop                                                                                                               
+  5.32%  bzip2-mpx  bzip2-mpx          [.] mainGtU.chkp.part.0                                                                                                                 
+  2.98%  bzip2-mpx  bzip2-mpx          [.] copy_output_until_stop   
+```
+
+Comparing the profiles, it looks like MPX disables inlining in the compiler, or at least forces the inliner to make different decisions. This may partially explain the performance difference. 
+
+Also, `perf` attributes lots of CPU cycles to the `bnd` instructions (not sure if we can trust perf here): 
+```
+  8.44 │       bndcl  (%rax),%bnd1
+  6.42 │       bndmov 0x10(%rsp),%bnd2  ...                                                          
+ 12.49 │       bndcu  (%rax),%bnd2
+```
+ 
+Now, we may run the same binaries on a proper MPX-enabled machine. (Stay tuned)
+
+
 # Performance
 MPX has several different instructions that have very different performance properties:
   * BNDCU/BNDCL/BNDMK -- pure arithmetic, supposedly very fast.
