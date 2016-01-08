@@ -97,6 +97,16 @@ Also, `perf` attributes lots of CPU cycles to the `bnd` instructions (not sure i
  12.49 │       bndcu  (%rax),%bnd2
 ```
 
+Maybe the compiler implementation in GCC is too naive.
+For example, I observe same bound information being loaded twice into different bnd registers: 
+```
+  401cd4:       66 0f 1a 0c 24          bndmov (%rsp),%bnd1   <<<<<<<<<<
+  401cd9:       f2 0f 1a 0a             bndcu  (%rdx),%bnd1
+  401cdd:       c6 02 00                movb   $0x0,(%rdx)
+  401ce0:       48 8d 50 0a             lea    0xa(%rax),%rdx
+  401ce4:       66 0f 1a 04 24          bndmov (%rsp),%bnd0   <<<<<<<<<<
+```
+
 Now, we may run the same binaries on a proper MPX-enabled machine. (Stay tuned)
 
 
