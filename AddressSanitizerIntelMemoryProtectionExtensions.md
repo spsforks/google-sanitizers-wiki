@@ -37,10 +37,26 @@ However, if you run it on a proper MPX machine, you will get this:
 % ./a.out 
 Saw a #BR! status 1 at 0x401d0a
 Saw a #BR! status 1 at 0x401d27
+% objdump -d a.out | grep "401d0a\|401d27"
+  401d0a:       f2 0f 1a 08             bndcu  (%rax),%bnd1
+  401d27:       f2 0f 1a 18             bndcu  (%rax),%bnd3
 ```
 
-As you can see, `fcheck-pointer-bounds` found the buffer overflows. 
+As you can see, `fcheck-pointer-bounds` found the buffer overflows using the `bndcu` instructions.
+The error message could have been more verbose, but that's not the hardware task.   
 
+Let's now try something more interesting, but sill simple enough: bzip2. 
+```
+wget http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz
+tar xf bzip2-1.0.6.tar.gz
+(
+cd bzip2-1.0.6
+make clean
+make  all LDFLAGS=-static  -j CC="$GCC_ROOT/bin/gcc  -fcheck-pointer-bounds -mmpx -Wl,-rpath=$GCC_ROOT/lib64" && mv bzip2 ../bzip2-mpx
+make clean
+make  all LDFLAGS=-static  -j CC="$GCC_ROOT/bin/gcc                                                         " && mv bzip2 ../bzip2-plain
+)
+```
 
 # Performance
 MPX has several different instructions that have very different performance properties:
