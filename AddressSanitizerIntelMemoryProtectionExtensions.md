@@ -130,7 +130,7 @@ be more changes for performance tuning."
 ## Memory consumption
 Let us now measure memory consumption on something extremely MPX-unfriendly:
 the C++ `unordered_set` (aka hash set). This data structure has many different pointers
-internally and thus will stress the MPS's metadata usage.
+internally and thus will stress the MPX's metadata usage.
 
 ```
 % cat hset.cc
