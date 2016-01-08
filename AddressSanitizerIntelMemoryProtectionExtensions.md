@@ -9,33 +9,13 @@ Links: [MPX-enabled GCC wiki](http://gcc.gnu.org/wiki/Intel%20MPX%20support%20in
 [Intel Pointer Checker](http://software.intel.com/en-us/articles/pointer-checker-feature-in-intel-parallel-studio-xe-2013-how-is-it-different-from-static).
 Some external feedback: [1](https://groups.google.com/d/msg/comp.arch/iKAACmTrTQs/bzqG5Dp-FPEJ), [2](http://www.cs.rutgers.edu/news/articles/2013/07/24/intel-memory-protection-extensions), [3](http://lists.cs.uiuc.edu/pipermail/cfe-dev/2014-September/039088.html).
 
-# Using SDE
-## Set up
-Intel documentation is too verbose, here is a very short summary for Linux x86\_64:
-  * From https://secure-software.intel.com/en-us/protected-download/267266/144917
-    * Get 2013-07-22-mpx-runtime-external-lin.tar.bz2
-    * Get sde-external-6.1.0-2013-07-22-lin.tar.bz2
-  * From http://software.intel.com/en-us/articles/intel-software-development-emulator :
-    * Get binutils-x86-64-static-avx512-mpx-sha.tar.bz2
-  * Extract all archives into $MPX\_HOME and set the following environment variables:
-```
-export MPX_BINUTILS=$MPX_HOME/binutils_x86_64_static_avx512-mpx-sha
-export MPX_RUNTIME_LIB=$MPX_HOME/2013-07-22-mpx-runtime-external-lin
-export SDE_KIT=$MPX_HOME/sde-external-6.1.0-2013-07-22-lin
-```
+**NEW** As of January 2016, Intel MPX is available in hardware and one can actually try how it works!
 
-Now you need to compile and install the mpx-enabled gcc
-(don't take the binaries from Intel, they may not work):
-```
-DIR=`pwd`
-svn co svn://gcc.gnu.org/svn/gcc/branches/mpx # last tested r201897
-mkdir mpx-build
-cd mpx-build
-../gcc/configure --prefix=$DIR/mpx-inst --enable-languages=c,c++ --enable-mpx \
-  --with-as=$MPX_BINUTILS/bin/as --with-ld=$MPX_BINUTILS/bin/ld
-make -j && make install
-export MPX_GCC=$DIR/mpx-inst
-```
+# Setup
+* To build with MPX all you need is a fresh GCC, e.g. 5.3. Now you can build your code with MPX and execute the binary on any x86_64 machine. The MPX instructions will be treated as NOPs, but you will be able to measure e.g. code size increase and MPX-NOP overhead. Follow the [GCC instructions](https://gcc.gnu.org/wiki/Intel%20MPX%20support%20in%20the%20GCC%20compiler********) to build your code. 
+* To run with the actual checks acquire a new machine with an MPX-enabled CPU,
+e.g. [i7-6700](http://ark.intel.com/products/88196/Intel-Core-i7-6700-Processor-8M-Cache-up-to-4_00-GHz).
+Also Make sure your Linux kernel is built with `CONFIG_X86_INTEL_MPX=y`
 
 ## Run
 ```
