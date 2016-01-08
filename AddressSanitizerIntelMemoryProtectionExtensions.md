@@ -52,7 +52,9 @@ tar xf bzip2-1.0.6.tar.gz
 (
 cd bzip2-1.0.6
 make clean
-make  all LDFLAGS=-static  -j CC="$GCC_ROOT/bin/gcc  -fcheck-pointer-bounds -mmpx -Wl,-rpath=$GCC_ROOT/lib64" && mv bzip2 ../bzip2-mpx
+make  all LDFLAGS=-static  -j CC="$GCC_ROOT/bin/gcc  \
+ -fcheck-pointer-bounds -mmpx -Wl,-rpath=$GCC_ROOT/lib64"  \
+  && mv bzip2 ../bzip2-mpx
 make clean
 make  all LDFLAGS=-static  -j CC="$GCC_ROOT/bin/gcc                                                         " && mv bzip2 ../bzip2-plain
 )
@@ -68,20 +70,20 @@ On my Xeon E5-2680 I observe 80% (!!!!) slowdown from MPX-NOPs.
 
 Profile w/o mpx:
 ```
- 44.29%  bzip2-plain  bzip2-plain        [.] mainSort                                                                                                                          
- 43.07%  bzip2-plain  bzip2-plain        [.] BZ2_compressBlock                                                                                                                 
-  5.32%  bzip2-plain  bzip2-plain        [.] handle_compress.isra.2                                                                                                            
-  4.82%  bzip2-plain  bzip2-plain        [.] mainGtU.part.0          
+ 44.29%  bzip2-plain  bzip2-plain        [.] mainSort
+ 43.07%  bzip2-plain  bzip2-plain        [.] BZ2_compressBlock
+  5.32%  bzip2-plain  bzip2-plain        [.] handle_compress.isra.2
+  4.82%  bzip2-plain  bzip2-plain        [.] mainGtU.part.0       
 ```
 Profile with MPX:
 ```
- 35.27%  bzip2-mpx  bzip2-mpx          [.] generateMTFValues                                                                                                                   
- 21.24%  bzip2-mpx  bzip2-mpx          [.] mainSort                                                                                                                            
- 11.89%  bzip2-mpx  bzip2-mpx          [.] sendMTFValues                                                                                                                       
- 11.27%  bzip2-mpx  bzip2-mpx          [.] mainSimpleSort                                                                                                                      
-  9.39%  bzip2-mpx  bzip2-mpx          [.] copy_input_until_stop                                                                                                               
-  5.32%  bzip2-mpx  bzip2-mpx          [.] mainGtU.chkp.part.0                                                                                                                 
-  2.98%  bzip2-mpx  bzip2-mpx          [.] copy_output_until_stop   
+ 35.27%  bzip2-mpx  bzip2-mpx          [.] generateMTFValues
+ 21.24%  bzip2-mpx  bzip2-mpx          [.] mainSort         
+ 11.89%  bzip2-mpx  bzip2-mpx          [.] sendMTFValues    
+ 11.27%  bzip2-mpx  bzip2-mpx          [.] mainSimpleSort   
+  9.39%  bzip2-mpx  bzip2-mpx          [.] copy_input_until_stop
+  5.32%  bzip2-mpx  bzip2-mpx          [.] mainGtU.chkp.part.0  
+  2.98%  bzip2-mpx  bzip2-mpx          [.] copy_output_until_stop
 ```
 
 Comparing the profiles, it looks like MPX disables inlining in the compiler, or at least forces the inliner to make different decisions. This may partially explain the performance difference. 
