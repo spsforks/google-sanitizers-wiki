@@ -115,7 +115,12 @@ For example, I observe same bound information being needlessly spilled/filled:
   401cf0:       66 0f 1a 14 24          bndmov (%rsp),%bnd2 <<<<<<<<<<<<
 ```
 
-Now, we may run the same binaries on a proper MPX-enabled machine. (Stay tuned)
+Now, if we run the same binaries on a proper MPX-enabled machine
+**the performance difference will be around 4x**.
+This is very sad, but it actually does not give us any hint about the
+potential of the MPX hardware feature, because as we describe above the
+compiler implementation is naive.
+
 
 
 # Performance
