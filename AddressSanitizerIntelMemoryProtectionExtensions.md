@@ -21,6 +21,7 @@ e.g. [i7-6700](http://ark.intel.com/products/88196/Intel-Core-i7-6700-Processor-
 Also Make sure your Linux kernel is built with `CONFIG_X86_INTEL_MPX=y`
 
 # Experiments
+The following experiments were done with GCC's fresh trunk on 2016-01-16 (r232243).
 ## Simple functionality
 ```
 % cat heap-buffer-overflow.c
@@ -50,7 +51,6 @@ As you can see, `fcheck-pointer-bounds` found the buffer overflows using the `bn
 The error message could have been more verbose, but that's not the hardware task.
 
 ## Performance on bzip2
-
 Let's now try something more interesting, but sill simple enough: bzip2.
 ```
 wget http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz
@@ -73,7 +73,7 @@ for f in plain mpx; do time ./bzip2-$f -c inp > /dev/null ; done
 ```
 
 One a non-MPX machine, the MPX binary will execute NOPs.
-On my Xeon E5-2680 I observe 80% (!!!!) slowdown from MPX-NOPs.
+On my Xeon E5-2680 I observe 50% (!!!!) slowdown from MPX-NOPs.
 
 Profile w/o mpx:
 ```
@@ -99,30 +99,14 @@ This may partially explain the performance difference.
 Also, `perf` attributes lots of CPU cycles to the `bnd` instructions (not sure if we can trust perf here):
 ```
   8.44 │       bndcl  (%rax),%bnd1
-  6.42 │       bndmov 0x10(%rsp),%bnd2  ...
  12.49 │       bndcu  (%rax),%bnd2
 ```
 
-Maybe the compiler implementation in GCC is too naive.
-For example, I observe same bound information being needlessly spilled/filled:
-```
-  401ccb:       66 0f 1b 04 24          bndmov %bnd0,(%rsp) <<<<<<<<<<<<
-  401cd0:       48 89 c7                mov    %rax,%rdi
-  401cd3:       f3 0f 1a 02             bndcl  (%rdx),%bnd0
-  401cd7:       66 0f 1a 0c 24          bndmov (%rsp),%bnd1 <<<<<<<<<<<<
-  401cdc:       f2 0f 1a 0a             bndcu  (%rdx),%bnd1
-  401ce0:       66 0f 1a 04 24          bndmov (%rsp),%bnd0 <<<<<<<<<<<<
-  401ce5:       c6 02 00                movb   $0x0,(%rdx)
-  401ce8:       48 8d 50 0a             lea    0xa(%rax),%rdx
-  401cec:       f3 0f 1a 02             bndcl  (%rdx),%bnd0
-  401cf0:       66 0f 1a 14 24          bndmov (%rsp),%bnd2 <<<<<<<<<<<<
-```
-
 Now, if we run the same binaries on a proper MPX-enabled machine
-**the performance difference will be around 4x**.
+**the performance difference will be around 2.5x**.
 This is very sad, but it actually does not give us any hint about the
-potential of the MPX hardware feature, because as we describe above the
-compiler implementation is naive. After all, the GCC wiki page frankly
+potential of the MPX hardware feature, because the
+compiler implementation may be not fully polished naive. After all, the GCC wiki page frankly
 [says](https://gcc.gnu.org/wiki/Intel%20MPX%20support%20in%20the%20GCC%20compiler):
 "Current support could be considered as enabling of the technology, there will
 be more changes for performance tuning."
@@ -153,11 +137,11 @@ let's run a real MPX box:
 % /usr/bin/time ./hset-plain; /usr/bin/time ./hset-mpx ;
 1.78user 0.28system 0:02.07elapsed 99%CPU (0avgtext+0avgdata 486624maxresident)k
 0inputs+0outputs (0major+82336minor)pagefaults 0swaps
-5.50user 1.27system 0:06.80elapsed 99%CPU (0avgtext+0avgdata 2166196maxresident)k
-0inputs+0outputs (0major+376900minor)pagefaults 0swaps
+4.54user 1.32system 0:05.88elapsed 99%CPU (0avgtext+0avgdata 2168748maxresident)k
+0inputs+0outputs (0major+380842minor)pagefaults 0swaps
 ```
 
-The time difference is 3x, which may be caused by the naive compiler
+The time difference is 2.5x, which may be caused by the naive compiler
 implementation, but there is also a **4x RAM usage increase**.
 It's hard to prove that the MPX itself (and not the compiler or the library) is
 guilty here, but this sounds very likely.
