@@ -19,6 +19,12 @@ Most run-time flags are passed to [AddressSanitizer](AddressSanitizer) via `ASAN
 ```
 ASAN_OPTIONS=verbosity=1:malloc_context_size=20 ./a.out
 ```
+but you could also embed default flags in the source code by implementing __asan_default_options function:
+```
+const char *__asan_default_options() {
+  return "verbosity=1:malloc_context_size=20";
+}
+```
 
 Note that the list below list may be (and probably is) incomplete. Also older versions of ASan may not support some of the listed flags. To get the idea of what's supported in your version, run
 ```
