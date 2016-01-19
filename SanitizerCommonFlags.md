@@ -63,7 +63,7 @@ Each tool parses the common options from the corresponding environment variable 
 |include |   ""       | read more options from the given file|
 |include_if_exists | ""         | read more options from the given file (if it exists)|
 |suppress_equal_pcs|  true      | Deduplicate multiple reports for single source location in halt_on_error=false mode (asan only).|
-
+|print_cmdline|  false      | Print command line on crash (asan only).|
 ### See also
 * [AddressSanitizerFlags](AddressSanitizerFlags)
 * [ThreadSanitizerFlags](ThreadSanitizerFlags)
