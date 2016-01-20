@@ -42,3 +42,11 @@ int main(int argc, char **argv) {
   v->pop_back();  // The last element leaks now.
 }
 ```
+
+### False positives 
+We know about at least one kind of false positive container overflow reports.
+If a part of the application is built with asan and another part is not instrumented, 
+and both parts use e.g. instrumented `std::vector`, asan may report non-existent container overflow.
+This happens because instrumented and non-instrumented bits of `std::vector`, inlined and not, are mixed during linking, so you end up with incompletely instrumented `std::vector`. 
+
+Solution: either build the entire application with asan or disable container overflow detection (`ASAN_OPTIONS=detect_container_overflow=0`)
