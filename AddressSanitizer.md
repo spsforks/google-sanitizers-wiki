@@ -10,6 +10,7 @@ It finds:
   * [Global buffer overflow](AddressSanitizerExampleGlobalOutOfBounds)
   * [Use after return](AddressSanitizerExampleUseAfterReturn)
   * [Initialization order bugs](AddressSanitizerInitializationOrderFiasco)
+  * [Memory leaks](AddressSanitizerLeakSanitizer)
 
 This tool is very fast. The average slowdown of the instrumented program is ~2x (see [AddressSanitizerPerformanceNumbers](AddressSanitizerPerformanceNumbers)).
 
