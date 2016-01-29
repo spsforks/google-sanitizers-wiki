@@ -91,8 +91,8 @@ $ ./a.out
 You can verify that MSan works as expected by introducing a bug:
 ```
 TEST(FooTest, Foo) {
-  std::string foo("foo");
-  EXPECT_EQ('z', foo[4]);
+  int uninitialized;
+  EXPECT_GT(uninitialized, 5);
 }
 ```
 
@@ -107,8 +107,7 @@ $ ./a.out
 [----------] 1 test from FooTest
 [ RUN      ] FooTest.Foo
 ==39032== WARNING: MemorySanitizer: use-of-uninitialized-value
-    #0 0x7fada23daa8e in testing::AssertionResult testing::internal::CmpHelperEQ<char, char>(char const*, char const*, char const&, char const&) googletest/include/gtest/gtest.h:1481:7
-    #1 0x7fada23da377 in testing::AssertionResult testing::internal::EqHelper<false>::Compare<char, char>(char const*, char const*, char const&, char const&) googletest/include/gtest/gtest.h:1511:12
-    #2 0x7fada23d9d39 in FooTest_Foo_Test::TestBody() test.cc:6:3
+    #0 0x48d73c in testing::AssertionResult testing::internal::CmpHelperGT<int, int>(char const*, char const*, int const&, int const&) googletest/include/gtest/gtest.h:1463:1
+    #1 0x48ce7a in FooTest_Foo_Test::TestBody() test.cc:6:3
 ...
 ```
