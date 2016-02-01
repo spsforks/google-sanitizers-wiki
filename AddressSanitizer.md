@@ -151,7 +151,7 @@ fun:*MyFooBar*
   * A: Most probably you link with -Wl,-z,defs or -Wl,--no-undefined. These flags don't work with ASan.
 
   * Q: My malloc stacktraces are too short?
-  * A: Try to compile your code with -fno-omit-frame-pointer or set ASAN\_OPTIONS=fast\_unwind\_on\_malloc=0 (the latter would be a performance killer though unless you also specify malloc\_context\_size=2 or lower).
+  * A: Try to compile your code with -fno-omit-frame-pointer or set ASAN\_OPTIONS=fast\_unwind\_on\_malloc=0 (the latter would be a performance killer though unless you also specify malloc\_context\_size=2 or lower). Note that frame-pointer-based unwinding does not work on Thumb.
 
   * Q: I'm using dynamic ASan runtime and my program crashes at start with "Shadow memory range interleaves with an existing memory mapping. ASan cannot proceed correctly.".
   * A1: If you are using shared ASan DSO, try LD\_PRELOAD'ing Asan runtime into your program.
