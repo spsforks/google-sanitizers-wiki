@@ -234,6 +234,14 @@ http://www.mail-archive.com/vim_dev@googlegroups.com/msg15549.html
   * http://git.savannah.gnu.org/gitweb/?p=coreutils.git;a=commit;h=f940fece
   * https://debbugs.gnu.org/cgi/bugreport.cgi?bug=20998
 
+# Tizen 
+http://injoit.org/index.php/j1/article/viewFile/231/184
+```This paper describes our experience in integration of ASan
+technology into large-scale software products: Tizen
+distribution and Linux kernel. The tool has already found
+around a hundred of serious memory bugs in various Tizen
+applications and in mainline Linux kernel. ```
+
 # Unsorted
 
   * http://hg.dovecot.org/dovecot-2.2/rev/740935acc0f8
