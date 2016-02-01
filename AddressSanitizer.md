@@ -141,12 +141,11 @@ fun:*MyFooBar*
 
 # FAQ
   * Q: Can [AddressSanitizer](AddressSanitizer) continue running after reporting first error?
-  * A1: No, sorry. [AddressSanitizer](AddressSanitizer) errors are fatal. This design choice allows the tool to be faster and simpler.
-  * A2: [AddressSanitizer](AddressSanitizer) has recently got -fsanitize-recover=address which enables continue-after-error mode. But this is somewhat experimental so may not yet be as reliable as default mode (and not as timely supported). Also keep in mind that errors after the first one may actually be spurious.
+  * A: Yes it can, AddressSanitizer has recently got continue-after-error mode. This is somewhat experimental so may not yet be as reliable as default setting (and not as timely supported). Also keep in mind that errors after the first one may actually be spurious. To enable continue-after-error, compile with -fsanitize-recover and then run your code with ASAN_OPTIONS=halt_on_error=0.
 
   * Q: Why didn't ASan report an obviously invalid memory access in my code?
   * A1: If your errors is too obvious, compiler might have already optimized it out by the time Asan runs.
-  * A2: Another, C-only option is accesses to global common symbols which are not protected by Asan (you can use -fno-common to disable generation of common symbols).
+  * A2: Another, C-only option is accesses to global common symbols which are not protected by Asan (you can use -fno-common to disable generation of common symbols and hopefully detect more bugs).
 
   * Q: When I link my shared library with -fsanitize=address, it fails due to some undefined ASan symbols (e.g. asan\_init\_v4)?
   * A: Most probably you link with -Wl,-z,defs or -Wl,--no-undefined. These flags don't work with ASan.
@@ -170,6 +169,9 @@ fun:*MyFooBar*
 
   * Q: I've built my main executable with ASan. Do I also need to build shared libraries?
   * A: ASan will work even if you rebuild just part of your program. But you'll have to rebuild all components to detect all errors.
+
+  * Q: I've built my shared library with ASan. Can I run it with unsanitized executable?
+  * A: Yes! You'll need to build your library with [dynamic version of ASan](AddressSanitizerAsDso) and then run executable with LD_PRELOAD=path/to/asan/runtime/lib.
 
 # Talks and papers
  * Watch the presentation from the [LLVM Developer's meeting](http://llvm.org/devmtg/2011-11/) (Nov 18, 2011): [Video](http://www.youtube.com/watch?v=CPnRS1nv3_s), [slides](http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf).
