@@ -92,7 +92,7 @@ The `ulimit -v` command makes little sense with ASan-ified binaries
 because ASan consumes 20 terabytes of virtual memory (plus a bit).
 
 You may try more sophisticated tools to limit your memory consumption,
-e.g. http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/cgroups/memory.txt
+e.g. https://en.wikipedia.org/wiki/Cgroups
 
 # Flags
 See the separate [AddressSanitizerFlags](AddressSanitizerFlags) page.
