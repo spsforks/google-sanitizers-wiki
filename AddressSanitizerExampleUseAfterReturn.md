@@ -1,12 +1,13 @@
 
 ```
-// RUN: clang -O -g -fsanitize=address %t -fsanitize=use-after-return && ./a.out
+// RUN: clang -O -g -fsanitize=address %t && ./a.out
 // By default, AddressSanitizer does not try to detect
 // stack-use-after-return bugs.
 // It may still find such bugs occasionally
 // and report them as a hard-to-explain stack-buffer-overflow.
 
-// This test is compiled with experimental flag -fsanitize=use-after-return
+// You need to run the test with ASAN_OPTIONS=detect_stack_use_after_return=1
+
 int *ptr;
 __attribute__((noinline))
 void FunctionThatEscapesLocalObject() {
