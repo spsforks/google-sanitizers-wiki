@@ -148,7 +148,7 @@ fun:*MyFooBar*
   * A2: Another, C-only option is accesses to global common symbols which are not protected by Asan (you can use -fno-common to disable generation of common symbols and hopefully detect more bugs).
 
   * Q: When I link my shared library with -fsanitize=address, it fails due to some undefined ASan symbols (e.g. asan\_init\_v4)?
-  * A: Most probably you link with -Wl,-z,defs or -Wl,--no-undefined. These flags don't work with ASan.
+  * A: Most probably you link with -Wl,-z,defs or -Wl,--no-undefined. These flags don't work with ASan unless you also use -shared-libasan (which is the default mode for GCC, but not for Clang).
 
   * Q: My malloc stacktraces are too short?
   * A: Try to compile your code with -fno-omit-frame-pointer or set ASAN\_OPTIONS=fast\_unwind\_on\_malloc=0 (the latter would be a performance killer though unless you also specify malloc\_context\_size=2 or lower). Note that frame-pointer-based unwinding does not work on Thumb.
