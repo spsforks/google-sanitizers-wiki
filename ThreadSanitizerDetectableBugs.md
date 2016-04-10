@@ -8,3 +8,5 @@
   * [Leaked threads](http://llvm.org/viewvc/llvm-project/compiler-rt/trunk/test/tsan/thread_leak3.c?view=markup)
   * [Signal-unsafe malloc/free calls in signal handlers](http://llvm.org/viewvc/llvm-project/compiler-rt/trunk/test/tsan/signal_malloc.cc?view=markup)
   * [Signal handler spoils errno](http://llvm.org/viewvc/llvm-project/compiler-rt/trunk/test/tsan/signal_errno.cc?view=markup)
+  * [Potential deadlocks (lock order inversions)](http://llvm.org/viewvc/llvm-project/compiler-rt/trunk/test/tsan/deadlock_detector_stress_test.cc?view=markup)
+
