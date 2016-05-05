@@ -28,7 +28,7 @@ mkdir /code/build && cd /code/build && cmake -GNinja -DCMAKE_BUILD_TYPE=Release 
 ```
 mkdir /code/build-libcxx-msan && cd /code/build-libcxx-msan
 CC=/code/build/bin/clang \
-CXX=/code/build-llvm/bin/clang++ \
+CXX=/code/build/bin/clang++ \
 cmake -GNinja \
       -DCMAKE_BUILD_TYPE=Release \
       -DLLVM_USE_SANITIZER=MemoryWithOrigins
