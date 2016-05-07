@@ -34,30 +34,29 @@ ninja cxx cxxabi)
 ## Build clang with MemorySanitizer, using the new libc++
 
 ```
+(mkdir -p build-clang-msan && cd build-clang-msan &&
+(CLANG_BUILD=$PWD/../build LIBCXX_BUILD=$PWD/../build-libcxx-msan \
 MSAN_FLAGS=" \
   -nostdinc++ \
-  -isystem /code/build-libcxx-msan/include \
-  -isystem /code/build-libcxx-msan/include/c++/v1  \
+  -isystem $LIBCXX_BUILD/include \
+  -isystem $LIBCXX_BUILD/include/c++/v1  \
   -lc++abi \
-  -Wl,--rpath=/code/build-libcxx-msan/lib \
-  -L/code/build-libcxx-msan/lib \
+  -Wl,--rpath=$LIBCXX_BUILD/lib \
+  -L$LIBCXX_BUILD/lib \
   -fsanitize=memory \
   -fsanitize-memory-track-origins \
-  -w"
-
-CC=/code/build/bin/clang \
-CXX=/code/build/bin/clang++ \
+  -w" \
+CC=$CLANG_BUILD/bin/clang \
+CXX=$CLANG_BUILD/bin/clang++ \
 CFLAGS=$MSAN_FLAGS \
 CXXFLAGS=$MSAN_FLAGS \
 cmake -GNinja \
       -DCMAKE_BUILD_TYPE=Release \
       -DLLVM_USE_SANITIZER=MemoryWithOrigins \
       -DLLVM_ENABLE_LIBCXX=ON \
-      -DCMAKE_EXE_LINKER_FLAGS="-lc++abi -Wl,--rpath=/code/build-libcxx-msan/lib -L/code/build-libcxx-msan/lib" \
-      /code/llvm
-
-ninja clang
-ninja check-clang check-llvm
+      -DCMAKE_EXE_LINKER_FLAGS="-lc++abi -Wl,--rpath=$LIBCXX_BUILD/lib -L$LIBCXX_BUILD/lib" \
+      ../llvm) &&
+ninja clang check-clang check-llvm)
 ```
 
 Note that building all targets in the instrumented tree will attempt to link newly built MSan runtime with MSan runtime from the previous stage, which is not a good idea.
