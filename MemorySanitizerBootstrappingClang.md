@@ -19,7 +19,7 @@ Checkout the source:
 ## Build Clang
 
 ```
-mkdir /code/build && cd /code/build && cmake -GNinja -DCMAKE_BUILD_TYPE=Release /code/llvm && ninja
+(mkdir -p build && cd build && cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../llvm && ninja)
 ```
 
 ## Build libc++ and libc++abi with MemorySanitizer
