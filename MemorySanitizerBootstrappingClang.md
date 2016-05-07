@@ -8,13 +8,12 @@ MSan requires that all code in the process is instrumented (see [handling-extern
 
 Checkout the source:
 ```
-svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm
-cd llvm
-R=$(svn info | grep Revision: | awk '{print $2}')
-(cd tools && svn co -r $R http://llvm.org/svn/llvm-project/cfe/trunk clang)
-(cd projects && svn co -r $R http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler-rt)
-(cd projects && svn co -r $R http://llvm.org/svn/llvm-project/libcxx/trunk libcxx)
-(cd projects && svn co -r $R http://llvm.org/svn/llvm-project/libcxxabi/trunk libcxxabi)
+(svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm && cd llvm &&
+(R=$(svn info | grep Revision: | awk '{print $2}') &&
+(cd tools && svn co -r $R http://llvm.org/svn/llvm-project/cfe/trunk clang)  &&
+(cd projects && svn co -r $R http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler-rt)  &&
+(cd projects && svn co -r $R http://llvm.org/svn/llvm-project/libcxx/trunk libcxx)  &&
+(cd projects && svn co -r $R http://llvm.org/svn/llvm-project/libcxxabi/trunk libcxxabi)))
 ```
 
 ## Build Clang
