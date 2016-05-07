@@ -25,14 +25,10 @@ Checkout the source:
 ## Build libc++ and libc++abi with MemorySanitizer
 
 ```
-mkdir /code/build-libcxx-msan && cd /code/build-libcxx-msan
-CC=/code/build/bin/clang \
-CXX=/code/build/bin/clang++ \
-cmake -GNinja \
-      -DCMAKE_BUILD_TYPE=Release \
-      -DLLVM_USE_SANITIZER=MemoryWithOrigins
-      /code/llvm
-ninja cxx cxxabi
+(mkdir -p build-libcxx-msan && cd build-libcxx-msan &&
+(CC=$PWD/../build/bin/clang CXX=$PWD/../build/bin/clang++ \
+  cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_SANITIZER=MemoryWithOrigins ../llvm) &&
+ninja cxx cxxabi)
 ```
 
 ## Build clang with MemorySanitizer, using the new libc++
