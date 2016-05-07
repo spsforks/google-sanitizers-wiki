@@ -51,11 +51,11 @@ CXX=$CLANG_BUILD/bin/clang++ \
 CFLAGS=$MSAN_FLAGS \
 CXXFLAGS=$MSAN_FLAGS \
 cmake -GNinja \
-      -DCMAKE_BUILD_TYPE=Release \
-      -DLLVM_USE_SANITIZER=MemoryWithOrigins \
-      -DLLVM_ENABLE_LIBCXX=ON \
-      -DCMAKE_EXE_LINKER_FLAGS="-lc++abi -Wl,--rpath=$LIBCXX_BUILD/lib -L$LIBCXX_BUILD/lib" \
-      ../llvm) &&
+ -DCMAKE_BUILD_TYPE=Release \
+ -DLLVM_USE_SANITIZER=MemoryWithOrigins \
+ -DLLVM_ENABLE_LIBCXX=ON \
+ -DCMAKE_EXE_LINKER_FLAGS="-lc++abi -Wl,--rpath=$LIBCXX_BUILD/lib -L$LIBCXX_BUILD/lib" \
+ ../llvm) &&
 ninja clang check-clang check-llvm)
 ```
 
