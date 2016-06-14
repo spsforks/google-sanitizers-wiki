@@ -173,6 +173,9 @@ fun:*MyFooBar*
   * Q: I've built my shared library with ASan. Can I run it with unsanitized executable?
   * A: Yes! You'll need to build your library with [dynamic version of ASan](AddressSanitizerAsDso) and then run executable with LD_PRELOAD=path/to/asan/runtime/lib.
 
+  * Q: I've compiled my code with -D_FORTIFY_SOURCE flag and ASan, but I've got strange errors in runtime. What goes wrong?
+  * A: Currently ASan (and other sanitizers) doesn't support source fortification, see https://github.com/google/sanitizers/issues/247
+ 
 # Talks and papers
  * Watch the presentation from the [LLVM Developer's meeting](http://llvm.org/devmtg/2011-11/) (Nov 18, 2011): [Video](http://www.youtube.com/watch?v=CPnRS1nv3_s), [slides](http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf).
  * Read the [USENIX ATC '2012 paper](http://research.google.com/pubs/pub37752.html).
