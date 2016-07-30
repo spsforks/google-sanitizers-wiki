@@ -63,4 +63,5 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 ==6268== ABORTING
 ```
 Read about [AddressSanitizerCallStack](AddressSanitizerCallStack)
+
 Read more about [AddressSanitizerUseAfterReturn](AddressSanitizerUseAfterReturn)
