@@ -69,4 +69,6 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   Right alloca redzone:    cb
 ==58237==ABORTING
 ```
-Read [AddressSanitizerCallStack](AddressSanitizerCallStack) about symbolizing callstack
+Read about [AddressSanitizerCallStack](AddressSanitizerCallStack)
+
+Read more about [AddressSanitizerUseAfterScope](AddressSanitizerUseAfterScope)
