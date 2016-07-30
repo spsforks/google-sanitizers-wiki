@@ -47,7 +47,7 @@ For the list of common sanitizer options see [SanitizerCommonFlags](SanitizerCom
 |replace_str | true     | If set, uses custom wrappers and replacements for libc string functions to find more errors.|
 |replace_intrin | true     | If set, uses custom wrappers for memset/memcpy/memmove intinsics.|
 |detect_stack_use_after_return | false    | Enables stack-use-after-return checking at run-time.|
-|detect_stack_use_after_scope | true    | Enable stack-use-after-scope checking at run-time.|
+|detect_stack_use_after_scope | true    | Enables stack-use-after-scope checking at run-time.|
 |min_uar_stack_size_log | 16       | Minimum fake stack size log.|
 |max_uar_stack_size_log | 20       | Maximum fake stack size log.|
 |uar_noreserve | false    | Use mmap with 'noreserve' flag to allocate fake stack.|
