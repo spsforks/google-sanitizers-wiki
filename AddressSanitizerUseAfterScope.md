@@ -3,7 +3,7 @@
 
 **Stack-use-after-scope** bug appears when a stack object is used outside the scope
 it was defined.
-Example (see also [AddressSanitizerExampleUseScope](AddressSanitizerExampleUseScope)):
+Example (see also [AddressSanitizerExampleUseAfterScope](AddressSanitizerExampleUseAfterScope)):
 ```
 void f() {
   int *p;
