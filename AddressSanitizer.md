@@ -9,6 +9,7 @@ It finds:
   * [Stack buffer overflow](AddressSanitizerExampleStackOutOfBounds)
   * [Global buffer overflow](AddressSanitizerExampleGlobalOutOfBounds)
   * [Use after return](AddressSanitizerExampleUseAfterReturn)
+  * [Use after scope](AddressSanitizerExampleUseAfterScope)
   * [Initialization order bugs](AddressSanitizerInitializationOrderFiasco)
   * [Memory leaks](AddressSanitizerLeakSanitizer)
 
