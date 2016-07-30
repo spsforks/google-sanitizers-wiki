@@ -4,7 +4,7 @@
 //    use-after-scope.cpp -o /tmp/use-after-scope
 // RUN: /tmp/use-after-scope
 
-// Check can be disabled in run-time with ASAN_OPTIONS=detect_stack_use_after_scope=0
+// Check can be disabled in run-time:
 // RUN: ASAN_OPTIONS=detect_stack_use_after_scope=0 /tmp/use-after-scope
 
 volatile int *p = 0;
