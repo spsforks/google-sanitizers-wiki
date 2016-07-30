@@ -2,6 +2,7 @@
 | flag| default | description |
 |:----|:--------|:------------|
 | -fsanitize=address |         | Enable [AddressSanitizer](AddressSanitizer) |
+| -fsanitize-address-use-after-scope |         | Check [stack user after scope](AddressSanitizerExampleUseAfterScope) |
 | -fno-omit-frame-pointer |         | Leave frame pointers. Allows the fast unwinder to function properly. |
 | -fsanitize-blacklist=path |         | Pass a [blacklist file](#Turning_off_instrumentation) |
 | -fno-common |         | Do not treat global variable in C as common variables (allows ASan to instrument them) |
