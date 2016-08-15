@@ -147,6 +147,7 @@ fun:*MyFooBar*
   * Q: Why didn't ASan report an obviously invalid memory access in my code?
   * A1: If your errors is too obvious, compiler might have already optimized it out by the time Asan runs.
   * A2: Another, C-only option is accesses to global common symbols which are not protected by Asan (you can use -fno-common to disable generation of common symbols and hopefully detect more bugs).
+  * A3: The fortify source compiler feature can mask errors that ASan is able to detect. On some systems (Ubuntu, Gentoo) fortify source is enabled by default, you can make sure it's disabled by passing -U_FORTIFY_SOURCE in your compiler flags.
 
   * Q: When I link my shared library with -fsanitize=address, it fails due to some undefined ASan symbols (e.g. asan\_init\_v4)?
   * A: Most probably you link with -Wl,-z,defs or -Wl,--no-undefined. These flags don't work with ASan unless you also use -shared-libasan (which is the default mode for GCC, but not for Clang).
