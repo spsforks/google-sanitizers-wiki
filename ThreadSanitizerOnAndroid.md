@@ -293,7 +293,7 @@ Then you can use tsan by link libtsan_shared.so.
 Note that libtsan_shared.so only works with libc.so on N devices or built in aosp_master. So you
 may need to find a way to link libc.so built in aosp_master instead of the one running on device.
 
-6. you may also need to build llvm­symbolizer and download llvm­symbolizer on device.
+6. you may also need to build `llvm­-symbolizer` and download `llvm-­symbolizer` on device.
 ```
-$mmma external/llvm/tools/llvm­symbolizer/ ­j20
+$mmma external/llvm/tools/llvm­-symbolizer/ ­j20
 ```
