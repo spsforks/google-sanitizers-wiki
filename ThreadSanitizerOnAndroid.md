@@ -14,6 +14,7 @@ $ln ­s ../../compiler_rt compiler_rt
 ```
 
 2. copy build files from aosp_master compiler_rt to upstream compiler_rt.
+```
 $cd aosp_master_compiler_rt
 $find . ­name Android.bp
 ./Android.bp
@@ -25,11 +26,11 @@ $find . ­name Android.bp
 ./lib/ubsan/Android.bp
 ./lib/asan/Android.bp
 ./lib/lsan/Android.bp
-
+```
 copy all Android.bp from aosp_master_compiler_rt to corresponding directories in upstream
 compiler_rt. except lib/asan/Android.bp (because it has a wrap file which doesn’t appear in
 upstream)
-
+```
 $ cp Android.bp ../aosp_master/external/compiler­rt/
 $ cp lib/tsan/Android.bp ../aosp_master/external/compiler­rt/lib/tsan/
 $ cp lib/profile/Android.bp ../aosp_master/external/compiler­rt/lib/profile/
@@ -37,9 +38,11 @@ $ cp lib/sanitizer_common/Android.bp ../aosp_master/external/compiler­rt/lib/
 $ cp lib/interception/Android.bp ../aosp_master/external/compiler­rt/lib/interception/
 $ cp lib/ubsan/Android.bp ../aosp_master/external/compiler­rt/lib/ubsan/
 $ cp lib/lsan/Android.bp ../aosp_master/external/compiler­rt/lib/lsan/
+```
 
 3. change build files
 add following lines in lib/tsan/Android.bp, and remove tests build:
+```
 tsan_rtl_cppflags2 = [
     "­std=c++11",
     "­Wall",
@@ -101,7 +104,9 @@ cc_library_shared {
       },
     },
 }
+```
 remove tests build:
+```
 //cc_test_host {
 //    name: "libtsan_unit_test",
 //
@@ -174,7 +179,10 @@ remove tests build:
 //        },
 //    },
 //}
-add following lines in lib/interception/Android.bp:
+```
+
+add following lines in `lib/interception/Android.bp`:
+```
 cc_library_static {
     name: "libinterception_device",
     clang: true,
@@ -200,7 +208,10 @@ cc_library_static {
     },
     compile_multilib: "both",
 }
-add following lines in lib/sanitizer_common/Android.bp:
+```
+
+add following lines in `lib/sanitizer_common/Android.bp`:
+```
 cc_library_static {
     name: "libsan_device",
     clang: true,
@@ -265,12 +276,15 @@ cc_library_static {
     },
     compile_multilib: "both",
 }
+```
 
 4. bulid libtsan_shared.so
+```
 $cd aosp_master
 $. build/envsetup.sh
 $lunch aosp_arm64­userdebug
 $mmma external/compiler­rt/lib/tsan ­j30
+```
 after building successfully, libtsan_shared.so for aarch64 is in
 aosp_master/out/target/product/generic_arm64/system/lib64/libtsan_shared.so
 
@@ -280,4 +294,6 @@ Note that libtsan_shared.so only works with libc.so on N devices or built i
 may need to find a way to link libc.so built in aosp_master instead of the one running on device.
 
 6. you may also need to build llvm­symbolizer and download llvm­symbolizer on device.
+```
 $mmma external/llvm/tools/llvm­symbolizer/ ­j20
+```
