@@ -35,28 +35,26 @@ ninja cxx cxxabi)
 
 ```
 (mkdir -p build-clang-msan && cd build-clang-msan &&
-(CLANG_BUILD=$PWD/../build LIBCXX_BUILD=$PWD/../build-libcxx-msan \
-MSAN_FLAGS=" \
-  -nostdinc++ \
-  -isystem $LIBCXX_BUILD/include \
-  -isystem $LIBCXX_BUILD/include/c++/v1  \
-  -lc++abi \
-  -Wl,--rpath=$LIBCXX_BUILD/lib \
-  -L$LIBCXX_BUILD/lib \
-  -fsanitize=memory \
-  -fsanitize-memory-track-origins \
-  -w" \
-CC=$CLANG_BUILD/bin/clang \
-CXX=$CLANG_BUILD/bin/clang++ \
-CFLAGS=$MSAN_FLAGS \
-CXXFLAGS=$MSAN_FLAGS \
-cmake -GNinja \
- -DCMAKE_BUILD_TYPE=Release \
- -DLLVM_USE_SANITIZER=MemoryWithOrigins \
- -DLLVM_ENABLE_LIBCXX=ON \
- -DCMAKE_EXE_LINKER_FLAGS="-lc++abi -Wl,--rpath=$LIBCXX_BUILD/lib -L$LIBCXX_BUILD/lib" \
- ../llvm) &&
-ninja clang check-clang check-llvm)
+  (CLANG_BUILD=$PWD/../build;
+    LIBCXX_BUILD=$PWD/../build-libcxx-msan;
+    MSAN_LINK_FLAGS="-lc++abi -Wl,--rpath=$LIBCXX_BUILD/lib -L$LIBCXX_BUILD/lib";
+    MSAN_FLAGS="$MSAN_LINK_FLAGS -nostdinc++ \
+      -isystem $LIBCXX_BUILD/include \
+      -isystem $LIBCXX_BUILD/include/c++/v1  \
+      -fsanitize=memory \
+      -fsanitize-memory-track-origins \
+      -w";
+    cmake -GNinja \
+      -DCMAKE_C_COMPILER=$CLANG_BUILD/bin/clang \
+      -DCMAKE_CXX_COMPILER=$CLANG_BUILD/bin/clang++ \
+      -DCMAKE_C_FLAGS="$MSAN_FLAGS" \
+      -DCMAKE_CXX_FLAGS="$MSAN_FLAGS" \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DLLVM_USE_SANITIZER=MemoryWithOrigins \
+      -DLLVM_ENABLE_LIBCXX=ON \
+      -DCMAKE_EXE_LINKER_FLAGS=$MSAN_LINK_FLAGS \
+      ../llvm) &&
+  ninja clang check-clang check-llvm)
 ```
 
 Note that building all targets in the instrumented tree will attempt to link newly built MSan runtime with MSan runtime from the previous stage, which is not a good idea.
