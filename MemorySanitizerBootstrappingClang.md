@@ -26,9 +26,12 @@ Checkout the source:
 
 ```
 (mkdir -p build-libcxx-msan && cd build-libcxx-msan &&
-(CC=$PWD/../build/bin/clang CXX=$PWD/../build/bin/clang++ \
-  cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_SANITIZER=MemoryWithOrigins ../llvm) &&
-ninja cxx cxxabi)
+  (cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
+    -DLLVM_USE_SANITIZER=MemoryWithOrigins \
+    -DCMAKE_C_COMPILER=$PWD/../build/bin/clang \
+    -DCMAKE_CXX_COMPILER=$PWD/../build/bin/clang++ \
+    ../llvm) &&
+  ninja cxx cxxabi)
 ```
 
 ## Build clang with MemorySanitizer, using the new libc++
