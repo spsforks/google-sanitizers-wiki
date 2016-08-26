@@ -14,4 +14,3 @@ freed by thread T0 here:
 ...
 ```
 
-TODO
