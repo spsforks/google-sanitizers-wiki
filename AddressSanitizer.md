@@ -177,6 +177,15 @@ fun:*MyFooBar*
 
   * Q: I've compiled my code with -D_FORTIFY_SOURCE flag and ASan, but I've got strange errors in runtime. What goes wrong?
   * A: Currently ASan (and other sanitizers) doesn't support source fortification, see https://github.com/google/sanitizers/issues/247
+  
+  * Q: On Linux I am seeings a crash at startup with something like this
+
+```
+ERROR: AddressSanitizer failed to allocate 0x400000000 (17179869184) bytes at address 67fff8000 (errno: 12)
+```
+
+  * A: Make sure you don't have `2` in `/proc/sys/vm/overcommit_memory` 
+
  
 # Talks and papers
  * Watch the presentation from the [LLVM Developer's meeting](http://llvm.org/devmtg/2011-11/) (Nov 18, 2011): [Video](http://www.youtube.com/watch?v=CPnRS1nv3_s), [slides](http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf).
