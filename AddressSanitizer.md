@@ -186,6 +186,11 @@ ERROR: AddressSanitizer failed to allocate 0x400000000 (17179869184) bytes at ad
 
   * A: Make sure you don't have `2` in `/proc/sys/vm/overcommit_memory` 
 
+  * Q: I'm working on a project that uses bare-metal OS with no pthread (TLS) support and no POSIX syscalls and want to use ASan, but its code depends on some stuff (e.g. **dlsym**) that is unavailable on my platform. Does ASan support bare-metal targets?
+
+  * A: Out of the box we don't have support for your use case. The easiest for you would be to rip off everything you don't have and rebuild the ASan run-time. However, there have been many attempts in applying ASan to bare-metal and at least some were successful. E.g.
+http://events.linuxfoundation.org/sites/events/files/slides/Alexander_Popov-KASan_in_a_Bare-Metal_Hypervisor_0.pdf
+and also grep for "bare-metal" and similar stuff in this group.
  
 # Talks and papers
  * Watch the presentation from the [LLVM Developer's meeting](http://llvm.org/devmtg/2011-11/) (Nov 18, 2011): [Video](http://www.youtube.com/watch?v=CPnRS1nv3_s), [slides](http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf).
