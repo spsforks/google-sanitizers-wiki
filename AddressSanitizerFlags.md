@@ -76,4 +76,4 @@ For the list of common sanitizer options see [SanitizerCommonFlags](SanitizerCom
 |suppressions | ""       | Suppressions file name.|
 |halt_on_error | true     | Crash the program after printing the first error report (WARNING: USE AT YOUR OWN RISK!)|
 |log_path|stderr|Write logs to `log_path.pid`. The special values are `stdout` and `stderr`|
-|use_odr_indicators | false       | Use special ODR indicator symbol for ODR violation detection.|
+|use_odr_indicator | false       | Use special ODR indicator symbol for ODR violation detection.|
