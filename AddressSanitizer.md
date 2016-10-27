@@ -191,6 +191,16 @@ ERROR: AddressSanitizer failed to allocate 0x400000000 (17179869184) bytes at ad
   * A: Out of the box we don't have support for your use case. The easiest for you would be to rip off everything you don't have and rebuild the ASan run-time. However, there have been many attempts in applying ASan to bare-metal and at least some were successful. E.g.
 http://events.linuxfoundation.org/sites/events/files/slides/Alexander_Popov-KASan_in_a_Bare-Metal_Hypervisor_0.pdf
 and also grep for "bare-metal" and similar stuff in https://groups.google.com/forum/#!forum/address-sanitizer group.
+
+  * Q: Can I run AddressSanitizer with more aggressive diagnostics enabled?
+
+  * A: Yes! In particular you may want to enable
+``` 
+ CFLAGS += -fsanitize-address-use-after-scope
+ ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1
+```
+check [Flags wiki] (https://github.com/google/sanitizers/wiki/AddressSanitizerFlags
+) for more details on this.
  
 # Talks and papers
  * Watch the presentation from the [LLVM Developer's meeting](http://llvm.org/devmtg/2011-11/) (Nov 18, 2011): [Video](http://www.youtube.com/watch?v=CPnRS1nv3_s), [slides](http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf).
