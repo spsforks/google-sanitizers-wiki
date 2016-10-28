@@ -45,7 +45,7 @@ Each tool parses the common options from the corresponding environment variable 
 |coverage_dir | "."        | Target directory for coverage dumps. Defaults to the current directory.|
 |full_address_space | false     | Sanitize complete address space; by default kernel area on 32-bit platforms will not be sanitized|
 |print_suppressions | true     | Print matched suppressions at exit.|
-|disable_coredump | true (false on non-64-bit systems)  | Disable core dumping. By default, disable_core=1 on 64-bit to avoid dumping a 16T+ core file. Ignored on OSes that don't dump core bydefault and for sanitizers that don't reserve lots of virtual memory.|
+|disable_coredump | true (false on non-64-bit systems)  | Disable core dumping. By default, disable_coredump=1 on 64-bit to avoid dumping a 16T+ core file. Ignored on OSes that don't dump core by default and for sanitizers that don't reserve lots of virtual memory.|
 |use_madv_dontdump | true     | If set, instructs kernel to not store the (huge) shadow in core file.|
 |symbolize_inline_frames | true     | Print inlined frames in stacktraces. Defaults to true.|
 |symbolize_vs_style | false    | Print file locations in Visual Studio style (e.g:  file(10,42): ...|
