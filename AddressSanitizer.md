@@ -142,7 +142,7 @@ fun:*MyFooBar*
 
 # FAQ
   * Q: Can [AddressSanitizer](AddressSanitizer) continue running after reporting first error?
-  * A: Yes it can, AddressSanitizer has recently got continue-after-error mode. This is somewhat experimental so may not yet be as reliable as default setting (and not as timely supported). Also keep in mind that errors after the first one may actually be spurious. To enable continue-after-error, compile with -fsanitize-recover and then run your code with ASAN_OPTIONS=halt_on_error=0.
+  * A: Yes it can, AddressSanitizer has recently got continue-after-error mode. This is somewhat experimental so may not yet be as reliable as default setting (and not as timely supported). Also keep in mind that errors after the first one may actually be spurious. To enable continue-after-error, compile with `-fsanitize-recover=address` and then run your code with `ASAN_OPTIONS=halt_on_error=0`.
 
   * Q: Why didn't ASan report an obviously invalid memory access in my code?
   * A1: If your errors is too obvious, compiler might have already optimized it out by the time Asan runs.
