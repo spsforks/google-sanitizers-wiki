@@ -207,7 +207,7 @@ If you are indeed a black belt (are you?), you probably know about CAS and other
 <br>
 <h1>More reading</h1>
 <ol><li><a href='http://people.redhat.com/drepper/cpumemory.pdf'>What Every Programmer Should Know About Memory</a>
-</li><li><a href='http://msdn.microsoft.com/en-us/magazine/cc163744.aspx'>What Every Dev Must Know About Multithreaded Apps</a>
+</li><li><a href='https://msdnshared.blob.core.windows.net/media/MSDNBlogsFS/prod.evol.blogs.msdn.com/CommunityServer.Components.PostAttachments/00/10/67/06/52/MultiThreading.pdf'>What Every Dev Must Know About Multithreaded Apps</a>
 </li><li><a href='http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html'>The "Double-Checked Locking is Broken" Declaration</a>
 </li><li><a href='http://en.wikipedia.org/wiki/Memory_barrier'>http://en.wikipedia.org/wiki/Memory_barrier</a>
 </li><li><a href='http://en.wikipedia.org/wiki/Volatile_variable'>http://en.wikipedia.org/wiki/Volatile_variable</a>
