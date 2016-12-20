@@ -1,11 +1,11 @@
 # Data races
-  * [106 data races in Chromium](https://code.google.com/p/chromium/issues/list?can=1&q=Stability%3DThreadSanitizer++v2+-status%3Dduplicate+%22threadsanitizer+data+race%22&sort=opened+modified&colspec=ID+Pri+M+Iteration+ReleaseBlock+Cr+Status+Owner+Summary+OS+Modified+Opened&x=m&y=releaseblock&cells=tiles)
+  * [125+ data races in Chromium](https://code.google.com/p/chromium/issues/list?can=1&q=Stability%3DThreadSanitizer++v2+-status%3Dduplicate+%22threadsanitizer+data+race%22&sort=opened+modified&colspec=ID+Pri+M+Iteration+ReleaseBlock+Cr+Status+Owner+Summary+OS+Modified+Opened&x=m&y=releaseblock&cells=tiles)
 
-  * [20+ races in Firefox](https://bugzilla.mozilla.org/show_bug.cgi?id=tsan-maintenance)
+  * [160+ races in Firefox](https://bugzilla.mozilla.org/show_bug.cgi?id=tsan-maintenance)
 
-  * [70 data races in Go standard library](https://github.com/golang/go/issues?&q=is%3Aissue+label%3ARaceReport)
+  * [73 data races in Go standard library](https://github.com/golang/go/issues?&q=is%3Aissue+label%3ARaceReport)
 
-  * [37 data races in WebRTC](https://code.google.com/p/webrtc/issues/list?can=1&q=tsan+errors)
+  * [52 data races in WebRTC](https://code.google.com/p/webrtc/issues/list?can=1&q=tsan+errors)
 
   * [A data race in OpenSSL](http://marc.info/?l=openssl-cvs&m=134947022905662)
 
