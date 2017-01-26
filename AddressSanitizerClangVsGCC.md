@@ -130,9 +130,11 @@ This feature is experimental. Support new kinds of bugs detection.
 <br>
 #### Feature:
 lifetime checking
-* LLVM: yes (experimental)
-* GCC: no
-* Bugs/ML:
+* LLVM: yes (experimental, enabled by default in clang 4.0)
+* GCC: no, but would become available in GCC 7
+* Bugs/ML: https://gcc.gnu.org/ml/gcc-patches/2016-05/msg00468.html
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/google/sanitizers/wiki/AddressSanitizerExampleUseAfterScope
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://gcc.gnu.org/viewcvs/gcc?view=revision&revision=241896
 
 ##### Cons and Pros:
 
