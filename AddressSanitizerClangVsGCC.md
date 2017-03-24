@@ -250,3 +250,12 @@ symbolizer implementation
 ##### Cons and Pros:
 
 GCC uses embedded libbacktrace library for symbolization that's statically linked with libasan. LLVM needs a separate llvm-symbolizer binary to print nice reports.
+
+#### Feature:
+Support for `no_sanitize` attribute
+* LLVM: yes
+* GCC: no
+* Bugs/ML: <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78204>
+
+##### Cons and Pros:
+In LLVM it's possible to disable custom UBSan checker (e.g. `float-divide-by-zero`) while GCC doesn't support such functionality.
