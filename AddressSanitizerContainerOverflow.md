@@ -1,4 +1,5 @@
-One kind of bugs that [AddressSanitizer](AddressSanitizer) can find with the help of code annotations is, as we call it, "container-overflow".
+One kind of bugs that [AddressSanitizer](AddressSanitizer) can find with the help of code annotations is, as we call it, "container-overflow". Given `std::vector<T> v` a container-overflow is a memory access inside the range `[v.end(), v.begin() + v.capacity())`, i.e. inside the allocated heap region but outside of the current container bounds.  
+
 Simplest example:
 ```
 #include <vector>
