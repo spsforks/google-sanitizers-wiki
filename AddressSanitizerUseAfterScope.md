@@ -15,7 +15,6 @@ void f() {
 }
 ```
 
-[AddressSanitizer](AddressSanitizer) currently does not enable detection of these bugs by default.
 This check is enabled by default in [AddressSanitizer](AddressSanitizer). It can be disabled with the clang flag -fno-sanitize-address-use-after-scope.
 
 # Algorithm
