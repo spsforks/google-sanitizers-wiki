@@ -16,7 +16,7 @@ void f() {
 ```
 
 [AddressSanitizer](AddressSanitizer) currently does not enable detection of these bugs by default.
-To enable this check you can use clang flag -fsanitize-address-use-after-scope.
+This check is enabled by default in [AddressSanitizer](AddressSanitizer). It can be disabled with the clang flag -fno-sanitize-address-use-after-scope.
 
 # Algorithm
 [AddressSanitizer](AddressSanitizer) detects this kind of bugs by marking memory used by local variables
