@@ -22,6 +22,7 @@ UBSan embedded into Asan
 Simplify Asan + UBSan usage. This doesn't work for GCC, because it links static libasan with -whole-archive option, so we end up with undefined references to C++ stuff required by UBSan runtime if use GCC driver.
 
 <br>
+
 #### Feature:
 std containers overflow detection
 * LLVM: yes
@@ -33,6 +34,7 @@ std containers overflow detection
 Support new kinds of bugs detection.
 
 <br>
+
 #### Feature:
 dynamic alloca overflow detection
 * LLVM: yes
@@ -43,6 +45,7 @@ dynamic alloca overflow detection
 Support new kinds of bugs detection.
 
 <br>
+
 #### Feature:
 on-demand stack allocation in UAR mode
 * LLVM: yes
@@ -53,6 +56,7 @@ on-demand stack allocation in UAR mode
 Less memory usage for non-UAR mode.
 
 <br>
+
 #### Feature:
 using private aliases for globals
 * LLVM: no, support ODR violation detection, mixing instrumented code with non-instrumented is not safe.
@@ -72,6 +76,7 @@ LLVM flaws:
 - false positives or internal ASan CHECK failures can occur when mixing instrumented code with non-instrumented.
 
 <br>
+
 #### Feature:
 symbol size changing for global variables
 * LLVM: yes
@@ -84,6 +89,7 @@ symbol size changing for global variables
 In Clang, ASan changes size of global variables by appending redzone size to it. This is an ABI change and may cause runtime errors when/if other shared modules have been linked against non-sanitized version of the library. However, given that Clang should support not only ELF format (e.g. Windows and OS/X use different ones), it's complicated to make sure that target linker won't cut out right redzone for global variables if not include it in symbol itself. GCC ASan generally supports ELF only, so it doesn't have such problems.
 
 <br>
+
 #### Feature:
 adaptive global redzone sizes
 * LLVM: yes
@@ -94,6 +100,7 @@ adaptive global redzone sizes
 Possible better layout for global variables in Clang.
 
 <br>
+
 #### Feature:
 KASan support
 * LLVM: limited
@@ -105,6 +112,7 @@ KASan support
 Use Asan for kernel. Linux kernel still cannot be built via clang for most targets (for x86{,_64} you still need apply special patches).
 
 <br>
+
 #### Feature:
 asan_experiments support
 * LLVM: yes (experimental)
@@ -117,6 +125,7 @@ asan_experiments support
 This feature is experimental. The experiments can be used to evaluate potential optimizations that remove instrumentation (assess false negatives). This way we can figure out, what optimization causes false negatives in much easier way.
 
 <br>
+
 #### Feature:
 invalid pointer pairs detection
 * LLVM: yes (experimental)
@@ -128,6 +137,7 @@ invalid pointer pairs detection
 This feature is experimental. Support new kinds of bugs detection.
 
 <br>
+
 #### Feature:
 lifetime checking
 * LLVM: yes (experimental, enabled by default in clang 4.0)
@@ -141,6 +151,7 @@ lifetime checking
 This feature is experimental. Allows detect use after scope bugs.
 
 <br>
+
 #### Feature:
 default runtime library linkage
 * LLVM: static
@@ -161,6 +172,7 @@ Dynamic linkage proc:
 - Ability to LD_PRELOAD ASAN-DSO
 
 <br>
+
 #### Feature:
 use explicit list of exported symbols
 * LLVM: yes
@@ -172,6 +184,7 @@ use explicit list of exported symbols
 In GCC, statically sanitized executables don't export ASan symbols. In particular, if executable is linked with -static-libasan, it won't export libasan public API (__asan_reportXYZ, etc.), causing dlopens of sanitized shared libraries to fail. Clang uses --dynamic-list link option to export public symbols and avoid such errors.
 
 <br>
+
 #### Feature:
 asan_symbolize script
 * LLVM: yes
@@ -183,6 +196,7 @@ asan_symbolize script
 The script itself is a useful feature, perhaps it should be embedded to GCC source tree as well.
 
 <br>
+
 #### Feature:
 ARM ABI for frame pointer extracting
 * LLVM: LLVM ABI
@@ -194,6 +208,7 @@ ARM ABI for frame pointer extracting
 GCC needs a special patch to handle the issue.
 
 <br>
+
 #### Feature:
 support ASan blacklist file
 * LLVM: yes
@@ -206,6 +221,7 @@ support ASan blacklist file
 Clang is more flexible in controlling instrumentation.
 
 <br>
+
 #### Feature:
 support sanitizer coverage
 * LLVM: yes
@@ -219,6 +235,7 @@ https://gcc.gnu.org/ml/gcc-patches/2015-12/msg00299.html
 In Clang, ASan has good integration with fast and lightweight fuzzing library Libfuzzer (<http://llvm.org/docs/LibFuzzer.html>). In GCC, ASan is integrated with AFL only (http://lcamtuf.coredump.cx/afl/).
 
 <br>
+
 #### Feature:
 reports deduplication for ASan recovery mode
 * LLVM: yes
@@ -230,6 +247,7 @@ reports deduplication for ASan recovery mode
 In Clang, ASan recovery mode is much usable. This feature should be merged to GCC.
 
 <br>
+
 #### Feature:
 support old Linux kernels (< 3.0)
 * LLVM: no
@@ -241,6 +259,7 @@ support old Linux kernels (< 3.0)
 In GCC, ASan works for older Linux kernels. GCC uses local workarounds in libsanitizer to support this feature.
 
 <br>
+
 #### Feature:
 symbolizer implementation
 * LLVM: LLVM symbolizer
