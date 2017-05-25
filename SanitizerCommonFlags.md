@@ -21,10 +21,11 @@ Each tool parses the common options from the corresponding environment variable 
 |allocator_may_return_null | false    | If false, the allocator will crash instead of returning 0 on out-of-memory.|
 |print_summary | true     | If false, disable printing error summaries in addition to error reports.|
 |check_printf | true     | Check printf arguments.|
-|handle_segv | true (false on Windows)  | If set, registers the tool's custom SIGSEGV/SIGBUS handler.|
-|handle_abort | false    | If set, registers the tool's custom SIGABRT handler.|
-|handle_sigfpe | true     | If set, registers the tool's custom SIGFPE handler.|
-|allow_user_segv_handler | false    | If set, allows user to register a SEGV handler even if the tool registers one.|
+|handle_segv | true | Controls custom tool's SEGV handler (0 - do not registers the handler, 1 - register the handler and allow user to set own, 2 - registers the handler and block user from changing it). Ignored on Windows.|
+|handle_sigbus | true | Controls custom tool's SIGBUS handler (0 - do not registers the handler, 1 - register the handler and allow user to set own, 2 - registers the handler and block user from changing it). Ignored on Windows.|
+|handle_abort | false    | Controls custom tool's SIGABRT handler (0 - do not registers the handler, 1 - register the handler and allow user to set own, 2 - registers the handler and block user from changing it). Ignored on Windows.|
+|handle_sigill | true     | Controls custom tool's SIGILL handler (0 - do not registers the handler, 1 - register the handler and allow user to set own, 2 - registers the handler and block user from changing it). Ignored on Windows.|
+|handle_sigfpe | true     | Controls custom tool's SIGFPE handler (0 - do not registers the handler, 1 - register the handler and allow user to set own, 2 - registers the handler and block user from changing it). Ignored on Windows.|
 |use_sigaltstack | true     | If set, uses alternate stack for signal handling.|
 |detect_deadlocks | false    | If set, deadlock detection is enabled.|
 |clear_shadow_mmap_threshold | 64 * 1024| Large shadow regions are zero-filled using mmap(NORESERVE) instead of memset(). This is the threshold size in bytes.|
