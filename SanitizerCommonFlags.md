@@ -11,7 +11,7 @@ Each tool parses the common options from the corresponding environment variable 
 |fast_unwind_on_fatal | false    | If available, use the fast frame-pointer-based unwinder on fatal errors.|
 |fast_unwind_on_malloc | true     | If available, use the fast frame-pointer-based unwinder on malloc/free.|
 |handle_ioctl | false    | Intercept and handle ioctl requests.|
-|malloc_context_size | 1        | Max number of stack frames kept for each allocation/deallocation.|
+|malloc_context_size | 30        | Max number of stack frames kept for each allocation/deallocation.|
 |log_path | stderr   | Write logs to "log_path.pid". The special values are "stdout" and "stderr". The default is "stderr".|
 |log_exe_name | false    | Mention name of executable when reporting error and append executable name to logs (as in "log_path.exe_name.pid").|
 |log_to_syslog | false (true on Android and Darwin)    | Write all sanitizer output to syslog in addition to other means of logging.|
