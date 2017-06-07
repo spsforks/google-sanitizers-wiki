@@ -53,7 +53,7 @@ For the list of common sanitizer options see [SanitizerCommonFlags](SanitizerCom
 |max_malloc_fill_size | 4096     | ASan allocator flag. max_malloc_fill_size is the maximal amount of bytes that will be filled with malloc_fill_byte on malloc.|
 |malloc_fill_byte | 0xbe     | Value used to fill the newly allocated memory.|
 |allow_user_poisoning | true     | If set, user may manually mark memory regions as poisoned or unpoisoned.|
-|sleep_before_dying | true     | Number of seconds to sleep between printing an error report and terminating the program. Useful for debugging purposes (e.g. when one needs to attach gdb).|
+|sleep_before_dying | 0     | Number of seconds to sleep between printing an error report and terminating the program. Useful for debugging purposes (e.g. when one needs to attach gdb).|
 |check_malloc_usable_size | true     | Allows the users to work around the bug in Nvidia drivers prior to 295.*.|
 |unmap_shadow_on_exit | false    | If set, explicitly unmaps the (huge) shadow at exit.|
 |protect_shadow_gap | true     | If set, mprotect the shadow gap|
