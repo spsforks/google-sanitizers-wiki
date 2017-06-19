@@ -56,6 +56,22 @@ LLVM flaws:
 <br>
 
 #### Feature:
+ODR violation detection
+* LLVM: yes
+* GCC: no
+* Bugs/ML: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=63888 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/google/sanitizers/issues/398 <br>
+
+##### Cons and Pros:
+GCC flaws:
+- ODR violation detection doesn't work.
+
+LLVM flaws:
+- false positives or internal ASan CHECK failures can occur when mixing instrumented code with non-instrumented.
+
+<br>
+
+#### Feature:
 symbol size changing for global variables
 * LLVM: yes
 * GCC: no
