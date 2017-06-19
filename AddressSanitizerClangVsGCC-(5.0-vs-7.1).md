@@ -262,3 +262,15 @@ Instrument function call arguments whose address is taken
 
 ##### Cons and Pros:
 LLVM can find more bugs in function arguments
+
+<br>
+
+#### Feature:
+Support for dead stripping of globals on Linux
+* LLVM: yes
+* GCC: no
+* Bugs/ML: <https://reviews.llvm.org/rL301587><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<https://reviews.llvm.org/rL301588>
+
+##### Cons and Pros:
+Allows linker to perform dead stripping of globals and their ASan metadata.
