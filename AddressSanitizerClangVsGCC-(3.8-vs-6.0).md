@@ -1,4 +1,4 @@
-# Clang vs GCC
+# Clang 3.8 vs GCC 6.0
 
 This page describes differences in AddressSanitizer between Clang and GCC (both runtime and compiler parts). In general, most differences are caused by different compiler part implementations in Clang and GCC.
 
@@ -11,17 +11,6 @@ LLVM:  LLVM  version 3.8.0 r255629 (http://llvm.org/viewvc/llvm-project?view=rev
 Compiler-rt: r255594               (http://llvm.org/viewvc/llvm-project/compiler-rt?view=revision&revision=255594)<br>
 
 GCC: gcc version 6.0.0 20151215 (experimental) r231646 (https://gcc.gnu.org/viewcvs/gcc?view=revision&revision=231646)
-
-#### Feature:
-UBSan embedded into Asan
-* LLVM: yes
-* GCC: no
-* Bugs/ML: <https://gcc.gnu.org/ml/gcc-patches/2015-10/msg01216.html>
-
-##### Cons and Pros:
-Simplify Asan + UBSan usage. This doesn't work for GCC, because it links static libasan with -whole-archive option, so we end up with undefined references to C++ stuff required by UBSan runtime if use GCC driver.
-
-<br>
 
 #### Feature:
 std containers overflow detection
@@ -43,17 +32,6 @@ dynamic alloca overflow detection
 
 ##### Cons and Pros:
 Support new kinds of bugs detection.
-
-<br>
-
-#### Feature:
-on-demand stack allocation in UAR mode
-* LLVM: yes
-* GCC: no
-* Bugs/ML: 
-
-##### Cons and Pros:
-Less memory usage for non-UAR mode.
 
 <br>
 
@@ -278,3 +256,15 @@ Support for `no_sanitize` attribute
 
 ##### Cons and Pros:
 In LLVM it's possible to disable custom UBSan checker (e.g. `float-divide-by-zero`) while GCC doesn't support such functionality.
+
+<br>
+
+#### Feature:
+Instrument function call arguments whose address is taken
+* LLVM: yes, but only for small types
+* GCC: no
+* Bugs/ML: <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=81040><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<https://github.com/google/sanitizers/issues/823>
+
+##### Cons and Pros:
+LLVM can find more bugs in function arguments
