@@ -245,11 +245,13 @@ GCC uses embedded libbacktrace library for symbolization that's statically linke
 #### Feature:
 Support for `no_sanitize` attribute
 * LLVM: yes
-* GCC: no
-* Bugs/ML: <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78204>
+* GCC: no, but would become available in GCC 8
+* Bugs/ML: <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78204> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://gcc.gnu.org/viewcvs/gcc?view=revision&revision=249158 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://clang.llvm.org/docs/AttributeReference.html#no-sanitize-clang-no-sanitize <br>
 
 ##### Cons and Pros:
-In LLVM it's possible to disable custom UBSan checker (e.g. `float-divide-by-zero`) while GCC doesn't support such functionality.
+In LLVM it's possible to disable custom UBSan checker (e.g. `float-divide-by-zero`). GCC 8+ will support such functionality as well.
 
 <br>
 
