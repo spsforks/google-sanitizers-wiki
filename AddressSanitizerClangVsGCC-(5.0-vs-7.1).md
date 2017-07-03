@@ -258,7 +258,7 @@ In LLVM it's possible to disable custom UBSan checker (e.g. `float-divide-by-zer
 #### Feature:
 Instrument function call arguments whose address is taken
 * LLVM: yes, but only for small types
-* GCC: no
+* GCC: no, but would become available in GCC 8
 * Bugs/ML: <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=81040><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<https://github.com/google/sanitizers/issues/823>
 
