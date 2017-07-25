@@ -122,13 +122,13 @@ This feature is experimental. The experiments can be used to evaluate potential 
 
 #### Feature:
 invalid pointer pairs detection
-* LLVM: yes (experimental)
+* LLVM: yes (experimental, heap only)
 * GCC: no
 * Bugs/ML:
 
 ##### Cons and Pros:
 
-This feature is experimental. Support new kinds of bugs detection.
+This feature is experimental. Instrument <, <=, >, >=, - with pointer operands. Used to enable detection of invalid comparison operators on pointers.
 
 <br>
 
