@@ -14,8 +14,8 @@ GCC: gcc version 6.0.0 20151215 (experimental) r231646 (https://gcc.gnu.org/view
 
 #### Feature:
 std containers overflow detection
-* LLVM: yes
-* GCC: google branch
+* LLVM: yes (std::vector)
+* GCC: google branch (std::vector)
 * Bugs/ML: <http://llvm.org/viewvc/llvm-project?view=revision&revision=208319> <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<https://gcc.gnu.org/viewcvs/gcc?view=revision&revision=207517>
 
