@@ -14,8 +14,8 @@ GCC: gcc version 7.1.1 r247506 (https://gcc.gnu.org/viewcvs/gcc?view=revision&re
 
 #### Feature:
 std containers overflow detection
-* LLVM: yes
-* GCC: google branch
+* LLVM: yes (std::vector, std::string is under review)
+* GCC: google branch (std::vector)
 * Bugs/ML: <http://llvm.org/viewvc/llvm-project?view=revision&revision=208319> <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<https://gcc.gnu.org/viewcvs/gcc?view=revision&revision=207517>
 
