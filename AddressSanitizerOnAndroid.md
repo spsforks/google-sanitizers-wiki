@@ -16,17 +16,11 @@ LOCAL_LDFLAGS   := -fsanitize=address
 LOCAL_ARM_MODE := arm
 ```
 
-[AddressSanitizer](AddressSanitizer) is only supported in clang-3.5 (or newer) toolchain, so you Application.mk should include
-
-```
-NDK_TOOLCHAIN_VERSION=clang3.5
-```
-
 Note that [AddressSanitizer](AddressSanitizer) in NDK r10d does not support 64-bit ABIs, and compilation with `APP_ABI := all` will fail. Use
 ```
 APP_ABI := armeabi armeabi-v7a x86
 ```
-or a subset of those.
+or a subset of those. This is not an issue with newer NDKs.
 
 
 ## Stack traces
