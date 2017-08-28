@@ -65,6 +65,10 @@ Each tool parses the common options from the corresponding environment variable 
 |include_if_exists | ""         | read more options from the given file (if it exists)|
 |suppress_equal_pcs|  true      | Deduplicate multiple reports for single source location in halt_on_error=false mode (asan only).|
 |print_cmdline|  false      | Print command line on crash (asan only).|
+|heap_profile|false|Experimental heap profiler, asan-only|
+|allocator_release_to_os_interval_ms|-1|Experimental. Only affects a 64-bit allocator. If set, tries to release unused memory to the OS, but not more often than this interval (in milliseconds). Negative values mean do not attempt to release memory to the OS.|
+|html_cov_report|false|Generate html coverage report.|
+|sancov_path|sancov|Sancov tool location.|
 ### See also
 * [AddressSanitizerFlags](AddressSanitizerFlags)
 * [ThreadSanitizerFlags](ThreadSanitizerFlags)
