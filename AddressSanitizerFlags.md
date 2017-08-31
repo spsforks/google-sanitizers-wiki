@@ -69,7 +69,7 @@ For the list of common sanitizer options see [SanitizerCommonFlags](SanitizerCom
 |strict_init_order | false    | If true, assume that dynamic initializers can never access globals from other modules, even if the latter are already initialized.|
 |start_deactivated | false    | If true, ASan tweaks a bunch of other flags (quarantine, redzone, heap poisoning) to reduce memory consumption as much as possible, and restores them to original values when the first instrumented module is loaded into the process. This is mainly intended to be used on Android. |
 |detect_invalid_pointer_pairs | 0        | If non-zero, try to detect operations like <, <=, >, >= and - on invalid pointer pairs (e.g. when pointers belong to different objects). The bigger the value the harder we try.|
-|detect_container_overflow | true     | If true, honor the container overflow  annotations. See https://github.com/google/sanitizers/wiki/AddressSanitizerContainerOverflow|
+|detect_container_overflow | true     | If true, honor the container overflow  annotations. See [ContainerOverflow](https://github.com/google/sanitizers/wiki/AddressSanitizerContainerOverflow)|
 |detect_odr_violation | 2        | If >=2, detect violation of One-Definition-Rule (ODR); If ==1, detect ODR-violation only if the two variables have different sizes|
 |dump_instruction_bytes | false    | If true, dump 16 bytes starting at the instruction that caused SEGV|
 |suppressions | ""       | Suppressions file name.|
