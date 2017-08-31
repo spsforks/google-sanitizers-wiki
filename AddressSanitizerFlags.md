@@ -38,7 +38,7 @@ For the list of common sanitizer options see [SanitizerCommonFlags](SanitizerCom
 | **Flag** | **Default value** | **Description** |
 |:---------|:------------------|:----------------|
 |quarantine_size | -1       | Deprecated, please use quarantine_size_mb.|
-|quarantine_size_mb | -1       | Size (in Mb) of quarantine used to detect use-after-free errors. Lower value may reduce memory usage but increase the chance of false negatives.|
+|quarantine_size_mb | 256 (16 on iOS or Android)      | Size (in Mb) of quarantine used to detect use-after-free errors. Lower value may reduce memory usage but increase the chance of false negatives.|
 |redzone | 16       | Minimal size (in bytes) of redzones around heap objects. Requirement: redzone >= 16, is a power of two.|
 |max_redzone | 2048     | Maximal size (in bytes) of redzones around heap objects.|
 |debug | false    | If set, prints some debugging information and does additional checks.|
