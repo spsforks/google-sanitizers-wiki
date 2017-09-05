@@ -25,7 +25,7 @@ The supported operation systems are Linux, Darwin (OS X and iOS Simulator), Free
 |:--------------|:---:|:------:|:---:|:-----:|:----:|:------:|:---------:|
 | Linux         | yes | yes    |     |       | yes  | yes    | yes       |
 | OS X          | yes | yes    |     |       |      |        |           |
-| iOS Simulator | yes |        |     |       |      |        |           |
+| iOS Simulator | yes | yes    |     |       |      |        |           |
 | FreeBSD       | yes | yes    |     |       |      |        |           |
 | Android       |     |        | yes | yes   |      |        |           |
 
