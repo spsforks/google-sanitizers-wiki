@@ -1,8 +1,8 @@
 # Introduction
 
-LeakSanitizer is a memory leak detector which is integrated into [AddressSanitizer](AddressSanitizer). The tool is supported on x86\_64 Linux.
+LeakSanitizer is a memory leak detector which is integrated into [AddressSanitizer](AddressSanitizer). The tool is supported on x86\_64 Linux and OS X.
 
-LeakSanitizer is enabled by default in all ASan builds. LSan lies dormant until the very end of the process, at which point there is an extra leak detection phase. In performance-critical scenarios, LSan can also be used without ASan instrumentation.
+LeakSanitizer is enabled by default in ASan builds of x86\_64 Linux, and can be enabled with `ASAN_OPTIONS=detect_leaks=1` on x86\_64 OS X. LSan lies dormant until the very end of the process, at which point there is an extra leak detection phase. In performance-critical scenarios, LSan can also be used without ASan instrumentation.
 
 See also: [design document](AddressSanitizerLeakSanitizerDesignDocument), [comparison with tcmalloc's heap leak checker](AddressSanitizerLeakSanitizerVsHeapChecker)
 
