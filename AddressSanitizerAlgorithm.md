@@ -45,8 +45,8 @@ if (ShadowIsPoisoned(shadow_address)) {
 memory into 1 byte of the shadow memory.
 
 There are only 9 different values for any aligned 8 bytes of the application memory:
-  * All 8 bytes in qword are unpoisoned (i.e. addressible). The shadow value is 0.
-  * All 8 bytes in qword are poisoned (i.e. not addressible). The shadow value is negative.
+  * All 8 bytes in qword are unpoisoned (i.e. addressable). The shadow value is 0.
+  * All 8 bytes in qword are poisoned (i.e. not addressable). The shadow value is negative.
   * First `k` bytes are unpoisoned, the rest `8-k` are poisoned. The shadow value is `k`.
 This is guaranteed by the fact that `malloc` returns 8-byte aligned chunks of memory.
 The only case where different bytes of an aligned qword have different state is the tail of
@@ -76,7 +76,7 @@ bool SlowPathCheck(shadow_value, address, kAccessSize) {
 
 
 `MemToShadow(ShadowAddr)` falls into the `ShadowGap` region
-which is unaddressible. So, if the program tries to directly access a memory location
+which is unaddressable. So, if the program tries to directly access a memory location
 in the shadow region, it will crash.
 
 ### 64-bit
