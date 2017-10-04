@@ -115,7 +115,7 @@ At some point the default behaviour **was**:
   * copy the failure address to `%rax` (`%eax`).
   * execute `ud2` (generates SIGILL)
   * Encode access type and size in a one-byte instruction which follows `ud2`.
-Overal these 3 instructions require 5-6 bytes of machine code.
+Overall these 3 instructions require 5-6 bytes of machine code.
 
 It is possible to use just a single instruction (e.g. `ud2`), but this will require
 to have a full disassembler in the run-time library (or some other hacks).
