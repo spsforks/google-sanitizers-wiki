@@ -1,6 +1,6 @@
 Current aosp/o-preview and aosp/master branches support running applications under AddressSanitizer on fully locked production devices.
 
-See [this patch](https://android-review.googlesource.com/#/c/platform/frameworks/base/+/264478/) for the details of the implementation. To use this feature,
+See [this patch](https://android-review.googlesource.com/#/c/platform/frameworks/base/+/264478/) and [documentation](https://developer.android.com/ndk/guides/wrap-script.html) for the details of the implementation. To use this feature,
 1. follow instructions in [[AddressSanitizerOnAndroid#building]] 
 2. add "android:debuggable" to the application manifest
 3. add libclang_rt.asan-${arch}-android.so library found in the NDK to the native libraries directory
