@@ -152,7 +152,7 @@ fun:*MyFooBar*
   * Q: When I link my shared library with -fsanitize=address, it fails due to some undefined ASan symbols (e.g. asan\_init\_v4)?
   * A: Most probably you link with -Wl,-z,defs or -Wl,--no-undefined. These flags don't work with ASan unless you also use -shared-libasan (which is the default mode for GCC, but not for Clang).
 
-  * Q: My malloc stacktraces are too short?
+  * Q: My malloc stacktraces are too short or do not make sense?
   * A: Try to compile your code with -fno-omit-frame-pointer or set ASAN\_OPTIONS=fast\_unwind\_on\_malloc=0 (the latter would be a performance killer though unless you also specify malloc\_context\_size=2 or lower). Note that frame-pointer-based unwinding does not work on Thumb.
 
   * Q: I'm using dynamic ASan runtime and my program crashes at start with "Shadow memory range interleaves with an existing memory mapping. ASan cannot proceed correctly.".
