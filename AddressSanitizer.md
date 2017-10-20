@@ -155,6 +155,9 @@ fun:*MyFooBar*
   * Q: My malloc stacktraces are too short or do not make sense?
   * A: Try to compile your code with -fno-omit-frame-pointer or set ASAN\_OPTIONS=fast\_unwind\_on\_malloc=0 (the latter would be a performance killer though unless you also specify malloc\_context\_size=2 or lower). Note that frame-pointer-based unwinding does not work on Thumb.
 
+  * Q: My new() and delete() stacktraces are too short or do not make sense?
+  * A: This may happen when the C++ standard library is linked statically. Prebuilt libstdc++/libc++ often do not use frame pointers, and it breaks fast (frame-pointer-based) unwinding. Either switch to the shared library with the -shared-libstdc++ flag, or use ASAN\_OPTIONS=fast\_unwind\_on\_malloc=0. The latter could be very slow.
+
   * Q: I'm using dynamic ASan runtime and my program crashes at start with "Shadow memory range interleaves with an existing memory mapping. ASan cannot proceed correctly.".
   * A1: If you are using shared ASan DSO, try LD\_PRELOAD'ing Asan runtime into your program.
   * A2: Otherwise you are probably hitting a known limitation of dynamic runtime. Libasan is initialized at the end of program startup so if some preceeding library initializer did lots of memory allocations memory region required for ASan shadow memory could be occupied by unrelated mappings.
