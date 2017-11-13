@@ -68,6 +68,7 @@
   * https://googlechromereleases.blogspot.com/2016/12/stable-channel-update-for-desktop.html
   * https://chromereleases.googleblog.com/2017/01/stable-channel-update-for-desktop.html
   * https://chromereleases.googleblog.com/2017/03/stable-channel-update-for-desktop.html
+  * https://chromereleases.googleblog.com/2017/11/stable-channel-update-for-desktop.html (note: [777728] Critical CVE-2017-15398: Stack buffer overflow in QUIC. Reported by Ned Williamson on 2017-10-24)
   * http://support.apple.com/kb/HT5000
   * http://support.apple.com/kb/HT5192
   * http://support.apple.com/kb/HT5400
