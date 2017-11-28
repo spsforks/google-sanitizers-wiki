@@ -211,6 +211,9 @@ check [Flags wiki] (https://github.com/google/sanitizers/wiki/AddressSanitizerFl
   * Q: My library crashes with SIGABRT while calling `free`. What's going wrong?
   * A: Most probably you are dlopening your library with **RTLD_DEEPBIND** flag. ASan doesn't support **RTLD_DEEPBIND**, see [issue #611](https://github.com/google/sanitizers/issues/611) for details.
 
+  * Q: I'm getting following error when building my code: `gcc: error: cannot specify -static with -fsanitize=address`.
+  * A: ASan doesn't work with static linkage. You need to disable static linkage in order to use ASan on your code.
+
 # Talks and papers
  * Watch the presentation from the [LLVM Developer's meeting](http://llvm.org/devmtg/2011-11/) (Nov 18, 2011): [Video](http://www.youtube.com/watch?v=CPnRS1nv3_s), [slides](http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf).
  * Read the [USENIX ATC '2012 paper](http://research.google.com/pubs/pub37752.html).
