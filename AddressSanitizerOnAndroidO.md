@@ -15,7 +15,7 @@ In steps 3 and 4, substitute ${arch} with the target architecture name, which ca
     HERE="$(cd "$(dirname "$0")" && pwd)"
     export ASAN_OPTIONS=log_to_syslog=false,allow_user_segv_handler=1
     export LD_PRELOAD=$HERE/libclang_rt.asan-${arch}-android.so
-    $@
+    "$@"
 
 ## Comparison with [[asan_device_setup|AddressSanitizerOnAndroid]]
 
