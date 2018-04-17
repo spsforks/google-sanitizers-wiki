@@ -4,7 +4,7 @@
 | -fsanitize=address |         | Enable [AddressSanitizer](AddressSanitizer) |
 | -fsanitize-address-use-after-scope |         | Enable [stack user after scope](AddressSanitizerExampleUseAfterScope) check|
 | -fno-omit-frame-pointer |         | Leave frame pointers. Allows the fast unwinder to function properly. |
-| -fsanitize-blacklist=path |         | Pass a [blacklist file](#Turning_off_instrumentation) |
+| -fsanitize-blacklist=path |         | Pass a [blacklist file](AddressSanitizer#turning-off-instrumentation) |
 | -fno-common |         | Do not treat global variable in C as common variables (allows ASan to instrument them) |
 
 ASan-specific compile-time flags are passed via clang flag `-mllvm <flag>`. In most cases you don't need them.
