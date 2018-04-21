@@ -1,4 +1,5 @@
 
+**A more advanced scheme ("memory tagging") is described here: https://arxiv.org/pdf/1802.09517.pdf**
 
 # Introduction
 [AddressSanitizer](AddressSanitizer) introduces [~2x slowdown on average](AddressSanitizerPerformanceNumbers).
