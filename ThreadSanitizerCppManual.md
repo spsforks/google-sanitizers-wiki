@@ -1,4 +1,3 @@
-
 # Introduction
 
 `ThreadSanitizer` (aka TSan) is a data race detector for C/C++. Data races are one of the most common and hardest to debug types of bugs in concurrent systems. A data race occurs when two threads access the same variable concurrently and at least one of the accesses is write. [C++11](http://en.wikipedia.org/wiki/C%2B%2B11) standard officially bans data races as _undefined behavior_.
@@ -112,6 +111,12 @@ To start, run your tests using `ThreadSanitizer`. The race detector only finds r
 
 The cost of race detection varies by program, but for a typical program, memory usage may increase by 5-10x and execution time by 2-20x.
 
+# Non-instrumented code
+
+`ThreadSanitizer` generally requires all code to be compiled with `-fsanitize=thread`. If some code (e.g. dynamic libraries) is not compiled with the flag, it can lead to false positive race reports, false negative race reports and/or missed stack frames in reports depending on the nature of non-instrumented code. To not produce false positive reports `ThreadSanitizer` has to see all synchronization in the program, some synchronization operations (namely, atomic operations and thread-safe static initialization) are intercepted during compilation (and can only be intercepted during compilation). `ThreadSanitizer` stack trace collection also relies on compiler instrumentation (unwinding stack on each memory access is too expensive).
+
+There are some precedents of making `ThreadSanitizer` work with non-instrumented libraries. Success of this highly depends on what exactly these libraries are doing. Besides suppressions, one can use `ignore_interceptors_accesses` flag which ignores memory accesses in all interceptors, or `ignore_noninstrumented_modules` flag which makes `ThreadSanitizer` ignore all interceptors called from the given set of (non-instrumented) libraries. 
+
 # FAQ
 
   * Q: When I run the program, it says: `FATAL: ThreadSanitizer can not mmap the shadow memory (something is mapped at 0x555555554000 < 0x7cf000000000)`. What to do?
@@ -150,5 +155,4 @@ Tsan does not support C++ exceptions.
 
 # Comments/Questions?
 
-Send comments/questions to thread-sanitizer@googlegroups.com
-
+Send comments/questions to `thread-sanitizer@googlegroups.com` mailing list.
