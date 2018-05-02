@@ -4,7 +4,7 @@ NOTE: _ASan is supported in all versions of Android starting with KitKat, with t
 
 NOTE: _[AddressSanitizer](AddressSanitizer) on Android requires a rooted device (either -eng or -userdebug build, or any other setup that allows editing the contents of the /system partition)._
 
-Android NDK supports [AddressSanitizer](AddressSanitizer) on arm, armv7 and x86 ABIs starting with version r10d.
+Android NDK supports [AddressSanitizer](AddressSanitizer) on arm, arm64 and x86 starting with version r10d.
 
 ## Building
 
