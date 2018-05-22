@@ -15,7 +15,7 @@ GCC: gcc version 7.1.1 r247506 (https://gcc.gnu.org/viewcvs/gcc?view=revision&re
 #### Feature:
 std containers overflow detection
 * LLVM: yes (std::vector, std::string is under review)
-* GCC: google branch (std::vector)
+* GCC: google branch (std::vector), but available in GCC 8
 * Bugs/ML: <http://llvm.org/viewvc/llvm-project?view=revision&revision=208319> <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<https://gcc.gnu.org/viewcvs/gcc?view=revision&revision=207517>
 
@@ -27,7 +27,7 @@ Support new kinds of bugs detection.
 #### Feature:
 dynamic alloca overflow detection
 * LLVM: yes
-* GCC: compiler support missing
+* GCC: compiler support missing, but available in GCC 8
 * Bugs/ML: 
 
 ##### Cons and Pros:
