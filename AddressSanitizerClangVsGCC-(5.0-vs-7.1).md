@@ -127,8 +127,8 @@ This feature is experimental. The experiments can be used to evaluate potential 
 #### Feature:
 invalid pointer pairs detection
 * LLVM: yes (experimental, heap only)
-* GCC: no
-* Bugs/ML:
+* GCC: no, but will be available in GCC 8.
+* Bugs/ML:https://gcc.gnu.org/viewcvs/gcc?view=revision&revision=255404
 
 ##### Cons and Pros:
 
