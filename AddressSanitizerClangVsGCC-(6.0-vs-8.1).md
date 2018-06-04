@@ -76,13 +76,13 @@ In Clang, ASan changes size of global variables by appending redzone size to it.
 <br>
 
 #### Feature:
-adaptive global redzone sizes
+adaptive stack/global redzone sizes
 * LLVM: yes
-* GCC: no
-* Bugs/ML: 
+* GCC: no, but is going to be implemented in GCC 9.
+* Bugs/ML: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=81715
 
 ##### Cons and Pros:
-Possible better layout for global variables in Clang.
+Possible better layout for stack/global variables in Clang.
 
 <br>
 
@@ -169,7 +169,7 @@ GCC needs a special patch to handle the issue.
 #### Feature:
 support ASan blacklist file
 * LLVM: yes
-* GCC: no
+* GCC: no, but the alternative is to use flexible `no_sanitize` attribute.
 * Bugs/ML: <http://clang.llvm.org/docs/AddressSanitizer.html#suppressing-errors-in-recompiled-code-blacklist><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<https://gcc.gnu.org/ml/gcc-patches/2013-12/msg00649.html>
 
