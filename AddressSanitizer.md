@@ -21,13 +21,13 @@ and a run-time library which replaces the `malloc` function.
 The tool works on x86, ARM, MIPS (both 32- and 64-bit versions of all architectures), PowerPC64.
 The supported operation systems are Linux, Darwin (OS X and iOS Simulator), FreeBSD, Android:
 
-| OS            | x86 | x86_64 | ARM | ARM64 | MIPS | MIPS64 | PowerPC64 |
-|:--------------|:---:|:------:|:---:|:-----:|:----:|:------:|:---------:|
-| Linux         | yes | yes    |     |       | yes  | yes    | yes       |
-| OS X          | yes | yes    |     |       |      |        |           |
-| iOS Simulator | yes | yes    |     |       |      |        |           |
-| FreeBSD       | yes | yes    |     |       |      |        |           |
-| Android       |     |        | yes | yes   |      |        |           |
+| OS            | x86 | x86_64 | ARM | ARM64 | MIPS | MIPS64 | PowerPC   | PowerPC64 |
+|:--------------|:---:|:------:|:---:|:-----:|:----:|:------:|:---------:|:---------:|
+| Linux         | yes | yes    |     |       | yes  | yes    | yes       | yes       |
+| OS X          | yes | yes    |     |       |      |        |           |           |
+| iOS Simulator | yes | yes    |     |       |      |        |           |           |
+| FreeBSD       | yes | yes    |     |       |      |        |           |           |
+| Android       |     |        | yes | yes   |      |        |           |           |
 
 Other OS/arch combinations may work as well, but aren't actively developed/tested.
 
