@@ -1,10 +1,10 @@
 # Compiler flags
-| flag| default | description |
-|:----|:--------|:------------|
-| -fsanitize=address |         | Enable [AddressSanitizer](AddressSanitizer) |
-| -fno-omit-frame-pointer |         | Leave frame pointers. Allows the fast unwinder to function properly. |
-| -fsanitize-blacklist=path |         | Pass a [blacklist file](AddressSanitizer#turning-off-instrumentation) |
-| -fno-common |         | Do not treat global variable in C as common variables (allows ASan to instrument them) |
+| flag| description |
+|:----|:------------|
+| -fsanitize=address | Enable [AddressSanitizer](AddressSanitizer) |
+| -fno-omit-frame-pointer | Leave frame pointers. Allows the fast unwinder to function properly. |
+| -fsanitize-blacklist=path | Pass a [blacklist file](AddressSanitizer#turning-off-instrumentation) |
+| -fno-common | Do not treat global variable in C as common variables (allows ASan to instrument them) |
 
 ASan-specific compile-time flags are passed via clang flag `-mllvm <flag>`. In most cases you don't need them.
 
