@@ -15,7 +15,7 @@ GCC: gcc version 8.1.1 r260570(https://gcc.gnu.org/viewcvs/gcc?view=revision&rev
 #### Feature:
 std containers overflow detection
 * LLVM: yes (std::vector, std::string is under review)
-* GCC: yes (std::vector), needs to be enabled explicitly by defining `_GLIBCXX_SANITIZE_VECTOR` macros
+* GCC: yes (std::vector), needs to be enabled explicitly by defining `_GLIBCXX_SANITIZE_VECTOR` macros when building `libstdc++`
 * Bugs/ML: <http://llvm.org/viewvc/llvm-project?view=revision&revision=208319> <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<https://gcc.gnu.org/viewcvs/gcc?view=revision&revision=250430>
 
