@@ -147,7 +147,13 @@ fun:*MyFooBar*
   * Q: Why didn't ASan report an obviously invalid memory access in my code?
   * A1: If your errors is too obvious, compiler might have already optimized it out by the time Asan runs.
   * A2: Another, C-only option is accesses to global common symbols which are not protected by Asan (you can use -fno-common to disable generation of common symbols and hopefully detect more bugs).
-  * A3: If _FORTIFY_SOURCE is enabled, ASan may have false positives, see below. 
+  * A3: If _FORTIFY_SOURCE is enabled, ASan may have false positives, see next question.
+
+  * Q: I've compiled my code with -D_FORTIFY_SOURCE flag and ASan, or -D_FORTIFY_SOURCE is enabled by default
+   in my distribution (most modern distributions). Now ASan misbehaves (either produces false warnings, or does not find some bugs). 
+  * A: Currently ASan (and other sanitizers) doesn't support source fortification, see https://github.com/google/sanitizers/issues/247.
+The fix should most likely be on the glibc side, see the (stalled)
+discussion [here](http://www.sourceware.org/ml/libc-alpha/2016-09/msg00080.html). 
 
   * Q: When I link my shared library with -fsanitize=address, it fails due to some undefined ASan symbols (e.g. asan\_init\_v4)?
   * A: Most probably you link with -Wl,-z,defs or -Wl,--no-undefined. These flags don't work with ASan unless you also use -shared-libasan (which is the default mode for GCC, but not for Clang).
@@ -177,12 +183,6 @@ fun:*MyFooBar*
 
   * Q: I've built my shared library with ASan. Can I run it with unsanitized executable?
   * A: Yes! You'll need to build your library with [dynamic version of ASan](AddressSanitizerAsDso) and then run executable with LD_PRELOAD=path/to/asan/runtime/lib.
-
-  * Q: I've compiled my code with -D_FORTIFY_SOURCE flag and ASan, or -D_FORTIFY_SOURCE is enabled by default
-   in my distribution. Now ASan misbehaves (either produces false warnings, or does not find some bugs). 
-  * A: Currently ASan (and other sanitizers) doesn't support source fortification, see https://github.com/google/sanitizers/issues/247.
-The fix should most likely be on the glibc side, see the (stalled)
-discussion [here](http://www.sourceware.org/ml/libc-alpha/2016-09/msg00080.html). 
   
   * Q: On Linux I am seeings a crash at startup with something like this
 
