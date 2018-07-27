@@ -65,7 +65,7 @@ To preserve memory, most [AddressSanitizer](AddressSanitizer) features are disab
 ## Run-time flags
 
 ```
-asan_device_setup --extra-options=<options text>
+asan_device_setup --extra-options <options text>
 ```
 > this flag can be used to set default ASAN\_OPTIONS for the Zygote process. Note that this will affect all applications on the device!
 
