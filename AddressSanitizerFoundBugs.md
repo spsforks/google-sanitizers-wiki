@@ -252,11 +252,13 @@ http://www.mail-archive.com/vim_dev@googlegroups.com/msg15549.html
 
 # Tizen 
 http://injoit.org/index.php/j1/article/viewFile/231/184
-```This paper describes our experience in integration of ASan
+```
+This paper describes our experience in integration of ASan
 technology into large-scale software products: Tizen
 distribution and Linux kernel. The tool has already found
 around a hundred of serious memory bugs in various Tizen
-applications and in mainline Linux kernel. ```
+applications and in mainline Linux kernel. 
+```
 
 # Unsorted
 
