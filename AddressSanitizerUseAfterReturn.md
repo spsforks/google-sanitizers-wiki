@@ -14,7 +14,7 @@ void FunctionThatEscapesLocalObject() {
 ```
 
 [AddressSanitizer](AddressSanitizer) currently does not attempt to detect these bugs by default,
-only with an additional flag run-time: ASAN\_OPTIONS=detect\_stack\_use\_after\_return=1 (Clang only, starting from r191186 (on Google Code))
+only with an additional flag run-time: ASAN\_OPTIONS=detect\_stack\_use\_after\_return=1
 
 # Algorithm
 Detection of stack-use-after-return is similar to detection of heap-use-after-free,
