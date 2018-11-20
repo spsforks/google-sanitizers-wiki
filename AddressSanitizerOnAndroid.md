@@ -22,10 +22,10 @@ or a subset of those. This is not an issue with newer NDKs.
 
 ## Running
 
-There are two ways of running ASan application on Android. The "wrap.sh" method is available and recommended beginning with Android O. Alternative "asan_device_setup" method requires a rooted device with writable system partition (dangerous!) but works on older devices as well as newer ones.
+There are two ways of running ASan application on Android. The "wrap.sh" method is available and recommended beginning with Android O MR1 (8.1.0). Alternative "asan_device_setup" method requires a rooted device with writable system partition (dangerous!) but works on older devices as well as newer ones.
 
 ### Running with wrap.sh (recommended)
-In Android O an application can provide a [script](https://developer.android.com/ndk/guides/wrap-script) that can wrap or replace the application process. It can be used to run ASan apps on fully locked, production devices.
+In Android O MR1 (version 8.1.0) an application can provide a [script](https://developer.android.com/ndk/guides/wrap-script) that can wrap or replace the application process. It can be used to run ASan apps on fully locked, production devices.
 
 A few extra steps are required to prepare an app to run with wrap.sh.
 
