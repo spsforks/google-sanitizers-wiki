@@ -35,7 +35,14 @@ There are a lot of various ways to trigger a data race in C++, see [ThreadSaniti
 
 # Supported Platforms
 
-TSan is supported on Linux x86\_64, tested on Ubuntu 12.04.
+TSan is supported on:
+
+ * Linux: `x86_64`, `mips64` (40-bit VMA), `aarch64` (39/42-bit VMA), `powerpc64` (44/46/47-bit VMA)
+ * Mac: x86_64, `aarch64` (39-bit VMA)
+ * FreeBSD: `x86_64`
+ * NetBSD: `x86_64`
+
+This list is last updated on Dec 2018 and is related to `clang` compiler, see up-to-date list [here](https://github.com/llvm-mirror/compiler-rt/blob/master/lib/tsan/rtl/tsan_platform.h). Platforms supported by `gcc` may differ. Older compiler versions may not support some of these platforms.
 
 # Usage
 
