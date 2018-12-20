@@ -27,7 +27,7 @@ Each tool parses the common options from the corresponding environment variable 
 |handle_sigill | true     | Controls custom tool's SIGILL handler (0 - do not registers the handler, 1 - register the handler and allow user to set own, 2 - registers the handler and block user from changing it). Ignored on Windows.|
 |handle_sigfpe | true     | Controls custom tool's SIGFPE handler (0 - do not registers the handler, 1 - register the handler and allow user to set own, 2 - registers the handler and block user from changing it). Ignored on Windows.|
 |use_sigaltstack | true     | If set, uses alternate stack for signal handling.|
-|detect_deadlocks | false    | If set, deadlock detection is enabled.|
+|detect_deadlocks | true    | If set, deadlock detection is enabled.|
 |clear_shadow_mmap_threshold | 64 * 1024| Large shadow regions are zero-filled using mmap(NORESERVE) instead of memset(). This is the threshold size in bytes.|
 |color | auto     | Colorize reports: (always|never|auto).|
 |legacy_pthread_cond | false    | Enables support for dynamic libraries linked with libpthread 2.2.5.|
