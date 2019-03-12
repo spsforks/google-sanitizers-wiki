@@ -15,9 +15,9 @@ than Memcheck (TODO:benchmark).
 
 # Getting MemorySanitizer
 
-[MemorySanitizer](MemorySanitizer) is part of LLVM trunk and 3.3 branch.
+[MemorySanitizer](MemorySanitizer) is part of LLVM trunk and has been widely available as a compile-time option in clang since version 4.0.
 
-At this time, [MemorySanitizer](MemorySanitizer) supports Linux x86\_64 only.
+At this time, [MemorySanitizer](MemorySanitizer) supports x86\_64, AArch64, PPC64, and MIPS64.
 
 
 # Using MemorySanitizer
