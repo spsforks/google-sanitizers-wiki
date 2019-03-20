@@ -1,65 +1,37 @@
-## Short summary
-Pure C apps seem to work fine, except for the stacks missing file/lineno in the reports (see issue 48 (on Google Code) - only function+offset info is available).
+LLVM AddressSanitizer has been ported to Windows, but there are a number of limitations and differences in deployment.
 
-The ASan runtime library builds using MSVC `cl` just fine.
+## Basic usage
 
-One has to use MSVC's `link` to link the Clang-generated `.o` files and the runtime.
+First, typically on Posix systems, users enable ASan by passing `-fsanitize=address` to `CFLAGS` and `LDFLAGS`. The compiler is usually called to perform the link step, so it will see `-fsanitize=address` in the link phase and add the ASan runtime library.
 
-C++ support is blocked by the unfinished clang++/Win implementation (see issue 56 (on Google Code)).
+In a typical build system set up to work with MSVC, the system will instead invoke the linker directly. This means you have to manually pass the path to the asan runtime library to the linker. These are the flags you need to add:
 
-Most likely it's possible to mix `cl`-built non-instrumented C++ code with `clang`-built instrumented C code.
+* `/LIBPATH:path/to/install/lib/clang/$clang_version/lib/windows` - This sets up the library search path to find clang runtime libraries, such as asan. $clang_version is "9.0.0", "8.0.1", or whatever your version of clang is.
+* For a statically linked executable: `clang_rt.asan-$arch.lib` - $arch is typically `x86_64` or `i386`.
+* For a DLL: `clang_rt.asan_dll_thunk-$arch.lib` - $arch is the same.
 
-# Try it
-_For up-to-date instructions, see the [build steps](http://code.google.com/p/address-sanitizer/source/browse/trunk/build/scripts/slave/buildbot_standard.bat) our internal buildbot is performing to test._
+You can pass `-fsanitize=address` to the compiler (clang or clang-cl, whichever command syntax you prefer) just as you would on Posix, and that will enable the compiler instrumentation in the usual way.
 
-First, you’ll need to have Clang built:
-```
-set REV=-r HEAD
-:: Replace “HEAD” with a revision number if you want
-svn co %REV% http://llvm.org/svn/llvm-project/llvm/trunk llvm
-svn co %REV% http://llvm.org/svn/llvm-project/cfe/trunk llvm/tools/clang
-svn co %REV% http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler_rt
+## Debug CRT incompatibility
 
-mkdir llvm-build
-cd llvm-build
+ASan does not support linking with the debug CRT versions because they make interposing new, delete, malloc, & co more difficult. Typically, the debug version is enabled with `/MDd` or `/MTd`. To test with ASan, use `/MT` or `/MD` instead.
 
-:: If devenv takes too much time and you observe "Function.cpp" near the end of the output,
-:: please LLVM.sln and disable optimizations for LLVMCore/Function.cpp in the Release build.
-cmake -G"Visual Studio 9 2008" ..\llvm && devenv LLVM.sln /Build Release /Project clang
+## LSan
 
-cd ..
-```
+LeakSanitizer is not supported on Windows yet. LeakSanitizer requires being able to stop the process at exit or some other point to scan for live pointers. This is called "StopTheWorld", and the posix implementation uses ptrace, which is not available on Windows.
 
-Now, build the runtime library:
-```
-cd compiler_rt\lib\asan
-cl /nologo /MP /MT /Zi /I.. /I../../include /c *.cc ../interception/*.cc ../sanitizer_common/*.cc
-lib /nologo /out:asan_rtl.lib *.obj
-cd ..\..\..
-```
+## Use-after-return
 
-Try to build your app with Clang:
-```
-path-to\llvm-build\bin\Release\clang.exe -fsanitize=address -g -c <your_files>
-link /debug /incremental:no /out:myprogname.exe /nologo <your_obj_files> path-to\rtl\asan_rtl.lib /defaultlib:libcmt
-myprogname.exe
-```
+As of this writing, I don't believe UAR detection is supported on Windows, although there is no major technical reason for it. If you are adventurous, try it and file any bugs you run into. :)
 
-## Known problems
-See the corresponding [issue tracker label](http://code.google.com/p/address-sanitizer/issues/list?q=label:OpSys-Windows).
+## Debugging
 
-## SPEC CPU2006 results
-We’ve run ASan/Win on SPEC tests.
-It has shown the very same slowdown as the Linux version (see [here](AddressSanitizerPerformanceNumbers)) on the C tests.
+If you wish to use an interactive debugger on an x64 process that uses ASan, you will immediately notice that the process raises many access violations during process startup. These are unfortunately necessary and expected. If you are using windbg or cdb, you can ignore access violation exceptions to continue past them (`sxi av`). You may need to set some other type of breakpoint or reenable AV exceptions (`sxe av`) after initialization is finished in order to stop the debugger at the right place. Alternatively, you can disable all first chance exception handling, or use __try / __except with __debugbreak to try to stop the debugger when the bug happens. This makes debugging ASan crashes quite challenging, so read on for more background about the current situation.
 
-The C++ tests were not run.
+One of the first things ASan does on startup is to reserve large sections (20TB at this time) of virtual memory for shadow memory and other reasons. Most Unix kernels will happily satisfy requests to map large quantities of zero pages, and will allocate physical memory (and swap if necessary) on demand. If none is available, the process may be OOM killed, or something else may fail, but the initial reservation succeeds. On Windows, the kernel proactively allocates swap if you try to do the analogous thing (commit the memory). Therefore, ASan on Windows this strategy:
 
-ASan has found the same UAF in perlbench and stack OOB on h264ref [seen on Linux](AddressSanitizerFoundBugs).
-
-The global OOB on h264ref was not detected - since this feature is not implemented yet on Windows. (or are they? issue 49 (on Google Code))<br>However, it has found one similar heap-OOB access on h264ref which needs to be investigated. See issue 50 (on Google Code) for the details.<br>
-<br>
-<h2>Chromium</h2>
-The plan is to try Chromium tests with runtime but no instrumentation first,<br>
-then add instrumentation of C code, then ...<br>
-<br>
-Stay tuned!
+* First, the address space is marked reserved.
+* When reserved addresses are first accessed, the OS will raise an access violation exception.
+* ASan has a vectored exception handler, which catches the exception.
+* If the AV is for memory that ASan reserved, ASan requests the block of memory in question be committed (allocated).
+* The exception is marked "handled" and execution resumes.
