@@ -37,7 +37,7 @@ A few extra steps are required to prepare an app to run with wrap.sh.
     HERE="$(cd "$(dirname "$0")" && pwd)"
     export ASAN_OPTIONS=log_to_syslog=false,allow_user_segv_handler=1
     export LD_PRELOAD=$HERE/libclang_rt.asan-${arch}-android.so
-    "$@"
+    exec "$@"
 ~~~~
 
 Note that multi-arch APKs need to repeat steps 2 and 3 for each architecture.
