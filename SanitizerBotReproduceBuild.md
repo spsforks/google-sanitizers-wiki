@@ -15,7 +15,7 @@ cd scratch_dir
 svn checkout https://llvm.org/svn/llvm-project/zorg
 BUILDBOT_CLOBBER= BUILDBOT_REVISION=300000 zorg/trunk/zorg/buildbot/builders/sanitizers/buildbot_fast.sh
 ```
-The script will checkout, build and test code very closely to how it does not bots.
+The script will checkout, build and test code very closely to how it does on bots.
 
 ## Try local changes
 Scripts support environment variable BUILDBOT_MONO_REPO_PATH
