@@ -1,28 +1,28 @@
 # Introduction
 
-[MemorySanitizer](MemorySanitizer) (MSan) is a detector of uninitialized memory reads in C/C++ programs.
+MemorySanitizer (MSan) is a detector of uninitialized memory reads in C/C++ programs.
 
 Uninitialized values occur when stack- or heap-allocated memory is read before it is written. MSan
 detects cases where such values affect program execution.
 
-[MemorySanitizer](MemorySanitizer) is bit-exact: it can track uninitialized bits in a bitfield. It will tolerate
+MSan is bit-exact: it can track uninitialized bits in a bitfield. It will tolerate
 copying of uninitialized memory, and also simple logic and arithmetic operations with it. In general,
-[MemorySanitizer](MemorySanitizer) silently tracks the spread of uninitialized data in memory, and reports a warning
+MSan silently tracks the spread of uninitialized data in memory, and reports a warning
 when a code branch is taken (or not taken) depending on an uninitialized value.
 
-[MemorySanitizer](MemorySanitizer) implements a subset of functionality found in Valgrind (Memcheck tool). It is significantly faster
+MSan implements a subset of functionality found in Valgrind (Memcheck tool). It is significantly faster
 than Memcheck (TODO:benchmark).
 
 # Getting MemorySanitizer
 
-[MemorySanitizer](MemorySanitizer) is part of LLVM trunk and has been widely available as a compile-time option in clang since version 4.0.
+MemorySanitizer is part of LLVM trunk and has been widely available as a compile-time option in clang since version 4.0.
 
-At this time, [MemorySanitizer](MemorySanitizer) supports x86\_64, AArch64, PPC64, and MIPS64.
+At this time, MSan supports x86\_64, AArch64, PPC64, and MIPS64.
 
 
 # Using MemorySanitizer
 
-To use [MemorySanitizer](MemorySanitizer), compile and link your program with -fsanitize=memory -fPIE -pie.
+To use MSan, compile and link your program with -fsanitize=memory -fPIE -pie.
 
 To get any stack traces, add -fno-omit-frame-pointer.
 
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
 ## Origins tracking
 
-[MemorySanitizer](MemorySanitizer) can track back each uninitialized value to the memory allocation where it was created, and use this
+MemorySanitizer can track back each uninitialized value to the memory allocation where it was created, and use this
 information in reports. This behaviour is enabled with the `-fsanitize-memory-track-origins` flag.
 It comes with additional 1.5x-2.5x slowdown, and makes the report from the previous example look like this:
 ```
@@ -65,12 +65,12 @@ It comes with additional 1.5x-2.5x slowdown, and makes the report from the previ
 
 ## Symbolization
 
-Set MSAN\_SYMBOLIZER\_PATH environment variable to the path to llvm-symbolizer binary (normally built with LLVM), or just put llvm-symbolizer somewhere in your $PATH. [MemorySanitizer](MemorySanitizer) will use it to symbolize reports on-the-fly.
+Set MSAN\_SYMBOLIZER\_PATH environment variable to the path to llvm-symbolizer binary (normally built with LLVM), or just put llvm-symbolizer somewhere in your $PATH. MemorySanitizer will use it to symbolize reports on-the-fly.
 
 ## Using instrumented libraries
 
 It is critical that you should build all the code in your program (including libraries it uses, in particular, C++ standard library)
-with [MemorySanitizer](MemorySanitizer). See [MemorySanitizerLibcxxHowTo](MemorySanitizerLibcxxHowTo) for more details.
+with MSan. See [MemorySanitizerLibcxxHowTo](MemorySanitizerLibcxxHowTo) for more details.
 
 ## Interface
 
