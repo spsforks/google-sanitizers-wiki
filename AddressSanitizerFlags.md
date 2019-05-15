@@ -73,7 +73,7 @@ For the list of common sanitizer options see [SanitizerCommonFlags](SanitizerCom
 |detect_odr_violation | 2        | If >=2, detect violation of One-Definition-Rule (ODR); If ==1, detect ODR-violation only if the two variables have different sizes|
 |dump_instruction_bytes | false    | If true, dump 16 bytes starting at the instruction that caused SEGV|
 |suppressions | ""       | Suppressions file name.|
-|halt_on_error | true     | Crash the program after printing the first error report (WARNING: USE AT YOUR OWN RISK!)|
+|halt_on_error | true     | Crash the program after printing the first error report (WARNING: USE AT YOUR OWN RISK!). The flag has effect only if code was compiled with -fsanitize-recover=address compile option.|
 |log_path|stderr|Write logs to `log_path.pid`. The special values are `stdout` and `stderr`|
 |use_odr_indicator | false       | Use special ODR indicator symbol for ODR violation detection.|
 |allocator_frees_and_returns_<br/>null_on_realloc_zero|true|realloc(p, 0) is equivalent to free(p) by default (Same as the POSIX standard). If set to false, realloc(p, 0) will return a pointer to an allocated space which can not be used.|
