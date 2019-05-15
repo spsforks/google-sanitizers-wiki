@@ -217,6 +217,9 @@ check [Flags wiki] (https://github.com/google/sanitizers/wiki/AddressSanitizerFl
 * Q: What do `0xbebebebebebebebe` and `0xbebebebe` mean?
 * A: ASan, by default, writes `0xbe` to newly allocated memory (see [malloc_fill_byte](https://github.com/google/sanitizers/wiki/AddressSanitizerFlags#run-time-flags)). `0xbebebebebebebebe` is (possibly) a 64-bit value that was allocated but not initialized. Similarly for `0xbebebebe`.
 
+* Q: Can I mix code instrumented by Clang with code instrumented by GCC? Or can I at least compile code with Clang and link against GCC ASan runtime and vice versa?
+* A: No, you cannot, Clang and GCC have completely incompatible ASan implementations, you cannot mix them in any way.
+
 # Talks and papers
  * Watch the presentation from the [LLVM Developer's meeting](http://llvm.org/devmtg/2011-11/) (Nov 18, 2011): [Video](http://www.youtube.com/watch?v=CPnRS1nv3_s), [slides](http://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf).
  * Read the [USENIX ATC '2012 paper](http://research.google.com/pubs/pub37752.html).
