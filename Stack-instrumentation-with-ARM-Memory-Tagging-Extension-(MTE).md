@@ -43,7 +43,7 @@ Zero initialization and tagging has no code size overhead on top of just tagging
 
 ### Value initialization
 
-    { int x = 42; use(&x);}
+    { int x = 42; use(&x); }
 
     irg  x0, sp
     mov  w8, #42
