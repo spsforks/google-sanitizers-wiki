@@ -9,7 +9,7 @@ Most memory access instructions compare address and allocation tags, and generat
 
 LLVM can apply MTE to check memory safety of stack allocations. This is done by instrumenting generated code with MTE instructions to update allocation tags of individual stack variables.
 
-Due to alignment requirements, all checked variables grow in size up to the next multiple of 16.
+Due to alignment requirements, all checked variables grow in size up to the next multiple of 16, and are also aligned by 16. All MTE instructions require 16-byte alignment of their address operands.
 
 Please note that this is a work in progress, and some of the code snippets below may generate less efficient code with the current ToT LLVM.
 
