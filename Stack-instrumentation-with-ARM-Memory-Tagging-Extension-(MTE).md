@@ -11,7 +11,7 @@ LLVM can apply MTE to check memory safety of stack allocations. This is done by 
 
 Due to alignment requirements, all checked variables grow in size up to the next multiple of 16, and are also aligned by 16. All MTE instructions require 16-byte alignment of their address operands.
 
-Please note that this is a work in progress, and some of the code snippets below may generate less efficient code with the current ToT LLVM.
+Stack instrumentation can be enabled in LLVM by compiling the code with the following flags `-march=armv8+memtag -fsanitize=memtag`. Please note that this is a work in progress, and some of the code snippets below may generate less efficient code with the current ToT LLVM.
 
 ### A basic example
 
