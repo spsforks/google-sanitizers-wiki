@@ -67,7 +67,7 @@ For variables with non-zero initializers, setting allocation tags can often be d
     addg x1, x19, #16, #1
     mov  x0, x19
     stg  x19, [x19]
-    stg  x0, [x0]
+    stg  x1, [x1]
     bl   use
     addg x1, x19, #16, #1
     mov  x0, x19
