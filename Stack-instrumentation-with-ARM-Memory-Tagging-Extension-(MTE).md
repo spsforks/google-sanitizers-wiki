@@ -2,6 +2,7 @@
 MTE is an ISA extension (part of ARMv8.5) that introduces two types of tags:
 * Allocation tags, 4 bits for each 16-byte granule of memory.
 * Address tags, 4 bits in the upper byte of a memory address.
+
 Most memory access instructions compare address and allocation tags, and generate an exception when they do not match.
 
 # Stack instrumentation
