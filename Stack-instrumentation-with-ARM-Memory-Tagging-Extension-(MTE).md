@@ -23,7 +23,7 @@ Stack instrumentation can be enabled in LLVM by compiling the code with the foll
     stg  sp, [sp]
 
 - `IRG Xd, Xn` copies `Xn` to `Xd`, replacing the address tag with a randomly generated one.
-- `STG Xd, [Xn]` updates allocation tag for `[Xn, Xn + 16]` to the address tag of `Xd`.
+- `STG Xd, [Xn]` updates allocation tag for `[Xn, Xn + 16)` to the address tag of `Xd`.
 
 The second `STG` reverts the allocation tag back to match the address tag in `SP` register.
 
@@ -36,7 +36,7 @@ The second `STG` reverts the allocation tag back to match the address tag in `SP
     bl   use
     stg  sp, [sp]
 
-- `STZG Xd, [Xn]` writes zero to `[Xn, Xn + 16]` and updates the allocation tag to the address tag of `Xd`.
+- `STZG Xd, [Xn]` writes zero to `[Xn, Xn + 16)` and updates the allocation tag to the address tag of `Xd`.
 - `ST2G` and `STZ2G` update two memory granules (i.e. 32 bytes) at once, with or without zero initialization.
 
 Zero initialization and tagging has no code size overhead on top of just tagging.
@@ -51,7 +51,7 @@ Zero initialization and tagging has no code size overhead on top of just tagging
     bl   use
     stg  sp, [sp]
 
-- `STGP Xt, Xt2, [Xn]`, similar to `STP`, writes a pair of registers to memory at `[Xn, Xn + 16]` and updates allocation tag to match `Xn`.
+- `STGP Xt, Xt2, [Xn]`, similar to `STP`, writes a pair of registers to memory at `[Xn, Xn + 16)` and updates allocation tag to match `Xn`.
 
 For variables with non-zero initializers, setting allocation tags can often be done with little or no code size overhead with `STGP` instruction.
 
