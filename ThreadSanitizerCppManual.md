@@ -126,7 +126,12 @@ There are some precedents of making `ThreadSanitizer` work with non-instrumented
 
 # FAQ
 
+  * Q: The reports contain "failed to restore the stack" and no second stack trace. What the heck?
+
+Try increasing [history_size flag](ThreadSanitizerFlags).
+
   * Q: When I run the program, it says: `FATAL: ThreadSanitizer can not mmap the shadow memory (something is mapped at 0x555555554000 < 0x7cf000000000)`. What to do?
+
 You need to enable ASLR:
 
 ```
@@ -136,6 +141,7 @@ $ echo 2 >/proc/sys/kernel/randomize_va_space
 This may be fixed in future kernels, see https://bugzilla.kernel.org/show_bug.cgi?id=66721
 
   * Q: When I run the program under gdb, it says: `FATAL: ThreadSanitizer can not mmap the shadow memory (something is mapped at 0x555555554000 < 0x7cf000000000)`. What to do?
+
 Run as:
 
 ```
@@ -143,21 +149,26 @@ $ gdb -ex 'set disable-randomization off' --args ./a.out
 ```
 
   * Q: Does it actually use hundreds of GBs of memory (as I see in top)?
+
 No, it does not. TSan maps (but does not reserve) a lot of virtual address space. This means that tools like ulimit may not work as expected.
 
   * Q: I want to link libc/libstdc++ statically into my program. With `ThreadSanitizer` it produces either link-time or run-time errors.
+
 Libc/libstdc++ static linking is not supported.
 
   * Q: What synchronization primitives are supported?
+
 TSan supports pthread synchronization primitives, built-in compiler atomic operations (sync/atomic), C++ `<atomic>` operations are supported with llvm libc++ (not very throughly tested, though).
 
   * Q: I see what looks like a false report inside the libstdc++ (libc++) code.
+
 This may happen in c++11 mode. One such case is discussed [here](http://lists.cs.uiuc.edu/pipermail/cfe-dev/2014-February/035408.html).
 Note that `ThreadSanitizer` is not [yet](https://github.com/google/sanitizers/issues/455) heavily tested on code that uses c++11 threading.
 The solution is be to rebuild libstdc++ (libc++) with `ThreadSanitizer` (this might be tricky, and the process changes periodically; contact us for details).
 It is also possible that libstdc++ (libc++) has a bug, we've seen at least [one such](http://gcc.gnu.org/bugzilla/show_bug.cgi?id=59215) before.
 
   * Q: My code with C++ exceptions does not work with tsan.
+
 Tsan does not support C++ exceptions.
 
 # Comments/Questions?
