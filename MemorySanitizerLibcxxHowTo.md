@@ -111,3 +111,7 @@ $ ./a.out
     #1 0x48ce7a in FooTest_Foo_Test::TestBody() test.cc:6:3
 ...
 ```
+
+## Also see
+* A [Dockerfile](https://github.com/awslabs/amazon-kinesis-video-streams-webrtc-sdk-c/blob/master/.github/msan-tester.Dockerfile) with libc++ and several other library built with MemorySanitizer instrumentation.
+* Chromium project maintains [docker files](https://www.chromium.org/developers/testing/memorysanitizer#TOC-Running-on-other-distros-using-Docker) with a large list of system libraries built with MemorySanitizer.
