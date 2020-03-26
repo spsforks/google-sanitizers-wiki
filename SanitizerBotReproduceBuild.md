@@ -8,6 +8,8 @@ Also here is [setup script](https://github.com/google/sanitizers/blob/master/bui
 
 Then you need to decide which script to run. To find the script name corresponding to the bot use [this mapping](https://github.com/llvm/llvm-zorg/blob/master/zorg/buildbot/builders/sanitizers/buildbot_selector.py).
 
+**WARNING**: The script can delete content of the current directory!
+
 ## Example
 ```
 mkdir scratch_dir
