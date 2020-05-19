@@ -43,17 +43,25 @@ We need to re-build both C++ standard library and googletest with [MemorySanitiz
 You need to build both [libc++](http://libcxx.llvm.org/) and
 [libc++abi](http://libcxxabi.llvm.org/) with MSan:
 
-```
-# Checkout LLVM, libc++ and libc++abi
-$ svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm
-$ (cd llvm/projects && svn co http://llvm.org/svn/llvm-project/libcxx/trunk libcxx)
-$ (cd llvm/projects && svn co http://llvm.org/svn/llvm-project/libcxxabi/trunk libcxxabi)
+First, clone the LLVM source from github and enter a new build directory:
 
-# Build libc++ with MSan:
-$ mkdir libcxx_msan && cd libcxx_msan
-$ cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_SANITIZER=Memory -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-$ make cxx -j12
+```bash
+# clone LLVM
+git clone --depth=1 https://github.com/llvm/llvm-project
+cd llvm-project
+mkdir build; cd build
+# configure cmake
+cmake -GNinja ../llvm \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" \
+	-DCMAKE_C_COMPILER=clang \
+	-DCMAKE_CXX_COMPILER=clang++ \
+	-DLLVM_USE_SANITIZER=MemoryWithOrigins
+# build the libraries
+cmake --build cxx cxxabi
 ```
+
+This will place the relevant build artifacts in `./lib` and `./include`.
 
 ## Instrumented gtest
 
