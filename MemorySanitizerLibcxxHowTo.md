@@ -58,7 +58,7 @@ cmake -GNinja ../llvm \
 	-DCMAKE_CXX_COMPILER=clang++ \
 	-DLLVM_USE_SANITIZER=MemoryWithOrigins
 # build the libraries
-cmake --build cxx cxxabi
+cmake --build . -- cxx cxxabi
 ```
 
 This will place the relevant build artifacts in `./lib` and `./include`.
