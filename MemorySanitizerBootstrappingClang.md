@@ -39,7 +39,7 @@ This will generate a [Ninja](https://ninja-build.org/) build configuration in th
 Lastly, build the libraries:
 
 ```bash
-cmake --build cxx cxxabi
+cmake --build . -- cxx cxxabi
 ```
 
 This will place the relevant build artifacts in `./lib` and `./include`.
@@ -71,7 +71,7 @@ cmake -GNinja ../llvm \
 Then, build the binaries:
 
 ```bash
-cmake --build clang lld
+cmake --build . -- clang lld
 ```
 
 This will place the built binaries in `./bin`.
