@@ -65,7 +65,7 @@ cmake -GNinja ../llvm \
 	-DLLVM_USE_SANITIZER=MemoryWithOrigins \
 	-DLLVM_ENABLE_LIBCXX=ON \
 	-DCMAKE_CXX_FLAGS=" -nostdinc++ -isystem $LIBCXX_DIR/include -isystem $LIBCXX_DIR/include/c++/v1" \
-	-DCMAKE_EXE_LINKER_FLAGS=" -stdlib=libc++ -Wl,--rpath=$LIBCXX_DIR/lib -L$LIBCXX_DIR/lib"
+	-DCMAKE_EXE_LINKER_FLAGS=" -stdlib=libc++ -Wl,--rpath=$LIBCXX_DIR/lib -L$LIBCXX_DIR/lib -fsanitize=memory"
 ```
 
 Then, build the binaries:
