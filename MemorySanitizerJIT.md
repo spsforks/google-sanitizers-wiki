@@ -115,6 +115,14 @@ Note that most actual JIT implementations don't use `DynamicLibrarySearchGenerat
 
 Hence the use of `DynamicLibrarySearchGenerator` or calling `dlsym()` ourselves in a custom symbol resolver, for MSan builds only, is appropriate.
 
+# Disabling optimization to improve performance
+
+The MemorySanitizer instrumentation can make LLVM's 'CodeGen' optimizations substantially slower. This can be worked around by disabling all optimization:
+
+```C++
+JTMB.setCodeGenOptLevel(llvm::CodeGenOpt::None);
+```
+
 # Example
 
 The above MemorySanitizer integration for JIT-compilation has been implemented in [Reactor](https://cs.opensource.google/swiftshader/SwiftShader/+/master:docs/Reactor.md), the embedded language which powers the dynamic code generation of the [SwiftShader](https://cs.opensource.google/swiftshader/SwiftShader) graphics driver. A more detailed account of this particular integration can be found in [MemorySanitizer for Reactor](https://docs.google.com/document/d/10Nxai_bsEhcK1Tzh4yEpV1lqY_ozuS7w8Nqx7rl_KAw/edit?usp=sharing).
