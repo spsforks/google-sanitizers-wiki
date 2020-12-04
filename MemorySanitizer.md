@@ -99,7 +99,10 @@ call __msan_print_shadow(&x, sizeof(x))
 
 ## MemorySanitizer algorithm
 
-TODO: another wiki page
+Paper: [MemorySanitizer: fast detector of C
+uninitialized memory use in C++](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf)
+
+TODO: summarize in another wiki page
 
 ## LLVM JIT code instrumentation
 
