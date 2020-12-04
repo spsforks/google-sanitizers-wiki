@@ -117,4 +117,4 @@ Hence the use of `DynamicLibrarySearchGenerator` or calling `dlsym()` ourselves 
 
 # Example
 
-The above MemorySanitizer integration for JIT-compilation has be implemented in [Reactor](https://cs.opensource.google/swiftshader/SwiftShader/+/master:docs/Reactor.md), the embedded language which powers the dynamic code generation of the [SwiftShader](https://cs.opensource.google/swiftshader/SwiftShader) graphics driver. A more detailed account of this particular integration can be found in [MemorySanitizer for Reactor](https://docs.google.com/document/d/10Nxai_bsEhcK1Tzh4yEpV1lqY_ozuS7w8Nqx7rl_KAw/edit?usp=sharing).
+The above MemorySanitizer integration for JIT-compilation has been implemented in [Reactor](https://cs.opensource.google/swiftshader/SwiftShader/+/master:docs/Reactor.md), the embedded language which powers the dynamic code generation of the [SwiftShader](https://cs.opensource.google/swiftshader/SwiftShader) graphics driver. A more detailed account of this particular integration can be found in [MemorySanitizer for Reactor](https://docs.google.com/document/d/10Nxai_bsEhcK1Tzh4yEpV1lqY_ozuS7w8Nqx7rl_KAw/edit?usp=sharing).
