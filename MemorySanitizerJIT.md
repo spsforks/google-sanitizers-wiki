@@ -123,6 +123,8 @@ The MemorySanitizer instrumentation can make LLVM's 'CodeGen' optimizations subs
 JTMB.setCodeGenOptLevel(llvm::CodeGenOpt::None);
 ```
 
+Some IR-level optimizations are useful though; see Clang's [`addGeneralOptsForMemorySanitizer`](https://github.com/llvm/llvm-project/blob/6154c4115cd4b78d0171892aac21e340e72e32bd/clang/lib/CodeGen/BackendUtil.cpp#L329).
+
 # Example
 
 The above MemorySanitizer integration for JIT-compilation has been implemented in [Reactor](https://cs.opensource.google/swiftshader/SwiftShader/+/master:docs/Reactor.md), the embedded language which powers the dynamic code generation of the [SwiftShader](https://cs.opensource.google/swiftshader/SwiftShader) graphics driver. A more detailed account of this particular integration can be found in [MemorySanitizer for Reactor](https://docs.google.com/document/d/10Nxai_bsEhcK1Tzh4yEpV1lqY_ozuS7w8Nqx7rl_KAw/edit?usp=sharing).
