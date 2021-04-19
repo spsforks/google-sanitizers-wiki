@@ -1,7 +1,7 @@
 # How to reproduce build from a Sanitizer Bot
 
 ## Requirements 
-You need workstation similar to buildbot, details you can find on the bot details page, e.g. [sanitizer-buildbot1](https://lab.llvm.org/buildbot/#/builders/sanitizer-x86_64-linux-fast)
+You need system similar to the buildbot, details can be found in worker info on the build page, e.g. [sanitizer-x86_64-linux-fast](https://lab.llvm.org/buildbot/#/builders/sanitizer-x86_64-linux-fast)
 
 Scripts probably will work only on x86_64 Linux, still a system does not need to be exactly the same.
 
