@@ -7,7 +7,7 @@ Scripts probably will work only on x86_64 Linux, still a system does not need to
 
 *OPTIONAL*: Also here is [setup script](https://github.com/google/sanitizers/blob/master/buildbot/start_script.sh) for bots, which can be used as a hint to install missing packages. **DON'T RUN** the this script itself. It's supposed to be used by our GCE instances.
 
-Then you need to decide which script to run. To find the script name corresponding to the bot use [this mapping](https://github.com/llvm/llvm-zorg/blob/master/zorg/buildbot/builders/sanitizers/buildbot_selector.py).
+Then you need to decide which script to run. To find the script name corresponding to the bot use [this mapping](https://github.com/llvm/llvm-zorg/blob/main/zorg/buildbot/builders/sanitizers/buildbot_selector.py).
 
 **WARNING**: The script can delete content of the current directory!
 
