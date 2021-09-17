@@ -9,8 +9,10 @@ suppression_type:suppression_string
 ```
 The suppression types are:
 
-| race | suppresses data races and use-after-free reports |
+| type | description |
 |:-----|:-------------------------------------------------|
+| race | suppresses data races and use-after-free reports |
+| race_top | same as `race`, but matched only against the top stack frame |
 | thread | suppresses reports related to threads (leaks)    |
 | mutex | suppresses reports related to mutexes (destruction of a locked mutex) |
 | signal | suppresses reports related to signal handlers (handler calls malloc()) |
